@@ -1,0 +1,10 @@
+{
+  "apps": {
+    "crenexi": {
+      "name": "crenexi",
+      "app_id": "A043DQ47LTV",
+      "team_id": "TH49V05FU"
+    }
+  },
+  "default": "crenexi"
+}
