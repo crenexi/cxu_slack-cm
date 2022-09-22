@@ -18,6 +18,9 @@ const buildmTrigger: Trigger<typeof BuildmWorkflow.definition> = {
     channel: {
       value: "{{data.channel_id}}",
     },
+    user: {
+      value: "{{data.user_id}}",
+    },
   },
   shortcut: {
     button_text: "Build Message",

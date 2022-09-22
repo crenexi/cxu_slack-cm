@@ -1,5 +1,5 @@
 import { DefineWorkflow, Schema } from "deno-slack-sdk/mod.ts";
-import { BuildmFnDefinition } from "../functions/buildm_function.ts";
+import { BuildmExpiredFn } from "../functions/buildm_expired_function.ts";
 
 /**
  * A Workflow is a set of steps that are executed in order.
@@ -8,8 +8,8 @@ import { BuildmFnDefinition } from "../functions/buildm_function.ts";
  */
 const BuildmWorkflow = DefineWorkflow({
   callback_id: "buildm_workflow",
-  title: "Buildm workflow",
-  description: "A buildm workflow",
+  title: "Send a message",
+  description: "Send a message to a site channel",
   input_parameters: {
     properties: {
       interactivity: {
@@ -17,6 +17,9 @@ const BuildmWorkflow = DefineWorkflow({
       },
       channel: {
         type: Schema.slack.types.channel_id,
+      },
+      user: {
+        type: Schema.slack.types.user_id,
       },
     },
     required: ["interactivity"],
@@ -33,28 +36,49 @@ const inputForm = BuildmWorkflow.addStep(
   {
     title: "Send message to channel",
     interactivity: BuildmWorkflow.inputs.interactivity,
-    submit_label: "Send message",
+    submit_label: "Build & Send",
     fields: {
-      elements: [{
-        name: "channel",
-        title: "Channel to send message to",
-        type: Schema.slack.types.channel_id,
-        default: BuildmWorkflow.inputs.channel,
-      }, {
-        name: "message",
-        title: "Message",
-        type: Schema.types.string,
-        long: true,
-      }],
-      required: ["channel", "message"],
+      elements: [
+        {
+          name: "channel",
+          title: "Site channel",
+          type: Schema.slack.types.channel_id,
+          default: BuildmWorkflow.inputs.channel,
+        },
+        {
+          name: "name",
+          title: "Item/product expired",
+          type: Schema.types.string,
+        },
+        {
+          name: "quantity",
+          title: "Item quantity",
+          type: Schema.types.number,
+        },
+        {
+          name: "bbDate",
+          title: "Date",
+          type: Schema.slack.types.date,
+        },
+        {
+          name: "accountManager",
+          title: "Account Manager",
+          type: Schema.slack.types.user_id,
+        },
+      ],
+      required: ["channel", "name", "quantity", "bbDate", "accountManager"],
     },
   },
 );
 
 const buildmFnStep = BuildmWorkflow.addStep(
-  BuildmFnDefinition,
+  BuildmExpiredFn,
   {
-    message: inputForm.outputs.fields.message,
+    user: BuildmWorkflow.inputs.user,
+    name: inputForm.outputs.fields.name,
+    quantity: inputForm.outputs.fields.quantity,
+    bbDate: inputForm.outputs.fields.bbDate,
+    accountManager: inputForm.outputs.fields.accountManager,
   },
 );
 
