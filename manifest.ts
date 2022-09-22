@@ -6,8 +6,8 @@ import { Manifest } from "deno-slack-sdk/mod.ts";
  * https://api.slack.com/future/manifest
  */
 export default Manifest({
-  name: "build-message",
-  description: "A blank template for building Slack apps with Deno",
+  name: "Build Message",
+  description: "Creates common Crafty messages",
   icon: "assets/icon.png",
   functions: [],
   workflows: [],
