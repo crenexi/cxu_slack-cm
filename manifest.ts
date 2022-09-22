@@ -7,7 +7,7 @@ import buildmWorkflow from "./workflows/buildm_workflow.ts";
  * https://api.slack.com/future/manifest
  */
 export default Manifest({
-  name: "Build Message",
+  name: "BA Ops Messages",
   description: "Creates common Crafty messages",
   icon: "assets/icon.png",
   functions: [],

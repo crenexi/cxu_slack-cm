@@ -19,7 +19,7 @@ const buildmTrigger: Trigger<typeof BuildmWorkflow.definition> = {
       value: "{{data.channel_id}}",
     },
   },
-  shortcuts: {
+  shortcut: {
     button_text: "Build Message",
   },
 };
