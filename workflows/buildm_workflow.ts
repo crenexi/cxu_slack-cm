@@ -27,7 +27,7 @@ const BuildmWorkflow = DefineWorkflow({
 const inputForm = BuildmWorkflow.addStep(
   Schema.slack.functions.OpenForm,
   {
-    title: c.workflow.description,
+    title: c.workflow.title,
     interactivity: BuildmWorkflow.inputs.interactivity,
     submit_label: c.views.write.submitLabel,
     fields: {
