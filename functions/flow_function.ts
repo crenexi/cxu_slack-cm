@@ -1,9 +1,14 @@
 import { DefineFunction, Schema, SlackFunction } from 'deno-slack-sdk/mod.ts';
 import { SlackAPI } from 'deno-slack-api/mod.ts';
 import BuildmWorkflow from '../workflows/buildm_workflow.ts';
-import buildmTrigger from '../triggers/buildm_trigger.ts';
-import expiredTemplate from '../templates/expired_template.ts';
+
 import c from '../constants/constants.ts';
+import trigger from '../triggers/buildm_trigger.ts';
+import template from './flow-expired/flow-expired_template.ts';
+
+//###
+//### PROPS
+//###
 
 const inputProps = {
   user: { type: Schema.slack.types.user_id },
@@ -20,8 +25,12 @@ const outputProps = {
   },
 };
 
+//###
+//### FUNCTION
+//###
+
 /** https://api.slack.com/future/functions/custom */
-export const BuildmExpiredFn = DefineFunction({
+export const FlowExpiredFn = DefineFunction({
   callback_id: c.buildm.functions.expired.id,
   source_file: c.buildm.functions.expired.srcFile,
   title: c.buildm.functions.expired.title,
@@ -36,16 +45,16 @@ export const BuildmExpiredFn = DefineFunction({
   },
 });
 
-export default SlackFunction(
-  BuildmExpiredFn,
+const FlowExpired = SlackFunction(
+  FlowExpiredFn,
   async ({ inputs, token }) => {
-    const updatedMsg = expiredTemplate({ ...inputs });
+    const updatedMsg = template({ ...inputs });
 
     const client = SlackAPI(token);
 
     const triggerRes = await client.workflows.triggers.create<
       typeof BuildmWorkflow.definition
-    >(buildmTrigger);
+    >(trigger);
 
     console.log(`Trigger response: ${triggerRes}`);
 
@@ -56,3 +65,5 @@ export default SlackFunction(
     };
   },
 );
+
+export default FlowExpired;
