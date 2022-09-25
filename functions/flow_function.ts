@@ -30,11 +30,11 @@ const outputProps = {
 //###
 
 /** https://api.slack.com/future/functions/custom */
-export const FlowExpiredFn = DefineFunction({
+export const FlowFn = DefineFunction({
   callback_id: c.functions.flow.id,
   source_file: c.functions.flow.srcFile,
   title: c.functions.flow.title,
-  description: c.functions.flow.desc,
+  description: c.functions.flow.description,
   input_parameters: {
     properties: { ...inputProps },
     required: ['user', 'quantity', 'bbDate', 'accountManager'],
@@ -45,25 +45,22 @@ export const FlowExpiredFn = DefineFunction({
   },
 });
 
-const FlowExpired = SlackFunction(
-  FlowExpiredFn,
-  async ({ inputs, token }) => {
-    const updatedMsg = template({ ...inputs });
+const Flow = SlackFunction(FlowFn, async ({ inputs, token }) => {
+  const updatedMsg = template({ ...inputs });
 
-    const client = SlackAPI(token);
+  const client = SlackAPI(token);
 
-    const triggerRes = await client.workflows.triggers.create<
-      typeof BuildmWorkflow.definition
-    >(trigger);
+  const triggerRes = await client.workflows.triggers.create<
+    typeof BuildmWorkflow.definition
+  >(trigger);
 
-    console.log(`Trigger response: ${triggerRes}`);
+  console.log(`Trigger response: ${triggerRes}`);
 
-    return {
-      outputs: {
-        updatedMsg,
-      },
-    };
-  },
-);
+  return {
+    outputs: {
+      updatedMsg,
+    },
+  };
+});
 
-export default FlowExpired;
+export default Flow;

@@ -1,16 +1,22 @@
 type triggerWorkflow = '`${string}#/workflows/${string}`';
 
+/* General meta */
+const title = 'Ops Message';
+const description = 'Builder to send common Crafty messages';
+const actionLabel = 'Build Message';
+
 const constants = {
+  manifest: { title, description },
   trigger: {
-    name: 'Build Message',
-    desc: 'Utility to generate common Crafty messages.',
+    description,
+    name: actionLabel,
     workflow: '#/workflows/buildm_workflow' as triggerWorkflow,
-    buttonLabel: 'Build Message',
+    buttonLabel: actionLabel,
   },
   workflow: {
+    title,
+    description,
     id: 'buildm_workflow',
-    title: 'Send a message',
-    desc: 'Send a message to a site channel',
   },
   views: {
     choose: {
@@ -22,10 +28,10 @@ const constants = {
   },
   functions: {
     flow: {
+      description,
       id: 'flow_function',
       srcFile: 'functions/flow_function.ts',
-      title: 'Build message',
-      desc: 'Builder to generate a message',
+      title: actionLabel,
     },
   },
 };

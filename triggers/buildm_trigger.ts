@@ -6,7 +6,7 @@ import c from '../constants/constants.ts';
 const buildmTrigger: Trigger<typeof BuildmWorkflow.definition> = {
   type: 'shortcut',
   name: c.trigger.name,
-  description: c.trigger.desc,
+  description: c.trigger.description,
   workflow: c.trigger.workflow,
   inputs: {
     interactivity: {

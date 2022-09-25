@@ -1,12 +1,12 @@
 import { DefineWorkflow, Schema } from 'deno-slack-sdk/mod.ts';
-import { BuildmExpiredFn } from '../functions/buildm_expired_function.ts';
+import { FlowFn } from '../functions/flow_function.ts';
 import c from '../constants/constants.ts';
 
 /** https://api.slack.com/future/workflows */
 const BuildmWorkflow = DefineWorkflow({
-  callback_id: c.buildm.workflow.id,
-  title: c.buildm.workflow.title,
-  description: c.buildm.workflow.desc,
+  callback_id: c.workflow.id,
+  title: c.workflow.title,
+  description: c.workflow.description,
   input_parameters: {
     properties: {
       interactivity: {
@@ -27,9 +27,9 @@ const BuildmWorkflow = DefineWorkflow({
 const inputForm = BuildmWorkflow.addStep(
   Schema.slack.functions.OpenForm,
   {
-    title: c.buildm.workflow.desc,
+    title: c.workflow.description,
     interactivity: BuildmWorkflow.inputs.interactivity,
-    submit_label: c.buildm.views.write.submitLabel,
+    submit_label: c.views.write.submitLabel,
     fields: {
       elements: [
         {
@@ -64,16 +64,13 @@ const inputForm = BuildmWorkflow.addStep(
   },
 );
 
-const buildmFnStep = BuildmWorkflow.addStep(
-  BuildmExpiredFn,
-  {
-    user: BuildmWorkflow.inputs.user,
-    name: inputForm.outputs.fields.name,
-    quantity: inputForm.outputs.fields.quantity,
-    bbDate: inputForm.outputs.fields.bbDate,
-    accountManager: inputForm.outputs.fields.accountManager,
-  },
-);
+const buildmFnStep = BuildmWorkflow.addStep(FlowFn, {
+  user: BuildmWorkflow.inputs.user,
+  name: inputForm.outputs.fields.name,
+  quantity: inputForm.outputs.fields.quantity,
+  bbDate: inputForm.outputs.fields.bbDate,
+  accountManager: inputForm.outputs.fields.accountManager,
+});
 
 BuildmWorkflow.addStep(Schema.slack.functions.SendMessage, {
   channel_id: inputForm.outputs.fields.channel,
