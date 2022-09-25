@@ -31,10 +31,10 @@ const outputProps = {
 
 /** https://api.slack.com/future/functions/custom */
 export const FlowExpiredFn = DefineFunction({
-  callback_id: c.buildm.functions.expired.id,
-  source_file: c.buildm.functions.expired.srcFile,
-  title: c.buildm.functions.expired.title,
-  description: c.buildm.functions.expired.desc,
+  callback_id: c.functions.flow.id,
+  source_file: c.functions.flow.srcFile,
+  title: c.functions.flow.title,
+  description: c.functions.flow.desc,
   input_parameters: {
     properties: { ...inputProps },
     required: ['user', 'quantity', 'bbDate', 'accountManager'],

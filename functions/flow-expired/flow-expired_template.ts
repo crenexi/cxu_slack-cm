@@ -6,15 +6,15 @@ interface Props {
   accountManager?: string | undefined;
 }
 
-const expiredTemplate = (props: Props) => (`
+const expiredTemplate = (p: Props) => (`
 :wastebasket: EXPIRED PRODUCT
-By: <@${props.user}>
+By: <@${p.user}>
 ----------
-Item/Product expired: ${props.name}
-Quantity: ${props.quantity}
-Date expired: ${props.bbDate}
+Item/Product expired: ${p.name}
+Quantity: ${p.quantity}
+Date expired: ${p.bbDate}
 ----------
-@ba-fieldops <@${props.accountManager}>
+@ba-fieldops <@${p.accountManager}>
 `);
 
 export default expiredTemplate;

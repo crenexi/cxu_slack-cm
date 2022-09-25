@@ -5,9 +5,9 @@ import c from '../constants/constants.ts';
 /** https://api.slack.com/future/triggers */
 const buildmTrigger: Trigger<typeof BuildmWorkflow.definition> = {
   type: 'shortcut',
-  name: c.buildm.trigger.name,
-  description: c.buildm.trigger.desc,
-  workflow: c.buildm.trigger.workflow,
+  name: c.trigger.name,
+  description: c.trigger.desc,
+  workflow: c.trigger.workflow,
   inputs: {
     interactivity: {
       value: '{{data.interactivity}}',
@@ -20,7 +20,7 @@ const buildmTrigger: Trigger<typeof BuildmWorkflow.definition> = {
     },
   },
   shortcut: {
-    button_text: c.buildm.trigger.buttonLabel,
+    button_text: c.trigger.buttonLabel,
   },
 };
 
