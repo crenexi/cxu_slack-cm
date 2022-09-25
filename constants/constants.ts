@@ -18,11 +18,13 @@ const constants = {
     description,
     id: 'buildm_workflow',
   },
-  views: {
-    choose: {
+  modal: {
+    id: 'flow_view',
+    view1: {
+      title: actionLabel,
       submitLabel: 'Continue',
     },
-    write: {
+    view2: {
       submitLabel: 'Build & Send',
     },
   },

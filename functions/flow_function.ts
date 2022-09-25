@@ -1,66 +1,36 @@
-import { DefineFunction, Schema, SlackFunction } from 'deno-slack-sdk/mod.ts';
+import type { SlackFunctionHandler } from 'deno-slack-sdk/types.ts';
 import { SlackAPI } from 'deno-slack-api/mod.ts';
-import BuildmWorkflow from '../workflows/buildm_workflow.ts';
-
+import { FlowFn } from './flow_function-def.ts';
+import flowChooseBlocks from './flow-choose/flow-choose_blocks.ts';
 import c from '../constants/constants.ts';
-import trigger from '../triggers/buildm_trigger.ts';
-import template from './flow-expired/flow-expired_template.ts';
 
-//###
-//### PROPS
-//###
-
-const inputProps = {
-  user: { type: Schema.slack.types.user_id },
-  name: { type: Schema.types.string },
-  quantity: { type: Schema.types.number },
-  bbDate: { type: Schema.slack.types.date },
-  accountManager: { type: Schema.slack.types.user_id },
-};
-
-const outputProps = {
-  updatedMsg: {
-    type: Schema.slack.types.rich_text,
-    description: 'Updated message to be posted',
-  },
-};
-
-//###
-//### FUNCTION
-//###
-
-/** https://api.slack.com/future/functions/custom */
-export const FlowFn = DefineFunction({
-  callback_id: c.functions.flow.id,
-  source_file: c.functions.flow.srcFile,
-  title: c.functions.flow.title,
-  description: c.functions.flow.description,
-  input_parameters: {
-    properties: { ...inputProps },
-    required: ['user', 'quantity', 'bbDate', 'accountManager'],
-  },
-  output_parameters: {
-    properties: { ...outputProps },
-    required: ['updatedMsg'],
-  },
-});
-
-const Flow = SlackFunction(FlowFn, async ({ inputs, token }) => {
-  const updatedMsg = template({ ...inputs });
+export const Flow: SlackFunctionHandler<
+  typeof FlowFn.definition
+> = async ({ inputs, token }) => {
+  console.log('Starting Flow handler...');
 
   const client = SlackAPI(token);
 
-  const triggerRes = await client.workflows.triggers.create<
-    typeof BuildmWorkflow.definition
-  >(trigger);
-
-  console.log(`Trigger response: ${triggerRes}`);
+  await client.views.open({
+    interactivity_pointer: inputs.interactivity.interactivity_pointer,
+    view: {
+      type: 'modal',
+      title: {
+        type: 'plain_text',
+        text: c.modal.view1.title,
+      },
+      blocks: flowChooseBlocks,
+      submit: {
+        type: 'plain_text',
+        text: c.modal.view1.submitLabel,
+      },
+      callback_id: c.modal.id, // used to route events to handlers
+      notify_on_close: true, // triggers view_closed events
+    },
+  });
 
   return {
-    outputs: {
-      updatedMsg,
-    },
+    // Set to false; we'll set complete status in view submission handler
+    completed: false,
   };
-});
-
-export default Flow;
+};

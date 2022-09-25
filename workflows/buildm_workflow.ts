@@ -1,5 +1,5 @@
 import { DefineWorkflow, Schema } from 'deno-slack-sdk/mod.ts';
-import { FlowFn } from '../functions/flow_function.ts';
+// import { FlowFn } from '../functions/flow_function.ts';
 import c from '../constants/constants.ts';
 
 /** https://api.slack.com/future/workflows */
@@ -29,7 +29,7 @@ const inputForm = BuildmWorkflow.addStep(
   {
     title: c.workflow.title,
     interactivity: BuildmWorkflow.inputs.interactivity,
-    submit_label: c.views.write.submitLabel,
+    submit_label: c.modal.view2.submitLabel,
     fields: {
       elements: [
         {
@@ -64,17 +64,18 @@ const inputForm = BuildmWorkflow.addStep(
   },
 );
 
-const buildmFnStep = BuildmWorkflow.addStep(FlowFn, {
-  user: BuildmWorkflow.inputs.user,
-  name: inputForm.outputs.fields.name,
-  quantity: inputForm.outputs.fields.quantity,
-  bbDate: inputForm.outputs.fields.bbDate,
-  accountManager: inputForm.outputs.fields.accountManager,
-});
+// const buildmFnStep = BuildmWorkflow.addStep(FlowFn, {
+//   user: BuildmWorkflow.inputs.user,
+//   name: inputForm.outputs.fields.name,
+//   quantity: inputForm.outputs.fields.quantity,
+//   bbDate: inputForm.outputs.fields.bbDate,
+//   accountManager: inputForm.outputs.fields.accountManager,
+// });
 
 BuildmWorkflow.addStep(Schema.slack.functions.SendMessage, {
   channel_id: inputForm.outputs.fields.channel,
-  message: buildmFnStep.outputs.updatedMsg,
+  // message: buildmFnStep.outputs.updatedMsg,
+  message: 'Dummy',
 });
 
 export default BuildmWorkflow;
