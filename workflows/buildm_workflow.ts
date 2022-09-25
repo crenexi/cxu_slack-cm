@@ -1,15 +1,12 @@
-import { DefineWorkflow, Schema } from "deno-slack-sdk/mod.ts";
-import { BuildmExpiredFn } from "../functions/buildm_expired_function.ts";
+import { DefineWorkflow, Schema } from 'deno-slack-sdk/mod.ts';
+import { BuildmExpiredFn } from '../functions/buildm_expired_function.ts';
+import c from '../constants/constants.ts';
 
-/**
- * A Workflow is a set of steps that are executed in order.
- * Each step in a Workflow is a function.
- * https://api.slack.com/future/workflows
- */
+/** https://api.slack.com/future/workflows */
 const BuildmWorkflow = DefineWorkflow({
-  callback_id: "buildm_workflow",
-  title: "Send a message",
-  description: "Send a message to a site channel",
+  callback_id: c.buildm.workflow.id,
+  title: c.buildm.workflow.title,
+  description: c.buildm.workflow.desc,
   input_parameters: {
     properties: {
       interactivity: {
@@ -22,51 +19,47 @@ const BuildmWorkflow = DefineWorkflow({
         type: Schema.slack.types.user_id,
       },
     },
-    required: ["interactivity"],
+    required: ['interactivity'],
   },
 });
 
-/**
- * For collecting input from users, we recommend the
- * built-in OpenForm function as a first step.
- * https://api.slack.com/future/functions#open-a-form
- */
+/** https://api.slack.com/future/functions#open-a-form */
 const inputForm = BuildmWorkflow.addStep(
   Schema.slack.functions.OpenForm,
   {
-    title: "Send message to channel",
+    title: c.buildm.workflow.desc,
     interactivity: BuildmWorkflow.inputs.interactivity,
-    submit_label: "Build & Send",
+    submit_label: c.buildm.views.write.submitLabel,
     fields: {
       elements: [
         {
-          name: "channel",
-          title: "Site channel",
+          name: 'channel',
+          title: 'Site channel',
           type: Schema.slack.types.channel_id,
           default: BuildmWorkflow.inputs.channel,
         },
         {
-          name: "name",
-          title: "Item/product expired",
+          name: 'name',
+          title: 'Item/product expired',
           type: Schema.types.string,
         },
         {
-          name: "quantity",
-          title: "Item quantity",
+          name: 'quantity',
+          title: 'Item quantity',
           type: Schema.types.number,
         },
         {
-          name: "bbDate",
-          title: "Date",
+          name: 'bbDate',
+          title: 'Date',
           type: Schema.slack.types.date,
         },
         {
-          name: "accountManager",
-          title: "Account Manager",
+          name: 'accountManager',
+          title: 'Account Manager',
           type: Schema.slack.types.user_id,
         },
       ],
-      required: ["channel", "name", "quantity", "bbDate", "accountManager"],
+      required: ['channel', 'name', 'quantity', 'bbDate', 'accountManager'],
     },
   },
 );
