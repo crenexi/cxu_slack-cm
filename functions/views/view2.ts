@@ -1,4 +1,22 @@
-import blocks from '../blocks/view2-blocks.ts';
+const blocks = [
+  {
+    type: 'input',
+    block_id: 'view2_test',
+    element: {
+      type: 'plain_text_input',
+      action_id: 'view2_test',
+      multiline: true,
+      placeholder: {
+        type: 'plain_text',
+        text: 'Test 2 placeholder...',
+      },
+    },
+    label: {
+      type: 'plain_text',
+      text: 'Test 2 Entry',
+    },
+  },
+];
 
 const view2 = {
   blocks,
@@ -11,7 +29,7 @@ const view2 = {
   },
   submit: {
     type: 'plain_text',
-    text: 'Build & Submit',
+    text: 'Send Message',
   },
 };
 
