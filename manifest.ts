@@ -4,8 +4,8 @@ import c from './constants/constants.ts';
 
 /** https://api.slack.com/future/manifest */
 export default Manifest({
-  name: c.manifest.title,
-  description: c.manifest.description,
+  name: c.general.title,
+  description: c.general.description,
   icon: 'assets/icon.png',
   functions: [],
   workflows: [buildmWorkflow],

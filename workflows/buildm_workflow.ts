@@ -1,12 +1,12 @@
 import { DefineWorkflow, Schema } from 'deno-slack-sdk/mod.ts';
-// import { FlowFn } from '../functions/flow_function.ts';
+import { FlowFn } from '../functions/flow_function.ts';
 import c from '../constants/constants.ts';
 
 /** https://api.slack.com/future/workflows */
 const BuildmWorkflow = DefineWorkflow({
-  callback_id: c.workflow.id,
-  title: c.workflow.title,
-  description: c.workflow.description,
+  callback_id: 'buildm_workflow',
+  title: c.general.title,
+  description: c.general.description,
   input_parameters: {
     properties: {
       interactivity: {
@@ -19,63 +19,19 @@ const BuildmWorkflow = DefineWorkflow({
         type: Schema.slack.types.user_id,
       },
     },
-    required: ['interactivity'],
+    required: ['interactivity', 'channel', 'user'],
   },
 });
 
-/** https://api.slack.com/future/functions#open-a-form */
-const inputForm = BuildmWorkflow.addStep(
-  Schema.slack.functions.OpenForm,
-  {
-    title: c.workflow.title,
-    interactivity: BuildmWorkflow.inputs.interactivity,
-    submit_label: c.modal.view2.submitLabel,
-    fields: {
-      elements: [
-        {
-          name: 'channel',
-          title: 'Site channel',
-          type: Schema.slack.types.channel_id,
-          default: BuildmWorkflow.inputs.channel,
-        },
-        {
-          name: 'name',
-          title: 'Item/product expired',
-          type: Schema.types.string,
-        },
-        {
-          name: 'quantity',
-          title: 'Item quantity',
-          type: Schema.types.number,
-        },
-        {
-          name: 'bbDate',
-          title: 'Date',
-          type: Schema.slack.types.date,
-        },
-        {
-          name: 'accountManager',
-          title: 'Account Manager',
-          type: Schema.slack.types.user_id,
-        },
-      ],
-      required: ['channel', 'name', 'quantity', 'bbDate', 'accountManager'],
-    },
-  },
-);
-
-// const buildmFnStep = BuildmWorkflow.addStep(FlowFn, {
-//   user: BuildmWorkflow.inputs.user,
-//   name: inputForm.outputs.fields.name,
-//   quantity: inputForm.outputs.fields.quantity,
-//   bbDate: inputForm.outputs.fields.bbDate,
-//   accountManager: inputForm.outputs.fields.accountManager,
-// });
+const flowFnStep = BuildmWorkflow.addStep(FlowFn, {
+  interactivity: BuildmWorkflow.inputs.interactivity,
+  channel: BuildmWorkflow.inputs.channel,
+  user: BuildmWorkflow.inputs.user,
+});
 
 BuildmWorkflow.addStep(Schema.slack.functions.SendMessage, {
-  channel_id: inputForm.outputs.fields.channel,
-  // message: buildmFnStep.outputs.updatedMsg,
-  message: 'Dummy',
+  channel_id: BuildmWorkflow.inputs.channel,
+  message: flowFnStep.outputs.message,
 });
 
 export default BuildmWorkflow;

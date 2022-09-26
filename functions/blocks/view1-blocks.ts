@@ -1,10 +1,10 @@
-const blocks = [
+const view1Blocks = [
   {
     type: 'input',
-    block_id: 'section1',
+    block_id: 'view1_test',
     element: {
       type: 'plain_text_input',
-      action_id: 'flow-choose_input',
+      action_id: 'view1_test',
       multiline: true,
       placeholder: {
         type: 'plain_text',
@@ -18,4 +18,4 @@ const blocks = [
   },
 ];
 
-export default blocks;
+export default view1Blocks;

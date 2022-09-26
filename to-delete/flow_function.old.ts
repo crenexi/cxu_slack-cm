@@ -142,3 +142,38 @@
 
 export default Flow;
  */
+
+
+
+
+
+
+//##
+//## View Routing
+//##
+
+const ViewRouter = ViewsRouter(FlowFn);
+
+export const Flow: SlackFunctionHandler(FlowFn, async ({ inputs, token }) => {
+  const client = SlackAPI(token);
+
+  await client.views.open({
+    interactivity_pointer: inputs.interactivity.interactivity_pointer,
+    view: flow_view1,
+  });
+
+  return {
+    completed: false,
+  };
+});
+
+export const { viewSubmission, viewClosed } = ViewRouter
+  .addSubmissionHandler(/view/, () => ({
+    response_action: 'update',
+    view: flow_view2,
+  }))
+  .addSubmissionHandler(/view/, () => ({
+    response_action: 'clear',
+  }));
+
+export default Flow;
