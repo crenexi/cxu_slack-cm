@@ -28,9 +28,6 @@ const inputChannelBlocks = ({ currentChannel }: Props) => [
       },
     ],
   },
-  {
-    type: 'divider',
-  },
 ];
 
 export default inputChannelBlocks;

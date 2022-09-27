@@ -1,4 +1,5 @@
 import { templates } from '../../constants/constants.ts';
+import headerStep2Blocks from '../blocks/header-step2_blocks.ts';
 import inputChannelBlocks from '../blocks/input-channel_blocks.ts';
 import errorView from './error_view.ts';
 
@@ -7,10 +8,12 @@ type Step2Props = {
   templateKey: string | undefined;
 };
 
-const step2View = ({ currentChannel, templateKey }: Step2Props) => {
-  const templateExists = templates.some(({ key }) => 'test' === templateKey);
+const dividerBlock = { type: 'divider' };
 
-  if (!templateExists) {
+const step2View = ({ currentChannel, templateKey }: Step2Props) => {
+  const template = templates.find(({ key }) => key === templateKey);
+
+  if (!template) {
     console.error('Template key not found in constants');
     return errorView;
   }
@@ -23,12 +26,15 @@ const step2View = ({ currentChannel, templateKey }: Step2Props) => {
       type: 'plain_text',
       text: 'Compose Message',
     },
-    // submit: {
-    //   type: 'plain_text',
-    //   text: 'Send Message',
-    // },
+    submit: {
+      type: 'plain_text',
+      text: 'Send Message',
+    },
     blocks: [
+      ...headerStep2Blocks({ template }),
+      dividerBlock,
       ...inputChannelBlocks({ currentChannel }),
+      dividerBlock,
     ],
   };
 };
