@@ -52,14 +52,10 @@ export const Flow: SlackFunctionHandler<
 
 const ViewRouter = ViewsRouter(FlowFn);
 export const { viewSubmission, viewClosed } = ViewRouter
-  .addSubmissionHandler('view1', () => {
-    console.log('Handling first submission...');
-
-    return {
-      response_action: 'update',
-      view: view2,
-    };
-  })
+  .addSubmissionHandler('view1', () => ({
+    response_action: 'update',
+    view: view2,
+  }))
   .addSubmissionHandler('view2', async ({ body, token }) => {
     console.log('Handling second submission...');
 
