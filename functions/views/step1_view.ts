@@ -38,9 +38,9 @@ const selectTemplateBlocks = [
   },
 ];
 
-const view1 = {
+const step1View = {
   type: 'modal',
-  callback_id: 'view1', // used to route events to handlers
+  callback_id: 'step1', // used to route events to handlers
   notify_on_close: true, // triggers view_closed events
   title: {
     type: 'plain_text',
@@ -53,4 +53,4 @@ const view1 = {
   },
 };
 
-export default view1;
+export default step1View;

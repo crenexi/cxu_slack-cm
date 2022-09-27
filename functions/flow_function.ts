@@ -1,8 +1,8 @@
 import { DefineFunction, Schema, ViewsRouter } from 'deno-slack-sdk/mod.ts';
 import type { SlackFunctionHandler } from 'deno-slack-sdk/types.ts';
 import { SlackAPI } from 'deno-slack-api/mod.ts';
-import view1, { view1Ids } from './views/view1.ts';
-import view2 from './views/view2.ts';
+import step1View, { view1Ids } from './views/step1_view.ts';
+import step2View from './views/step2_view.ts';
 import c from '../constants/constants.ts';
 
 //## Function Definition
@@ -41,7 +41,7 @@ export const Flow: SlackFunctionHandler<
 
   await client.views.open({
     interactivity_pointer: inputs.interactivity.interactivity_pointer,
-    view: view1,
+    view: step1View,
   });
 
   return {
@@ -52,7 +52,7 @@ export const Flow: SlackFunctionHandler<
 
 const ViewRouter = ViewsRouter(FlowFn);
 export const { viewSubmission, viewClosed } = ViewRouter
-  .addSubmissionHandler('view1', ({ inputs, body }) => {
+  .addSubmissionHandler('step1', ({ inputs, body }) => {
     // Note the current channel
     const currentChannel = inputs.channel;
 
@@ -70,10 +70,10 @@ export const { viewSubmission, viewClosed } = ViewRouter
 
     return {
       response_action: 'update',
-      view: view2({ currentChannel, templateKey }),
+      view: step2View({ currentChannel, templateKey }),
     };
   })
-  .addSubmissionHandler('view2', async ({ inputs, body, token }) => {
+  .addSubmissionHandler('step2', async ({ inputs, body, token }) => {
     const client = SlackAPI(token);
 
     console.log(inputs);
