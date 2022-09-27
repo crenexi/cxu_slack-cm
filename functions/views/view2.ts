@@ -25,7 +25,7 @@ const view2 = {
   notify_on_close: true, // triggers view_closed events
   title: {
     type: 'plain_text',
-    text: 'Build Message',
+    text: 'Compose Message',
   },
   submit: {
     type: 'plain_text',

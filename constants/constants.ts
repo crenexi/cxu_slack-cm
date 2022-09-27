@@ -1,8 +1,8 @@
 const constants = {
   general: {
-    title: 'Ops Message',
-    description: 'Builder to send common Crafty messages',
-    actionLabel: 'Build Message',
+    title: 'Ops Composer',
+    description: 'Builder to send common operator messages',
+    actionLabel: 'Compose Message',
   },
 };
 
