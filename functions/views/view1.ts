@@ -1,5 +1,10 @@
 import { templates } from '../../constants/constants.ts';
 
+export const view1Ids = {
+  input_template_block: 'input_template',
+  input_template_action: 'input_template_action',
+};
+
 const templateOptions = templates
   .filter(({ enabled }) => enabled)
   .map(({ key, title, emoji }) => {
@@ -16,6 +21,7 @@ const templateOptions = templates
 const selectTemplateBlocks = [
   {
     type: 'input',
+    block_id: view1Ids.input_template_block,
     label: {
       type: 'plain_text',
       text: 'Message Template',
@@ -27,7 +33,7 @@ const selectTemplateBlocks = [
         text: 'Select template',
       },
       options: templateOptions,
-      action_id: 'select-template-action',
+      action_id: view1Ids.input_template_action,
     },
   },
 ];
