@@ -1,16 +1,34 @@
-import { templates } from '../../constants/constants.ts';
-import headerStep2Blocks from '../blocks/header-step2_blocks.ts';
-import inputChannelBlocks from '../blocks/input-channel_blocks.ts';
+import { Template, templates } from '../../constants/constants.ts';
 import errorView from './error_view.ts';
+import headerStep2Blocks from '../blocks/header-step2_blocks.ts';
+import inputExpiredBlocks from '../blocks/input-expired_blocks.ts';
 
-type Step2Props = {
-  currentChannel: string | undefined;
+type Props = {
+  channel: string | undefined;
+  channelName: string | undefined;
   templateKey: string | undefined;
 };
 
 const dividerBlock = { type: 'divider' };
 
-const step2View = ({ currentChannel, templateKey }: Step2Props) => {
+const templateBlocks = (template: Template) => {
+  switch (template.key) {
+    case 'dro':
+      return inputExpiredBlocks;
+    default:
+      return [
+        {
+          type: 'section',
+          text: {
+            type: 'plain_text',
+            text: 'No case defined for this template',
+          },
+        },
+      ];
+  }
+};
+
+const step2View = ({ channel, templateKey }: Props) => {
   const template = templates.find(({ key }) => key === templateKey);
 
   if (!template) {
@@ -33,8 +51,7 @@ const step2View = ({ currentChannel, templateKey }: Step2Props) => {
     blocks: [
       ...headerStep2Blocks({ template }),
       dividerBlock,
-      ...inputChannelBlocks({ currentChannel }),
-      dividerBlock,
+      ...templateBlocks(template),
     ],
   };
 };

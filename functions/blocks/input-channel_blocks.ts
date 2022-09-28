@@ -1,32 +1,26 @@
 type Props = {
-  currentChannel: string | undefined;
+  channel: string | undefined;
 };
 
-const inputChannelBlocks = ({ currentChannel }: Props) => [
+const inputChannelBlocks = ({ channel }: Props) => [
   {
-    type: 'section',
-    text: {
+    type: 'input',
+    label: {
       type: 'plain_text',
-      text: 'Sending message to:',
-      emoji: true,
+      text: 'Channel',
     },
-  },
-  {
-    type: 'actions',
-    elements: [
-      {
-        type: 'conversations_select',
-        placeholder: {
-          type: 'plain_text',
-          text: 'Select site channel',
-        },
-        filter: {
-          include: ['public', 'private'],
-        },
-        initial_conversation: currentChannel,
-        action_id: 'input_channel',
+    element: {
+      type: 'conversations_select',
+      placeholder: {
+        type: 'plain_text',
+        text: 'Select site channel',
       },
-    ],
+      filter: {
+        include: ['public', 'private'],
+      },
+      initial_conversation: channel,
+      action_id: 'input_channel',
+    },
   },
 ];
 

@@ -1,8 +1,9 @@
 import { DefineFunction, Schema, ViewsRouter } from 'deno-slack-sdk/mod.ts';
 import type { SlackFunctionHandler } from 'deno-slack-sdk/types.ts';
 import { SlackAPI } from 'deno-slack-api/mod.ts';
-import step1View, { view1Ids } from './views/step1_view.ts';
+import step1View from './views/step1_view.ts';
 import step2View from './views/step2_view.ts';
+import { selectedTemplate } from './blocks/input-template_blocks.ts';
 import c from '../constants/constants.ts';
 
 //## Function Definition
@@ -38,10 +39,11 @@ export const Flow: SlackFunctionHandler<
   typeof FlowFn.definition
 > = async ({ inputs, token }) => {
   const client = SlackAPI(token);
+  const channel = inputs.channel;
 
   await client.views.open({
     interactivity_pointer: inputs.interactivity.interactivity_pointer,
-    view: step1View,
+    view: step1View({ channel }),
   });
 
   return {
@@ -50,33 +52,36 @@ export const Flow: SlackFunctionHandler<
   };
 };
 
+const handleViewClosed = () => {
+  console.log('Flow cancelled');
+};
+
 const ViewRouter = ViewsRouter(FlowFn);
 export const { viewSubmission, viewClosed } = ViewRouter
-  .addSubmissionHandler('step1', ({ inputs, body }) => {
-    // Note the current channel
-    const currentChannel = inputs.channel;
+  .addSubmissionHandler('step1', async ({ token, inputs, body }) => {
+    const client = SlackAPI(token);
 
-    // Get the selected value for the template input
-    const templateKey = (() => {
-      try {
-        const values = body.view.state.values;
-        const block = values[view1Ids.input_template_block];
-        const action = block[view1Ids.input_template_action];
-        return action.selected_option.value;
-      } catch (err) {
-        console.error(err);
-      }
-    })();
+    // Note the current channel
+    const channel = inputs.channel;
+
+    // Note channel name from API info
+    const channelName = await client.apiCall(
+      'conversations.info',
+      { token, channel },
+    );
+
+    console.log(channelName);
+
+    // Get selected template from state
+    const templateKey = selectedTemplate({ state: body.view.state });
 
     return {
       response_action: 'update',
-      view: step2View({ currentChannel, templateKey }),
+      view: step2View({ channel, channelName: 'test', templateKey }),
     };
   })
-  .addSubmissionHandler('step2', async ({ inputs, body, token }) => {
+  .addSubmissionHandler('step2', async ({ token, body }) => {
     const client = SlackAPI(token);
-
-    console.log(inputs);
 
     await client.functions.completeSuccess({
       function_execution_id: body.function_data.execution_id,
@@ -89,9 +94,8 @@ export const { viewSubmission, viewClosed } = ViewRouter
       response_action: 'clear',
     };
   })
-  .addClosedHandler(/view/, () => {
-    console.log('Flow cancelled');
-  });
+  .addClosedHandler('step1', handleViewClosed)
+  .addClosedHandler('step2', handleViewClosed);
 
 export const test = typeof ViewRouter.addSubmissionHandler;
 

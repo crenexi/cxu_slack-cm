@@ -1,44 +1,13 @@
-import { templates } from '../../constants/constants.ts';
+import inputTemplateBlocks from '../blocks/input-template_blocks.ts';
+import inputChannelBlocks from '../blocks/input-channel_blocks.ts';
 
-export const view1Ids = {
-  input_template_block: 'input_template',
-  input_template_action: 'input_template_action',
+type Props = {
+  channel: string | undefined;
 };
 
-const templateOptions = templates
-  .filter(({ enabled }) => enabled)
-  .map(({ key, title, emoji }) => {
-    return {
-      text: {
-        type: 'plain_text',
-        text: `${emoji} | ${title}`,
-        emoji: true,
-      },
-      value: key,
-    };
-  });
+const dividerBlock = { type: 'divider' };
 
-const selectTemplateBlocks = [
-  {
-    type: 'input',
-    block_id: view1Ids.input_template_block,
-    label: {
-      type: 'plain_text',
-      text: 'Message Template',
-    },
-    element: {
-      type: 'static_select',
-      placeholder: {
-        type: 'plain_text',
-        text: 'Select template',
-      },
-      options: templateOptions,
-      action_id: view1Ids.input_template_action,
-    },
-  },
-];
-
-const step1View = {
+const step1View = ({ channel }: Props) => ({
   type: 'modal',
   callback_id: 'step1', // used to route events to handlers
   notify_on_close: true, // triggers view_closed events
@@ -46,11 +15,15 @@ const step1View = {
     type: 'plain_text',
     text: 'Compose Message',
   },
-  blocks: [...selectTemplateBlocks],
+  blocks: [
+    ...inputTemplateBlocks,
+    dividerBlock,
+    ...inputChannelBlocks({ channel }),
+  ],
   submit: {
     type: 'plain_text',
     text: 'Next',
   },
-};
+});
 
 export default step1View;
