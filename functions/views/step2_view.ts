@@ -1,6 +1,7 @@
 import { Template, templates } from '../../constants/constants.ts';
 import errorView from './error_view.ts';
 import headerStep2Blocks from '../blocks/header-step2_blocks.ts';
+import contextChannelBlocks from '../blocks/context-channel_blocks.ts';
 import inputExpiredBlocks from '../blocks/input-expired_blocks.ts';
 
 type Props = {
@@ -28,8 +29,9 @@ const templateBlocks = (template: Template) => {
   }
 };
 
-const step2View = ({ channel, templateKey }: Props) => {
+const step2View = ({ channelName, templateKey }: Props) => {
   const template = templates.find(({ key }) => key === templateKey);
+  const templateEmoji = template?.emoji;
 
   if (!template) {
     console.error('Template key not found in constants');
@@ -52,6 +54,8 @@ const step2View = ({ channel, templateKey }: Props) => {
       ...headerStep2Blocks({ template }),
       dividerBlock,
       ...templateBlocks(template),
+      dividerBlock,
+      ...contextChannelBlocks({ templateEmoji, channelName }),
     ],
   };
 };

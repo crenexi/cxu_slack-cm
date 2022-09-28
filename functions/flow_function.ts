@@ -68,16 +68,14 @@ export const { viewSubmission, viewClosed } = ViewRouter
     const channelName = await client.apiCall(
       'conversations.info',
       { token, channel },
-    );
-
-    console.log(channelName);
+    ).then((res) => res.channel.name);
 
     // Get selected template from state
     const templateKey = selectedTemplate({ state: body.view.state });
 
     return {
       response_action: 'update',
-      view: step2View({ channel, channelName: 'test', templateKey }),
+      view: step2View({ channel, channelName, templateKey }),
     };
   })
   .addSubmissionHandler('step2', async ({ token, body }) => {
