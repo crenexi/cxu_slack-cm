@@ -29,9 +29,10 @@ const templateBlocks = (template: Template) => {
   }
 };
 
-const step2View = ({ channelName, templateKey }: Props) => {
+const step2View = ({ channel, channelName, templateKey }: Props) => {
   const template = templates.find(({ key }) => key === templateKey);
   const templateEmoji = template?.emoji;
+  const data = JSON.stringify({ channel, template });
 
   if (!template) {
     console.error('Template key not found in constants');
@@ -42,9 +43,14 @@ const step2View = ({ channelName, templateKey }: Props) => {
     type: 'modal',
     callback_id: 'step2', // used to route events to handlers
     notify_on_close: true, // triggers view_closed events
+    private_metadata: data,
     title: {
       type: 'plain_text',
       text: 'Compose Message',
+    },
+    close: {
+      type: 'plain_text',
+      text: 'Cancel',
     },
     submit: {
       type: 'plain_text',

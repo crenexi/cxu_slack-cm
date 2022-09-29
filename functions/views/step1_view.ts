@@ -15,15 +15,19 @@ const step1View = ({ channel }: Props) => ({
     type: 'plain_text',
     text: 'Compose Message',
   },
+  close: {
+    type: 'plain_text',
+    text: 'Cancel',
+  },
+  submit: {
+    type: 'plain_text',
+    text: 'Next',
+  },
   blocks: [
     ...inputTemplateBlocks,
     dividerBlock,
     ...inputChannelBlocks({ channel }),
   ],
-  submit: {
-    type: 'plain_text',
-    text: 'Next',
-  },
 });
 
 export default step1View;

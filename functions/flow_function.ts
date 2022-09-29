@@ -4,7 +4,29 @@ import { SlackAPI } from 'deno-slack-api/mod.ts';
 import step1View from './views/step1_view.ts';
 import step2View from './views/step2_view.ts';
 import { selectedTemplate } from './blocks/input-template_blocks.ts';
+import { selectedChannel } from './blocks/input-channel_blocks.ts';
+import { Template } from '../constants/constants.ts';
 import c from '../constants/constants.ts';
+import droTemplate from './templates/dro_template.ts';
+import orderTemplate from './templates/order_template.ts';
+import expiredTemplate from './templates/expired_template.ts';
+import traineeTemplate from './templates/dro_template.ts';
+
+//## Types
+
+type ViewMetadata = {
+  channel: string;
+  template: Template;
+};
+
+type HandleCompose = (props: {
+  user: string;
+  template: Template;
+  values: {
+    // deno-lint-ignore no-explicit-any
+    [key: string]: any;
+  };
+}) => string;
 
 //## Function Definition
 
@@ -15,6 +37,7 @@ const inputProps = {
 };
 
 const outputProps = {
+  channel: { type: Schema.slack.types.channel_id },
   message: { type: Schema.slack.types.rich_text },
 };
 
@@ -29,7 +52,7 @@ export const FlowFn = DefineFunction({
   },
   output_parameters: {
     properties: { ...outputProps },
-    required: ['message'],
+    required: ['channel', 'message'],
   },
 });
 
@@ -52,17 +75,55 @@ export const Flow: SlackFunctionHandler<
   };
 };
 
+const timeFormatted = () => {
+  // deno-lint-ignore no-explicit-any
+  const options: any = {
+    weekday: 'short',
+    year: '2-digit',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: true,
+  };
+
+  const dt = new Date().toLocaleDateString('en-US', options);
+  return dt.split(', ').join(' - ');
+};
+
+const handleCompose: HandleCompose = ({ user, template, values }) => {
+  // Construct the header
+  const title = `*${template.title.toUpperCase()} :${template.emojiKey}:*`;
+  const subtitle = `By <@${user}> | ${timeFormatted()}`;
+  const header = `${title}\n${subtitle}\n----------`;
+
+  // Construct the body
+  switch (template.key) {
+    case 'dro': {
+      const body = droTemplate({
+        accountManager: 'TODO',
+      });
+
+      return `${header}\n${body.trim()}`;
+    }
+    default: {
+      return `${header}\n'Something went wrong.'`;
+    }
+  }
+};
+
 const handleViewClosed = () => {
   console.log('Flow cancelled');
 };
 
 const ViewRouter = ViewsRouter(FlowFn);
 export const { viewSubmission, viewClosed } = ViewRouter
-  .addSubmissionHandler('step1', async ({ token, inputs, body }) => {
+  .addSubmissionHandler('step1', async ({ token, view }) => {
     const client = SlackAPI(token);
 
-    // Note the current channel
-    const channel = inputs.channel;
+    // Get selected template and channel from state
+    const templateKey = selectedTemplate({ state: view.state });
+    const channel = selectedChannel({ state: view.state });
 
     // Note channel name from API info
     const channelName = await client.apiCall(
@@ -70,22 +131,31 @@ export const { viewSubmission, viewClosed } = ViewRouter
       { token, channel },
     ).then((res) => res.channel.name);
 
-    // Get selected template from state
-    const templateKey = selectedTemplate({ state: body.view.state });
-
     return {
       response_action: 'update',
       view: step2View({ channel, channelName, templateKey }),
     };
   })
-  .addSubmissionHandler('step2', async ({ token, body }) => {
-    const client = SlackAPI(token);
+  .addSubmissionHandler('step2', async ({ token, inputs, body, view }) => {
+    // Validate metadata existence
+    if (!view.private_metadata) {
+      throw new Error('View metadata is undefined!');
+    }
 
+    // Get data
+    const metadata: ViewMetadata = JSON.parse(<string> view.private_metadata);
+    const { channel, template } = metadata;
+    const { values } = view.state;
+    const { user } = inputs;
+
+    // Get channel and compose message
+    const message = handleCompose({ user, template, values });
+
+    // Complete flow
+    const client = SlackAPI(token);
     await client.functions.completeSuccess({
       function_execution_id: body.function_data.execution_id,
-      outputs: {
-        message: 'Test message output',
-      },
+      outputs: { channel, message },
     });
 
     return {
@@ -94,7 +164,5 @@ export const { viewSubmission, viewClosed } = ViewRouter
   })
   .addClosedHandler('step1', handleViewClosed)
   .addClosedHandler('step2', handleViewClosed);
-
-export const test = typeof ViewRouter.addSubmissionHandler;
 
 export default Flow;
