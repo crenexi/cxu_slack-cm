@@ -20,7 +20,7 @@ type ViewMetadata = {
 };
 
 type HandleCompose = (props: {
-  user: string;
+  user: string | undefined;
   template: Template;
   values: {
     // deno-lint-ignore no-explicit-any
@@ -98,18 +98,34 @@ const handleCompose: HandleCompose = ({ user, template, values }) => {
   const header = `${title}\n${subtitle}\n----------`;
 
   // Construct the body
-  switch (template.key) {
-    case 'dro': {
-      const body = droTemplate({
-        accountManager: 'TODO',
-      });
+  const body: string = (() => {
+    switch (template.key) {
+      case 'dro':
+        return droTemplate({
+          accountManager: 'TODO',
+        });
+      case 'order':
+        return orderTemplate({
+          accountManager: 'TODO',
+        });
+      case 'expired':
+        return expiredTemplate({
+          name: 'TODO',
+          quantity: 99,
+          bbDate: 'TODO',
+          accountManager: 'TODO',
+        });
+      case 'trainee':
+        return traineeTemplate({
+          accountManager: 'TODO',
+        });
+      default: {
+        return 'Something went wrong.';
+      }
+    }
+  })();
 
-      return `${header}\n${body.trim()}`;
-    }
-    default: {
-      return `${header}\n'Something went wrong.'`;
-    }
-  }
+  return `${header}\n${body.trim()}`;
 };
 
 const handleViewClosed = () => {
