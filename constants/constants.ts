@@ -2,7 +2,6 @@ export type Template = {
   enabled: boolean;
   key: string;
   title: string;
-  emoji: string;
   emojiKey: string;
   moreLink?: URL;
 };
@@ -21,7 +20,6 @@ export const templates: Template[] = [
     enabled: true,
     key: 'dro',
     title: 'DRO / Daily Report',
-    emoji: '📅',
     emojiKey: 'calendar',
     moreLink: new URL(
       'https://docs.google.com/document/d/1xN4pQ0aLcgeU52Y0VjGZeAA8xKoNmLOk6-ECr2AFQe0/edit?usp=sharing',
@@ -31,7 +29,6 @@ export const templates: Template[] = [
     enabled: true,
     key: 'order',
     title: 'Order Summary',
-    emoji: '📦',
     emojiKey: 'package',
     moreLink: new URL(
       'https://docs.google.com/document/d/1ZMLlip4x07TbQcISxLsrcNqm0mt2BfL1b5IXWh4WYWQ/edit?usp=sharing',
@@ -41,7 +38,6 @@ export const templates: Template[] = [
     enabled: true,
     key: 'expired',
     title: 'Expired Product',
-    emoji: '🗑️',
     emojiKey: 'wastebasket',
     moreLink: new URL(
       'https://docs.google.com/document/d/17C9BLztmVtg5m3dLlmP2PoqB_RoLMJby9KjrdL4INbo/edit?usp=sharing',
@@ -51,7 +47,6 @@ export const templates: Template[] = [
     enabled: true,
     key: 'trainee',
     title: 'Trainee Recap',
-    emoji: '🎓',
     emojiKey: 'mortar_board',
   },
 ];

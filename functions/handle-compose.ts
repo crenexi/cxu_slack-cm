@@ -1,17 +1,17 @@
 import { Template } from '../constants/constants.ts';
-import droTemplate from './templates/dro_template.ts';
-import orderTemplate from './templates/order_template.ts';
-import expiredTemplate from './templates/expired_template.ts';
-import traineeTemplate from './templates/dro_template.ts';
+import droTemplate from '../views/step2/form_dro/dro.template.ts';
+import orderTemplate from '../views/step2/form_order/order.template.ts';
+import expiredTemplate from '../views/step2/form_expired/expired.template.ts';
+import traineeTemplate from '../views/step2/form_trainee/trainee.template.ts';
 
-type Props = {
+type HandleCompose = (props: {
   user: string | undefined;
   template: Template;
   values: {
     // deno-lint-ignore no-explicit-any
     [key: string]: any;
   };
-};
+}) => string;
 
 const timeFormatted = () => {
   // deno-lint-ignore no-explicit-any
@@ -29,7 +29,7 @@ const timeFormatted = () => {
   return dt.split(', ').join(' - ');
 };
 
-const handleCompose = ({ user, template }: Props): string => {
+const handleCompose: HandleCompose = ({ user, template }) => {
   // Construct the header
   const title = `*${template.title.toUpperCase()} :${template.emojiKey}:*`;
   const subtitle = `By <@${user}> | ${timeFormatted()}`;

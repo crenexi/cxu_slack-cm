@@ -1,12 +1,12 @@
 import { DefineWorkflow, Schema } from 'deno-slack-sdk/mod.ts';
 import { FlowFn } from '../functions/flow_function.ts';
-import c from '../constants/constants.ts';
+import constants from '../constants/constants.ts';
 
 /** https://api.slack.com/future/workflows */
-const BuildmWorkflow = DefineWorkflow({
-  callback_id: 'buildm_workflow',
-  title: c.general.title,
-  description: c.general.description,
+const CmWorkflow = DefineWorkflow({
+  callback_id: 'cm_workflow',
+  title: constants.general.title,
+  description: constants.general.description,
   input_parameters: {
     properties: {
       interactivity: {
@@ -23,15 +23,15 @@ const BuildmWorkflow = DefineWorkflow({
   },
 });
 
-const flowFnStep = BuildmWorkflow.addStep(FlowFn, {
-  interactivity: BuildmWorkflow.inputs.interactivity,
-  channel: BuildmWorkflow.inputs.channel,
-  user: BuildmWorkflow.inputs.user,
+const flowFnStep = CmWorkflow.addStep(FlowFn, {
+  interactivity: CmWorkflow.inputs.interactivity,
+  channel: CmWorkflow.inputs.channel,
+  user: CmWorkflow.inputs.user,
 });
 
-BuildmWorkflow.addStep(Schema.slack.functions.SendMessage, {
+CmWorkflow.addStep(Schema.slack.functions.SendMessage, {
   channel_id: flowFnStep.outputs.channel,
   message: flowFnStep.outputs.message,
 });
 
-export default BuildmWorkflow;
+export default CmWorkflow;

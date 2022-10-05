@@ -1,3 +1,5 @@
+import errorBlock from './error.block.ts';
+
 const errorView = ({
   type: 'modal',
   callback_id: 'error',
@@ -6,15 +8,7 @@ const errorView = ({
     type: 'plain_text',
     text: 'Compose Message',
   },
-  blocks: [
-    {
-      type: 'section',
-      text: {
-        type: 'plain_text',
-        text: 'Error: something went wrong',
-      },
-    },
-  ],
+  blocks: [errorBlock()],
 });
 
 export default errorView;

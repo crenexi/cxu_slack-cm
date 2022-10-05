@@ -3,16 +3,16 @@ type Props = {
   channelName: string | undefined;
 };
 
-const contextChannelBlocks = ({ templateEmoji, channelName }: Props) => [
+const modalFooterBlocks = ({ templateEmoji, channelName }: Props) => [
   {
     type: 'context',
     elements: [
       {
         type: 'mrkdwn',
-        text: `${templateEmoji} | Sending to #${channelName}`,
+        text: `:${templateEmoji}: | Sending to #${channelName}`,
       },
     ],
   },
 ];
 
-export default contextChannelBlocks;
+export default modalFooterBlocks;

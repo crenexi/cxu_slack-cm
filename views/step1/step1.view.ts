@@ -1,5 +1,5 @@
-import inputTemplateBlocks from '../blocks/input-template_blocks.ts';
-import inputChannelBlocks from '../blocks/input-channel_blocks.ts';
+import templateBlocks from './form_template/template.block.ts';
+import channelBlocks from './form_channel/channel.block.ts';
 
 type Props = {
   channel: string | undefined;
@@ -24,9 +24,9 @@ const step1View = ({ channel }: Props) => ({
     text: 'Next',
   },
   blocks: [
-    ...inputTemplateBlocks,
+    templateBlocks,
     dividerBlock,
-    ...inputChannelBlocks({ channel }),
+    channelBlocks({ channel }),
   ],
 });
 

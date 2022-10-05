@@ -1,3 +1,3 @@
-# tracks_build-message
+# Slack — Compose Message
 
-Demo Slack app to generate common messages in Crafty.
+Slack app to generate common messages in Crafty.

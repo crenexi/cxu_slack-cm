@@ -1,4 +1,4 @@
-import { templates } from '../../constants/constants.ts';
+import { templates } from '../../../constants/constants.ts';
 
 export const ids = {
   input_template_block: 'input_template',
@@ -18,35 +18,33 @@ export const selectedTemplate = ({ state }: any) => {
 
 const templateOptions = templates
   .filter(({ enabled }) => enabled)
-  .map(({ key, title, emoji }) => {
+  .map(({ key, title, emojiKey }) => {
     return {
       text: {
         type: 'plain_text',
-        text: `${emoji} | ${title}`,
+        text: `:${emojiKey}: | ${title}`,
         emoji: true,
       },
       value: key,
     };
   });
 
-const inputTemplateBlocks = [
-  {
-    type: 'input',
-    block_id: ids.input_template_block,
-    label: {
-      type: 'plain_text',
-      text: 'Template',
-    },
-    element: {
-      type: 'static_select',
-      placeholder: {
-        type: 'plain_text',
-        text: 'Select template',
-      },
-      options: templateOptions,
-      action_id: ids.input_template_action,
-    },
+const templateBlock = ({
+  type: 'input',
+  block_id: ids.input_template_block,
+  label: {
+    type: 'plain_text',
+    text: 'Template',
   },
-];
+  element: {
+    type: 'static_select',
+    placeholder: {
+      type: 'plain_text',
+      text: 'Select template',
+    },
+    options: templateOptions,
+    action_id: ids.input_template_action,
+  },
+});
 
-export default inputTemplateBlocks;
+export default templateBlock;

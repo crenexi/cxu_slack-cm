@@ -18,27 +18,25 @@ export const selectedChannel = ({ state }: any) => {
   }
 };
 
-const inputChannelBlocks = ({ channel }: Props) => [
-  {
-    type: 'input',
-    block_id: ids.input_channel_block,
-    label: {
-      type: 'plain_text',
-      text: 'Channel',
-    },
-    element: {
-      type: 'conversations_select',
-      placeholder: {
-        type: 'plain_text',
-        text: 'Select site channel',
-      },
-      filter: {
-        include: ['public', 'private'],
-      },
-      initial_conversation: channel,
-      action_id: ids.input_channel_action,
-    },
+const channelBlock = ({ channel }: Props) => ({
+  type: 'input',
+  block_id: ids.input_channel_block,
+  label: {
+    type: 'plain_text',
+    text: 'Channel',
   },
-];
+  element: {
+    type: 'conversations_select',
+    placeholder: {
+      type: 'plain_text',
+      text: 'Select site channel',
+    },
+    filter: {
+      include: ['public', 'private'],
+    },
+    initial_conversation: channel,
+    action_id: ids.input_channel_action,
+  },
+});
 
-export default inputChannelBlocks;
+export default channelBlock;

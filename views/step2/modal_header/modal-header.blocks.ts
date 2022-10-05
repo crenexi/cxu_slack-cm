@@ -1,10 +1,10 @@
-import { Template } from '../../constants/constants.ts';
+import { Template } from '../../../constants/constants.ts';
 
 type Props = {
   template: Template;
 };
 
-const headerStep2Blocks = ({ template }: Props) => {
+const modalHeaderBlocks = ({ template }: Props) => {
   const { key, title, moreLink } = template;
 
   return [
@@ -36,4 +36,4 @@ const headerStep2Blocks = ({ template }: Props) => {
   ];
 };
 
-export default headerStep2Blocks;
+export default modalHeaderBlocks;
