@@ -1,12 +1,12 @@
 import { DefineWorkflow, Schema } from 'deno-slack-sdk/mod.ts';
 import { FlowFn } from '../functions/flow_function.ts';
-import c from '../constants/constants.ts';
+import constants from '../constants/constants.ts';
 
 /** https://api.slack.com/future/workflows */
 const BuildmWorkflow = DefineWorkflow({
   callback_id: 'buildm_workflow',
-  title: c.general.title,
-  description: c.general.description,
+  title: constants.general.title,
+  description: constants.general.description,
   input_parameters: {
     properties: {
       interactivity: {

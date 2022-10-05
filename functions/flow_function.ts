@@ -5,12 +5,9 @@ import step1View from './views/step1_view.ts';
 import step2View from './views/step2_view.ts';
 import { selectedTemplate } from './blocks/input-template_blocks.ts';
 import { selectedChannel } from './blocks/input-channel_blocks.ts';
+import handleCompose from './handle-compose.ts';
 import { Template } from '../constants/constants.ts';
-import c from '../constants/constants.ts';
-import droTemplate from './templates/dro_template.ts';
-import orderTemplate from './templates/order_template.ts';
-import expiredTemplate from './templates/expired_template.ts';
-import traineeTemplate from './templates/dro_template.ts';
+import constants from '../constants/constants.ts';
 
 //## Types
 
@@ -43,8 +40,8 @@ const outputProps = {
 
 export const FlowFn = DefineFunction({
   callback_id: 'flow_function',
-  title: c.general.title,
-  description: c.general.description,
+  title: constants.general.title,
+  description: constants.general.description,
   source_file: 'functions/flow_function.ts',
   input_parameters: {
     properties: { ...inputProps },
@@ -73,59 +70,6 @@ export const Flow: SlackFunctionHandler<
     // Set to false; we'll set complete status in view submission handler
     completed: false,
   };
-};
-
-const timeFormatted = () => {
-  // deno-lint-ignore no-explicit-any
-  const options: any = {
-    weekday: 'short',
-    year: '2-digit',
-    month: '2-digit',
-    day: '2-digit',
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: true,
-  };
-
-  const dt = new Date().toLocaleDateString('en-US', options);
-  return dt.split(', ').join(' - ');
-};
-
-const handleCompose: HandleCompose = ({ user, template, values }) => {
-  // Construct the header
-  const title = `*${template.title.toUpperCase()} :${template.emojiKey}:*`;
-  const subtitle = `By <@${user}> | ${timeFormatted()}`;
-  const header = `${title}\n${subtitle}\n----------`;
-
-  // Construct the body
-  const body: string = (() => {
-    switch (template.key) {
-      case 'dro':
-        return droTemplate({
-          accountManager: 'TODO',
-        });
-      case 'order':
-        return orderTemplate({
-          accountManager: 'TODO',
-        });
-      case 'expired':
-        return expiredTemplate({
-          name: 'TODO',
-          quantity: 99,
-          bbDate: 'TODO',
-          accountManager: 'TODO',
-        });
-      case 'trainee':
-        return traineeTemplate({
-          accountManager: 'TODO',
-        });
-      default: {
-        return 'Something went wrong.';
-      }
-    }
-  })();
-
-  return `${header}\n${body.trim()}`;
 };
 
 const handleViewClosed = () => {

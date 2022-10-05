@@ -1,12 +1,12 @@
 import { Trigger } from 'deno-slack-api/types.ts';
 import BuildmWorkflow from '../workflows/buildm_workflow.ts';
-import c from '../constants/constants.ts';
+import constants from '../constants/constants.ts';
 
 /** https://api.slack.com/future/triggers */
 const buildmTrigger: Trigger<typeof BuildmWorkflow.definition> = {
   type: 'shortcut',
-  name: c.general.actionLabel,
-  description: c.general.description,
+  name: constants.general.actionLabel,
+  description: constants.general.description,
   workflow: '#/workflows/buildm_workflow',
   inputs: {
     interactivity: {
@@ -20,7 +20,7 @@ const buildmTrigger: Trigger<typeof BuildmWorkflow.definition> = {
     },
   },
   shortcut: {
-    button_text: c.general.actionLabel,
+    button_text: constants.general.actionLabel,
   },
 };
 
