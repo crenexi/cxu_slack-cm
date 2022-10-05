@@ -1,4 +1,4 @@
-import { Template } from '../constants/constants.ts';
+import { Template } from '../constants/templates.ts';
 import droTemplate from '../views/step2/form_dro/dro.template.ts';
 import orderTemplate from '../views/step2/form_order/order.template.ts';
 import expiredTemplate from '../views/step2/form_expired/expired.template.ts';

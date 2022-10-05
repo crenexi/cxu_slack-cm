@@ -1,7 +1,8 @@
 import { DefineFunction, Schema, ViewsRouter } from 'deno-slack-sdk/mod.ts';
 import type { SlackFunctionHandler } from 'deno-slack-sdk/types.ts';
 import { SlackAPI } from 'deno-slack-api/mod.ts';
-import constants, { Template } from '../constants/constants.ts';
+import constants from '../constants/constants.ts';
+import { Template } from '../constants/templates.ts';
 
 import step1View from '../views/step1/step1.view.ts';
 import { selectedTemplate } from '../views/step1/form_template/template.block.ts';
@@ -64,12 +65,9 @@ export const Flow: SlackFunctionHandler<
   };
 };
 
-const handleViewClosed = () => {
-  console.log('Flow cancelled');
-};
-
 const ViewRouter = ViewsRouter(FlowFn);
 export const { viewSubmission, viewClosed } = ViewRouter
+  .addClosedHandler('step1', () => {})
   .addSubmissionHandler('step1', async ({ token, view }) => {
     const client = SlackAPI(token);
 
@@ -88,6 +86,7 @@ export const { viewSubmission, viewClosed } = ViewRouter
       view: step2View({ channel, channelName, templateKey }),
     };
   })
+  .addClosedHandler('step2', () => {})
   .addSubmissionHandler('step2', async ({ token, inputs, body, view }) => {
     // Validate metadata existence
     if (!view.private_metadata) {
@@ -113,8 +112,6 @@ export const { viewSubmission, viewClosed } = ViewRouter
     return {
       response_action: 'clear',
     };
-  })
-  .addClosedHandler('step1', handleViewClosed)
-  .addClosedHandler('step2', handleViewClosed);
+  });
 
 export default Flow;

@@ -1,4 +1,4 @@
-import { Template, templates } from '../../constants/constants.ts';
+import templates, { Template } from '../../constants/templates.ts';
 import errorView from '../error/error.view.ts';
 import errorBlock from '../error/error.block.ts';
 import headerBlocks from './modal_header/modal-header.blocks.ts';
@@ -34,7 +34,7 @@ const templateBlocks = (template: Template) => {
 const step2View = ({ channel, channelName, templateKey }: Props) => {
   const template = templates.find(({ key }) => key === templateKey);
   const templateEmoji = template?.emojiKey;
-  const privateMetadata = JSON.stringify({ channel, template });
+  const private_metadata = JSON.stringify({ channel, template });
 
   if (!template) {
     console.error('Template key not found in constants');
@@ -42,7 +42,7 @@ const step2View = ({ channel, channelName, templateKey }: Props) => {
   }
 
   return {
-    privateMetadata,
+    private_metadata,
     type: 'modal',
     callback_id: 'step2', // used to route events to handlers
     notify_on_close: true, // triggers view_closed events

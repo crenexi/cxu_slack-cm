@@ -1,4 +1,4 @@
-import { Template } from '../../../constants/constants.ts';
+import { Template } from '../../../constants/templates.ts';
 
 type Props = {
   template: Template;

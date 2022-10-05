@@ -1,4 +1,4 @@
-import { templates } from '../../../constants/constants.ts';
+import templates from '../../../constants/templates.ts';
 
 export const ids = {
   input_template_block: 'input_template',
