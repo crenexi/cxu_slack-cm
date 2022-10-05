@@ -1,5 +1,5 @@
 import { Manifest } from 'deno-slack-sdk/mod.ts';
-import buildmWorkflow from './workflows/buildm_workflow.ts';
+import cmWorkflow from './workflows/cm_workflow.ts';
 import constants from './constants/constants.ts';
 
 // Scopes needed to read channel name in step2 of function_flow
@@ -11,7 +11,7 @@ export default Manifest({
   description: constants.general.description,
   icon: 'assets/icon.png',
   functions: [],
-  workflows: [buildmWorkflow],
+  workflows: [cmWorkflow],
   outgoingDomains: [],
   botScopes: ['commands', 'chat:write', 'chat:write.public', ...readScopes],
 });
