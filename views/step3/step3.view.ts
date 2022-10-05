@@ -31,7 +31,7 @@ const templateBlocks = (template: Template) => {
   }
 };
 
-const step2View = ({ channel, channelName, templateKey }: Props) => {
+const step3View = ({ channel, channelName, templateKey }: Props) => {
   const template = templates.find(({ key }) => key === templateKey);
   const templateEmoji = template?.emojiKey;
   const private_metadata = JSON.stringify({ channel, template });
@@ -44,7 +44,7 @@ const step2View = ({ channel, channelName, templateKey }: Props) => {
   return {
     private_metadata,
     type: 'modal',
-    callback_id: 'step2', // used to route events to handlers
+    callback_id: 'step3', // used to route events to handlers
     notify_on_close: true, // triggers view_closed events
     title: {
       type: 'plain_text',
@@ -68,4 +68,4 @@ const step2View = ({ channel, channelName, templateKey }: Props) => {
   };
 };
 
-export default step2View;
+export default step3View;

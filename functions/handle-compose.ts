@@ -1,8 +1,8 @@
 import { Template } from '../constants/templates.ts';
-import droTemplate from '../views/step2/form_dro/dro.template.ts';
-import orderTemplate from '../views/step2/form_order/order.template.ts';
-import expiredTemplate from '../views/step2/form_expired/expired.template.ts';
-import traineeTemplate from '../views/step2/form_trainee/trainee.template.ts';
+import droTemplate from '../views/step3/form_dro/dro.template.ts';
+import orderTemplate from '../views/step3/form_order/order.template.ts';
+import expiredTemplate from '../views/step3/form_expired/expired.template.ts';
+import traineeTemplate from '../views/step3/form_trainee/trainee.template.ts';
 
 type HandleCompose = (props: {
   user: string | undefined;

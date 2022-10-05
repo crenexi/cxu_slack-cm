@@ -2,7 +2,7 @@ import { Manifest } from 'deno-slack-sdk/mod.ts';
 import cmWorkflow from './workflows/cm_workflow.ts';
 import constants from './constants/constants.ts';
 
-// Scopes needed to read channel name in step2 of function_flow
+// Scopes needed to read channel name in step3 of function_flow
 const readScopes = ['channels:read', 'groups:read', 'mpim:read', 'im:read'];
 
 /** https://api.slack.com/future/manifest */

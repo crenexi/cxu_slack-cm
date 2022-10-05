@@ -8,7 +8,7 @@ import step1View from '../views/step1/step1.view.ts';
 import { selectedTemplate } from '../views/step1/form_template/template.block.ts';
 import { selectedChannel } from '../views/step1/form_channel/channel.block.ts';
 
-import step2View from '../views/step2/step2.view.ts';
+import step3View from '../views/step3/step3.view.ts';
 import handleCompose from './handle-compose.ts';
 
 //## Types
@@ -83,11 +83,11 @@ export const { viewSubmission, viewClosed } = ViewRouter
 
     return {
       response_action: 'update',
-      view: step2View({ channel, channelName, templateKey }),
+      view: step3View({ channel, channelName, templateKey }),
     };
   })
-  .addClosedHandler('step2', () => {})
-  .addSubmissionHandler('step2', async ({ token, inputs, body, view }) => {
+  .addClosedHandler('step3', () => {})
+  .addSubmissionHandler('step3', async ({ token, inputs, body, view }) => {
     // Validate metadata existence
     if (!view.private_metadata) {
       throw new Error('View metadata is undefined!');
