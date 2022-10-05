@@ -5,7 +5,6 @@ export type Template = {
   emoji: string;
   emojiKey: string;
   moreLink?: URL;
-  defaultChannel?: string;
 };
 
 export type Constants = {
@@ -54,7 +53,6 @@ export const templates: Template[] = [
     title: 'Trainee Recap',
     emoji: '🎓',
     emojiKey: 'mortar_board',
-    defaultChannel: 'C0452DVMKSR',
   },
 ];
 
