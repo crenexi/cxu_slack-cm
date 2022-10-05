@@ -14,19 +14,17 @@ type HandleCompose = (props: {
 }) => string;
 
 const timeFormatted = () => {
-  // deno-lint-ignore no-explicit-any
-  const options: any = {
-    weekday: 'short',
-    year: '2-digit',
-    month: '2-digit',
-    day: '2-digit',
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: true,
-  };
+  const n = new Date();
+  const YY = String(n.getFullYear()).split('').slice(-2).join('');
+  const MM = (n.getMonth() < 10 ? '0' : '') + n.getMonth();
+  const DD = (n.getDate() < 10 ? '0' : '') + n.getDate();
+  const DDD = n.toLocaleString('en-US', { weekday: 'short' });
+  const T = n.toLocaleTimeString('en-US', {
+    hour: 'numeric',
+    minute: 'numeric',
+  });
 
-  const dt = new Date().toLocaleDateString('en-US', options);
-  return dt.split(', ').join(' - ');
+  return `${DDD}, ${MM}-${DD}-${YY} at ${T}`;
 };
 
 const handleCompose: HandleCompose = ({ user, template }) => {
