@@ -1,4 +1,4 @@
-import templates, { Template } from '../../constants/templates.ts';
+import { Template } from '../../constants/templates.ts';
 import errorView from '../error/error.view.ts';
 import errorBlock from '../error/error.block.ts';
 import headerBlocks from './modal_header/modal-header.blocks.ts';
@@ -11,7 +11,7 @@ import traineeBlocks from './form_trainee/trainee.blocks.ts';
 type Props = {
   channel: string | undefined;
   channelName: string | undefined;
-  templateKey: string | undefined;
+  template: Template;
 };
 
 const dividerBlock = { type: 'divider' };
@@ -31,8 +31,7 @@ const templateBlocks = (template: Template) => {
   }
 };
 
-const step3View = ({ channel, channelName, templateKey }: Props) => {
-  const template = templates.find(({ key }) => key === templateKey);
+const step3View = ({ channel, channelName, template }: Props) => {
   const templateEmoji = template?.emojiKey;
   const private_metadata = JSON.stringify({ channel, template });
 

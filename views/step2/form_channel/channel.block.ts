@@ -1,5 +1,5 @@
 type Props = {
-  channel: string | undefined;
+  activeChannel: string | undefined;
 };
 
 export const ids = {
@@ -18,7 +18,7 @@ export const selectedChannel = ({ state }: any) => {
   }
 };
 
-const channelBlock = ({ channel }: Props) => ({
+const channelBlock = ({ activeChannel }: Props) => ({
   type: 'input',
   block_id: ids.input_channel_block,
   label: {
@@ -34,7 +34,7 @@ const channelBlock = ({ channel }: Props) => ({
     filter: {
       include: ['public', 'private'],
     },
-    initial_conversation: channel,
+    initial_conversation: activeChannel,
     action_id: ids.input_channel_action,
   },
 });

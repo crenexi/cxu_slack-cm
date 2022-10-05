@@ -42,7 +42,7 @@ const templates: Template[] = [
     enabled: true,
     key: 'trainee',
     title: 'Trainee Recap',
-    footnote: 'Select `*#ba_flex_operators*` as the channel',
+    footnote: 'Select *#ba_flex_operators* as the channel',
     emojiKey: 'mortar_board',
   },
 ];

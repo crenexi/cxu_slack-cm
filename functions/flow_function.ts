@@ -2,11 +2,13 @@ import { DefineFunction, Schema, ViewsRouter } from 'deno-slack-sdk/mod.ts';
 import type { SlackFunctionHandler } from 'deno-slack-sdk/types.ts';
 import { SlackAPI } from 'deno-slack-api/mod.ts';
 import constants from '../constants/constants.ts';
-import { Template } from '../constants/templates.ts';
+import templates, { Template } from '../constants/templates.ts';
 
 import step1View from '../views/step1/step1.view.ts';
 import { selectedTemplate } from '../views/step1/form_template/template.block.ts';
-import { selectedChannel } from '../views/step1/form_channel/channel.block.ts';
+
+import step2View from '../views/step2/step2.view.ts';
+import { selectedChannel } from '../views/step2/form_channel/channel.block.ts';
 
 import step3View from '../views/step3/step3.view.ts';
 import handleCompose from './handle-compose.ts';
@@ -48,15 +50,24 @@ export const FlowFn = DefineFunction({
 
 //## Function Handling
 
+const parseMetadata = (data: string | undefined): ViewMetadata => {
+  const metadata = JSON.parse(<string> data);
+
+  if (!metadata) {
+    throw new Error('View metadata is undefined!');
+  }
+
+  return metadata;
+};
+
 export const Flow: SlackFunctionHandler<
   typeof FlowFn.definition
 > = async ({ inputs, token }) => {
   const client = SlackAPI(token);
-  const channel = inputs.channel;
 
   await client.views.open({
     interactivity_pointer: inputs.interactivity.interactivity_pointer,
-    view: step1View({ channel }),
+    view: step1View(),
   });
 
   return {
@@ -68,14 +79,26 @@ export const Flow: SlackFunctionHandler<
 const ViewRouter = ViewsRouter(FlowFn);
 export const { viewSubmission, viewClosed } = ViewRouter
   .addClosedHandler('step1', () => {})
-  .addSubmissionHandler('step1', async ({ token, view }) => {
-    const client = SlackAPI(token);
+  .addSubmissionHandler('step1', ({ inputs, view }) => {
+    const activeChannel = inputs.channel;
 
-    // Get selected template and channel from state
+    // Get selected template from state
     const templateKey = selectedTemplate({ state: view.state });
+    const template = templates.find(({ key }) => key === templateKey);
+
+    return {
+      response_action: 'update',
+      view: step2View({ activeChannel, template }),
+    };
+  })
+  .addClosedHandler('step2', () => {})
+  .addSubmissionHandler('step2', async ({ token, view }) => {
+    // Get data
+    const { template } = parseMetadata(view.private_metadata);
     const channel = selectedChannel({ state: view.state });
 
     // Note channel name from API info
+    const client = SlackAPI(token);
     const channelName = await client.apiCall(
       'conversations.info',
       { token, channel },
@@ -83,23 +106,17 @@ export const { viewSubmission, viewClosed } = ViewRouter
 
     return {
       response_action: 'update',
-      view: step3View({ channel, channelName, templateKey }),
+      view: step3View({ template, channel, channelName }),
     };
   })
   .addClosedHandler('step3', () => {})
   .addSubmissionHandler('step3', async ({ token, inputs, body, view }) => {
-    // Validate metadata existence
-    if (!view.private_metadata) {
-      throw new Error('View metadata is undefined!');
-    }
-
     // Get data
-    const metadata: ViewMetadata = JSON.parse(<string> view.private_metadata);
-    const { channel, template } = metadata;
+    const { channel, template } = parseMetadata(view.private_metadata);
     const { values } = view.state;
     const { user } = inputs;
 
-    // Get channel and compose message
+    // Compose message payload
     const message = handleCompose({ user, template, values });
 
     // Complete flow
