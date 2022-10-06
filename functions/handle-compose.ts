@@ -14,7 +14,7 @@ type HandleCompose = (props: {
 }) => string;
 
 const trimText = (str: string | undefined) => {
-  if (!str) return 'N/A';
+  if (!str) return 'n/a';
   return str.length < 10 ? str.trim() : `\n${str.trim()}`;
 };
 
@@ -48,7 +48,7 @@ const handleCompose: HandleCompose = ({ user, template, values }) => {
         return orderTemplate({
           orderId: textValById(orderIds.orderId),
           orderRecap: textValById(orderIds.orderRecap),
-          deliveryDate: dateValById(orderIds.deliveryDate),
+          deliveryDate: formatDate(dateValById(orderIds.deliveryDate)),
           listChained: trimText(textValById(orderIds.listChained)),
           listICNeeds: trimText(textValById(orderIds.listICNeeds)),
           listEdits: trimText(textValById(orderIds.listEdits)),
