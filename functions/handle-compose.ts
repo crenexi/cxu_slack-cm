@@ -25,9 +25,12 @@ const trimText = (str: string | undefined) => {
 
 const formatDate: FormatDate = ({ date, withTime }) => {
   const n = !date ? new Date() : new Date(`${date}T00:00:00Z`);
+  const m = n.getMonth() + 1;
+  const d = n.getDate() + 1;
+
   const YY = String(n.getFullYear()).split('').slice(-2).join('');
-  const MM = (n.getMonth() < 10 ? '0' : '') + (+n.getMonth() + 1);
-  const DD = (n.getDate() < 10 ? '0' : '') + (+n.getDate() + 1);
+  const MM = (m < 10 ? `0${m}` : m);
+  const DD = (m < 10 ? `0${d}` : d);
 
   const DDD = n.toLocaleString('en-US', {
     weekday: 'short',

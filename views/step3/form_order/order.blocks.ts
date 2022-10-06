@@ -54,12 +54,11 @@ const listChained = {
   block_id: ids.listChained,
   optional: true,
   label: plain('Chained Products'),
-  hint: plain('Are there any "chained" products for the next order?'),
   element: {
     type: 'plain_text_input',
     action_id: 'action',
     multiline: true,
-    placeholder: plain('- Item'),
+    placeholder: plain('Are there any "chained" products for the next order?'),
   },
 };
 
