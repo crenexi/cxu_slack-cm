@@ -7,26 +7,21 @@ type Props = {
   template: Template | undefined;
 };
 
+// Helpers
+const plain = (text: string) => ({ text, type: 'plain_text' });
+
 const step1View = ({ activeChannel, template }: Props) => {
   const private_metadata = JSON.stringify({ template });
+  const title = !template ? '' : template.title;
 
   return {
     private_metadata,
     type: 'modal',
     callback_id: 'step2',
     notify_on_close: true,
-    title: {
-      type: 'plain_text',
-      text: template?.title,
-    },
-    close: {
-      type: 'plain_text',
-      text: 'Cancel',
-    },
-    submit: {
-      type: 'plain_text',
-      text: 'Next',
-    },
+    title: plain(title),
+    close: plain('Cancel'),
+    submit: plain('Next'),
     blocks: [
       channelBlocks({ activeChannel }),
       ...footerBlocks({ template }),

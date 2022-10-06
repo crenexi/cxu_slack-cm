@@ -1,15 +1,14 @@
 type Props = {
-  templateEmoji: string | undefined;
   channelName: string | undefined;
 };
 
-const modalFooterBlocks = ({ templateEmoji, channelName }: Props) => [
+const modalFooterBlocks = ({ channelName }: Props) => [
   {
     type: 'context',
     elements: [
       {
         type: 'mrkdwn',
-        text: `:${templateEmoji}: | Sending to #${channelName}`,
+        text: `Message will send to #${channelName}`,
       },
     ],
   },

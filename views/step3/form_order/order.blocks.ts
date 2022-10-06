@@ -11,8 +11,14 @@ export const ids = {
   accountManager: 'account-manager',
 };
 
+// Helper for text object
 const plain = (text: string) => ({ text, type: 'plain_text' });
-const header = (text: string) => ({ text: plain(text), type: 'header' });
+
+// Helper for header block
+const header = (text: string) => ({
+  text: plain(text.toUpperCase()),
+  type: 'header',
+});
 
 const orderId = {
   type: 'input',
@@ -34,7 +40,7 @@ const orderRecap = {
     type: 'plain_text_input',
     action_id: 'action',
     max_length: 50,
-    placeholder: plain('Site Name - Street - Floor, $0.00'),
+    placeholder: plain('Site - Street - Floor, $0.00'),
   },
 };
 
@@ -45,7 +51,7 @@ const deliveryDate = {
   element: {
     type: 'datepicker',
     action_id: 'action',
-    placeholder: plain('Select Date'),
+    placeholder: plain('Select'),
   },
 };
 
@@ -54,11 +60,12 @@ const listChained = {
   block_id: ids.listChained,
   optional: true,
   label: plain('Chained Products'),
+  hint: plain('Are there any "chained" products for the next order?'),
   element: {
     type: 'plain_text_input',
     action_id: 'action',
     multiline: true,
-    placeholder: plain('Are there any "chained" products for the next order?'),
+    placeholder: plain('- Item\n- Item'),
   },
 };
 
@@ -67,13 +74,12 @@ const listICNeeds = {
   block_id: ids.listICNeeds,
   optional: true,
   label: plain('Adjustments Needed'),
+  hint: plain('Any adjustments needed to quantities for products listed?'),
   element: {
     type: 'plain_text_input',
     action_id: 'action',
     multiline: true,
-    placeholder: plain(
-      'Any adjustments needed to quantities for products listed?',
-    ),
+    placeholder: plain('- Item\n- Item'),
   },
 };
 
@@ -82,11 +88,12 @@ const listEdits = {
   block_id: ids.listEdits,
   optional: true,
   label: plain('Edits Made'),
+  hint: plain('Were any edits made to this order?'),
   element: {
     type: 'plain_text_input',
     action_id: 'action',
     multiline: true,
-    placeholder: plain('Were any edits made to this order?'),
+    placeholder: plain('- Item\n- Item'),
   },
 };
 
@@ -112,11 +119,12 @@ const itemsPickup = {
   block_id: ids.itemsPickup,
   optional: true,
   label: plain('Items for Pickup'),
+  hint: plain('Any items for pick-up + reason for pick-up'),
   element: {
     type: 'plain_text_input',
     action_id: 'action',
     multiline: true,
-    placeholder: plain('Any items for pick-up + reason for pick-up'),
+    placeholder: plain('- Item\n- Item'),
   },
 };
 
@@ -147,7 +155,7 @@ const accountManager = {
     type: 'multi_users_select',
     action_id: 'action',
     max_selected_items: 1,
-    placeholder: plain('Select Site AM'),
+    placeholder: plain('Select'),
   },
 };
 
@@ -161,9 +169,9 @@ const orderBlocks = [
   listChained,
   listICNeeds,
   listEdits,
-  auditCheck,
-  header('Issues'),
   itemsPickup,
+  header('Checks'),
+  auditCheck,
   itemsUnavailable,
 ];
 

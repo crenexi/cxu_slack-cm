@@ -22,7 +22,7 @@ const templateOptions = templates
     return {
       text: {
         type: 'plain_text',
-        text: `:${emojiKey}: | ${title}`,
+        text: `:${emojiKey}: ${title}`,
         emoji: true,
       },
       value: key,

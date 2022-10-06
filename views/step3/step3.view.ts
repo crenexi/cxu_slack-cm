@@ -13,7 +13,9 @@ type Props = {
   template: Template;
 };
 
+// Helpers
 const dividerBlock = { type: 'divider' };
+const plain = (text: string) => ({ text, type: 'plain_text' });
 
 const templateBlocks = (template: Template) => {
   switch (template.key) {
@@ -29,7 +31,6 @@ const templateBlocks = (template: Template) => {
 };
 
 const step3View = ({ channel, channelName, template }: Props) => {
-  const templateEmoji = template?.emojiKey;
   const private_metadata = JSON.stringify({ channel, template });
 
   if (!template) {
@@ -42,24 +43,15 @@ const step3View = ({ channel, channelName, template }: Props) => {
     type: 'modal',
     callback_id: 'step3', // used to route events to handlers
     notify_on_close: true, // triggers view_closed events
-    title: {
-      type: 'plain_text',
-      text: template.title,
-    },
-    close: {
-      type: 'plain_text',
-      text: 'Cancel',
-    },
-    submit: {
-      type: 'plain_text',
-      text: 'Send Message',
-    },
+    title: plain(template.title),
+    close: plain('Cancel'),
+    submit: plain('Send'),
     blocks: [
-      ...headerBlocks({ template }),
+      ...headerBlocks({ channelName, template }),
       dividerBlock,
       ...templateBlocks(template),
       dividerBlock,
-      ...footerBlocks({ templateEmoji, channelName }),
+      ...footerBlocks({ channelName }),
     ],
   };
 };
