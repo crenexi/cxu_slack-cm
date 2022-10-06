@@ -50,6 +50,7 @@ const handleCompose: HandleCompose = ({ user, template, values }) => {
           orderRecap: textValById(orderIds.orderRecap),
           deliveryDate: dateValById(orderIds.deliveryDate),
           auditCheck: cbValById(orderIds.auditCheck) ? 'Yes' : 'No',
+          itemsPickup: textValById(orderIds.itemsPickup),
           accountManager: userValById(orderIds.accountManager),
         });
       // Message: expired

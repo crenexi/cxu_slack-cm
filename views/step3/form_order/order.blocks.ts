@@ -3,6 +3,7 @@ export const ids = {
   orderRecap: 'order-recap',
   deliveryDate: 'delivery-date',
   auditCheck: 'audit-check',
+  itemsPickup: 'items-pickup',
   accountManager: 'account-manager',
 };
 
@@ -61,6 +62,19 @@ const auditCheck = {
   },
 };
 
+const itemsPickup = {
+  type: 'input',
+  block_id: ids.itemsPickup,
+  label: plain('Items for Pickup'),
+  hint: plain('Any items for pick-up + reason for pick-up'),
+  element: {
+    type: 'plain_text_input',
+    action_id: 'action',
+    multiline: true,
+    initial_value: 'N/A',
+  },
+};
+
 const accountManager = {
   type: 'input',
   block_id: ids.accountManager,
@@ -79,6 +93,8 @@ const orderBlocks = [
   deliveryDate,
   divider,
   auditCheck,
+  divider,
+  itemsPickup,
   divider,
   accountManager,
 ];
