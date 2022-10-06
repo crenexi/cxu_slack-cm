@@ -1,11 +1,10 @@
 import { Template } from '../../../constants/templates.ts';
 
 type Props = {
-  channelName: string | undefined;
   template: Template;
 };
 
-const modalHeaderBlocks = ({ channelName, template }: Props) => {
+const modalHeaderBlocks = ({ template }: Props) => {
   const { key, moreLink } = template;
 
   return [
@@ -25,15 +24,6 @@ const modalHeaderBlocks = ({ channelName, template }: Props) => {
         },
       ],
     },
-    // {
-    //   type: 'context',
-    //   elements: [
-    //     {
-    //       type: 'mrkdwn',
-    //       text: `Message will send to #${channelName}`,
-    //     },
-    //   ],
-    // },
   ];
 };
 

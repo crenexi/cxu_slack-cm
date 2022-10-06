@@ -7,7 +7,7 @@ const modalFooterBlocks = ({ channelName }: Props) => [
     type: 'context',
     elements: [
       {
-        type: 'mrkdwn',
+        type: 'plain_text',
         text: `Message will send to #${channelName}`,
       },
     ],

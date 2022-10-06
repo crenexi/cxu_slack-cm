@@ -47,7 +47,7 @@ const step3View = ({ channel, channelName, template }: Props) => {
     close: plain('Cancel'),
     submit: plain('Send'),
     blocks: [
-      ...headerBlocks({ channelName, template }),
+      ...headerBlocks({ template }),
       dividerBlock,
       ...templateBlocks(template),
       dividerBlock,
