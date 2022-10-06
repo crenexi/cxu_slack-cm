@@ -2,6 +2,7 @@ export const ids = {
   orderId: 'order-id',
   orderRecap: 'order-recap',
   deliveryDate: 'delivery-date',
+  auditCheck: 'audit-check',
   accountManager: 'account-manager',
 };
 
@@ -32,6 +33,34 @@ const orderRecap = {
   },
 };
 
+const deliveryDate = {
+  type: 'input',
+  block_id: ids.deliveryDate,
+  label: plain('Delivery Date'),
+  element: {
+    type: 'datepicker',
+    action_id: 'action',
+    placeholder: plain('Select Date'),
+  },
+};
+
+const auditCheck = {
+  type: 'input',
+  block_id: ids.auditCheck,
+  label: plain('Audited?'),
+  optional: true,
+  element: {
+    type: 'checkboxes',
+    action_id: 'action',
+    options: [
+      {
+        text: plain('Have you audited this order?'),
+        value: 'v1',
+      },
+    ],
+  },
+};
+
 const accountManager = {
   type: 'input',
   block_id: ids.accountManager,
@@ -44,21 +73,12 @@ const accountManager = {
   },
 };
 
-const deliveryDate = {
-  type: 'input',
-  block_id: ids.deliveryDate,
-  label: plain('Delivery Date'),
-  element: {
-    type: 'datepicker',
-    action_id: 'action',
-    placeholder: plain('Select Date'),
-  },
-};
-
 const orderBlocks = [
   orderId,
   orderRecap,
   deliveryDate,
+  divider,
+  auditCheck,
   divider,
   accountManager,
 ];

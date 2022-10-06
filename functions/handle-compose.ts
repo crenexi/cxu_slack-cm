@@ -33,11 +33,12 @@ const handleCompose: HandleCompose = ({ user, template, values }) => {
   const subtitle = `By <@${user}> | ${timeFormatted()}`;
   const header = `${title}\n${subtitle}\n----------`;
 
-  console.log(values);
+  // console.log(values);
 
   const textValById = (id: string) => values[id].action.value;
   const dateValById = (id: string) => values[id].action.selected_date;
   const userValById = (id: string) => values[id].action.selected_users[0];
+  const cbValById = (id: string) => values[id].action.selected_options.length;
 
   // Construct the body
   const body: string = (() => {
@@ -48,6 +49,7 @@ const handleCompose: HandleCompose = ({ user, template, values }) => {
           orderId: textValById(orderIds.orderId),
           orderRecap: textValById(orderIds.orderRecap),
           deliveryDate: dateValById(orderIds.deliveryDate),
+          auditCheck: cbValById(orderIds.auditCheck) ? 'Yes' : 'No',
           accountManager: userValById(orderIds.accountManager),
         });
       // Message: expired
