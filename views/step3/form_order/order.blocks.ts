@@ -7,6 +7,7 @@ export const ids = {
   listEdits: 'list-edits-made',
   auditCheck: 'audit-check',
   itemsPickup: 'items-pickup',
+  itemsUnavailable: 'items-unavailable',
   accountManager: 'account-manager',
 };
 
@@ -67,12 +68,13 @@ const listICNeeds = {
   block_id: ids.listICNeeds,
   optional: true,
   label: plain('Adjustments Needed'),
-  hint: plain('Any adjustments needed to quantities for products listed?'),
   element: {
     type: 'plain_text_input',
     action_id: 'action',
     multiline: true,
-    placeholder: plain('- Item'),
+    placeholder: plain(
+      'Any adjustments needed to quantities for products listed?',
+    ),
   },
 };
 
@@ -81,12 +83,11 @@ const listEdits = {
   block_id: ids.listEdits,
   optional: true,
   label: plain('Edits Made'),
-  hint: plain('Were any edits made to this order?'),
   element: {
     type: 'plain_text_input',
     action_id: 'action',
     multiline: true,
-    placeholder: plain('- Item'),
+    placeholder: plain('Were any edits made to this order?'),
   },
 };
 
@@ -112,12 +113,30 @@ const itemsPickup = {
   block_id: ids.itemsPickup,
   optional: true,
   label: plain('Items for Pickup'),
-  hint: plain('Any items for pick-up + reason for pick-up'),
   element: {
     type: 'plain_text_input',
     action_id: 'action',
     multiline: true,
-    placeholder: plain('- Item'),
+    placeholder: plain('Any items for pick-up + reason for pick-up'),
+  },
+};
+
+const itemsUnavailable = {
+  type: 'input',
+  block_id: ids.itemsUnavailable,
+  optional: true,
+  label: plain('Items Unavailable?'),
+  element: {
+    type: 'checkboxes',
+    action_id: 'action',
+    options: [
+      {
+        text: plain(
+          'Are there "Items Not Placed on Order"? If yes, send this message then post a screenshot of them below',
+        ),
+        value: 'v1',
+      },
+    ],
   },
 };
 
@@ -146,6 +165,7 @@ const orderBlocks = [
   auditCheck,
   header('Issues'),
   itemsPickup,
+  itemsUnavailable,
 ];
 
 export default orderBlocks;

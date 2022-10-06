@@ -7,6 +7,7 @@ interface Props {
   listEdits: string | undefined;
   auditCheck: 'Yes' | 'No';
   itemsPickup: string | undefined;
+  itemsUnavailable: string | undefined;
   accountManager?: string | undefined;
 }
 
@@ -21,7 +22,7 @@ Any adjustments needed to quantities for products listed?: ${p.listICNeeds}
 Were any edits made to this order?: ${p.listEdits}
 ----------
 Any items for pick-up + reason for pick-up: ${p.itemsPickup}
-Below is a screenshot of the items that couldn't make it on the order: TODO
+Below is a screenshot of the items that couldn't make it on the order: ${p.itemsUnavailable}
 ----------
 @ba-fieldops <@${p.accountManager}>
 `);
