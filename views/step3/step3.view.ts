@@ -3,7 +3,6 @@ import errorView from '../error/error.view.ts';
 import errorBlock from '../error/error.block.ts';
 import headerBlocks from './modal_header/modal-header.blocks.ts';
 import footerBlocks from './modal_footer/modal-footer.blocks.ts';
-import droBlocks from './form_dro/dro.blocks.ts';
 import orderBlocks from './form_order/order.blocks.ts';
 import expiredBlocks from './form_expired/expired.blocks.ts';
 import traineeBlocks from './form_trainee/trainee.blocks.ts';
@@ -18,8 +17,6 @@ const dividerBlock = { type: 'divider' };
 
 const templateBlocks = (template: Template) => {
   switch (template.key) {
-    case 'dro':
-      return droBlocks;
     case 'order':
       return orderBlocks;
     case 'expired':

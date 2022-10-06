@@ -10,16 +10,6 @@ export type Template = {
 const templates: Template[] = [
   {
     enabled: true,
-    key: 'dro',
-    title: 'DRO / Daily Report',
-    emojiKey: 'calendar',
-    footnote: 'Select the relevant site channel',
-    moreLink: new URL(
-      'https://docs.google.com/document/d/1xN4pQ0aLcgeU52Y0VjGZeAA8xKoNmLOk6-ECr2AFQe0/edit?usp=sharing',
-    ),
-  },
-  {
-    enabled: true,
     key: 'order',
     title: 'Order Summary',
     emojiKey: 'package',

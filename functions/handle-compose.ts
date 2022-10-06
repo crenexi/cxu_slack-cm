@@ -1,5 +1,4 @@
 import { Template } from '../constants/templates.ts';
-import droTemplate from '../views/step3/form_dro/dro.template.ts';
 import orderTemplate from '../views/step3/form_order/order.template.ts';
 import expiredTemplate from '../views/step3/form_expired/expired.template.ts';
 import traineeTemplate from '../views/step3/form_trainee/trainee.template.ts';
@@ -36,11 +35,6 @@ const handleCompose: HandleCompose = ({ user, template }) => {
   // Construct the body
   const body: string = (() => {
     switch (template.key) {
-      // Message: DRO
-      case 'dro':
-        return droTemplate({
-          accountManager: 'TODO',
-        });
       // Message: order
       case 'order':
         return orderTemplate({
