@@ -13,48 +13,27 @@ type HandleCompose = (props: {
   };
 }) => string;
 
-type FormatDate = (props: {
-  date?: string;
-  withTime?: boolean;
-}) => string;
-
 const trimText = (str: string | undefined) => {
   if (!str) return 'N/A';
   return str.length < 10 ? str.trim() : `\n${str.trim()}`;
 };
 
-const formatDate: FormatDate = ({ date, withTime }) => {
+const formatDate = (date?: string) => {
   const n = !date ? new Date() : new Date(`${date}T00:00:00Z`);
-  const m = n.getMonth() + 1;
-  const d = n.getDate() + 1;
 
   const YY = String(n.getFullYear()).split('').slice(-2).join('');
-  const MM = (m < 10 ? `0${m}` : m);
-  const DD = (m < 10 ? `0${d}` : d);
+  const MM = n.toLocaleString('en-US', { month: '2-digit', timeZone: 'UTC' });
+  const DD = n.toLocaleString('en-US', { day: '2-digit', timeZone: 'UTC' });
+  const DDD = n.toLocaleString('en-US', { weekday: 'short', timeZone: 'UTC' });
 
-  const DDD = n.toLocaleString('en-US', {
-    weekday: 'short',
-    timeZone: 'UTC',
-  });
-
-  const T = n.toLocaleTimeString('en-US', {
-    hour: 'numeric',
-    minute: 'numeric',
-  });
-
-  const formatted = `${DDD}, ${MM}-${DD}-${YY}`;
-  return !withTime ? formatted : `${formatted} at ${T}`;
+  return `${DDD}, ${MM}-${DD}-${YY}`;
 };
 
 const handleCompose: HandleCompose = ({ user, template, values }) => {
   // Construct the header
   const title = `*${template.title.toUpperCase()} :${template.emojiKey}:*`;
-  const subtitle = `By <@${user}> | ${formatDate({ withTime: true })}`;
+  const subtitle = `By <@${user}> | ${formatDate()}`;
   const header = `${title}\n${subtitle}\n----------`;
-
-  // console.log(values);
-  console.log('### FORMATTING DATE');
-  console.log(formatDate({ date: '2022-10-05' }));
 
   const textValById = (id: string) => values[id].action.value;
   const dateValById = (id: string) => values[id].action.selected_date;
