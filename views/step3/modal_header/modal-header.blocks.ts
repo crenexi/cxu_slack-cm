@@ -5,16 +5,9 @@ type Props = {
 };
 
 const modalHeaderBlocks = ({ template }: Props) => {
-  const { key, title, moreLink } = template;
+  const { key, moreLink } = template;
 
   return [
-    {
-      type: 'header',
-      text: {
-        type: 'plain_text',
-        text: title,
-      },
-    },
     {
       type: 'section',
       text: {
@@ -25,7 +18,7 @@ const modalHeaderBlocks = ({ template }: Props) => {
         type: 'button',
         text: {
           type: 'plain_text',
-          text: 'View Instructions ↗️',
+          text: 'View Instructions',
           emoji: true,
         },
         value: key,

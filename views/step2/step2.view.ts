@@ -17,7 +17,7 @@ const step1View = ({ activeChannel, template }: Props) => {
     notify_on_close: true,
     title: {
       type: 'plain_text',
-      text: 'Compose Message',
+      text: template?.title,
     },
     close: {
       type: 'plain_text',

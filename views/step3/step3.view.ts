@@ -44,7 +44,7 @@ const step3View = ({ channel, channelName, template }: Props) => {
     notify_on_close: true, // triggers view_closed events
     title: {
       type: 'plain_text',
-      text: 'Compose Message',
+      text: template.title,
     },
     close: {
       type: 'plain_text',

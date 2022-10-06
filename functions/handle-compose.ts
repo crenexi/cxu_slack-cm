@@ -13,6 +13,11 @@ type HandleCompose = (props: {
   };
 }) => string;
 
+const trimText = (str: string | undefined) => {
+  if (!str) return 'N/A';
+  return str.length < 10 ? str.trim() : `\n${str.trim()}`;
+};
+
 const timeFormatted = () => {
   const n = new Date();
   const YY = String(n.getFullYear()).split('').slice(-2).join('');
@@ -49,8 +54,11 @@ const handleCompose: HandleCompose = ({ user, template, values }) => {
           orderId: textValById(orderIds.orderId),
           orderRecap: textValById(orderIds.orderRecap),
           deliveryDate: dateValById(orderIds.deliveryDate),
+          listChained: trimText(textValById(orderIds.listChained)),
+          listICNeeds: trimText(textValById(orderIds.listICNeeds)),
+          listEdits: trimText(textValById(orderIds.listEdits)),
           auditCheck: cbValById(orderIds.auditCheck) ? 'Yes' : 'No',
-          itemsPickup: textValById(orderIds.itemsPickup),
+          itemsPickup: trimText(textValById(orderIds.itemsPickup)),
           accountManager: userValById(orderIds.accountManager),
         });
       // Message: expired
