@@ -1,4 +1,5 @@
 import { Template } from '../constants/templates.ts';
+import { ids as orderIds } from '../views/step3/form_order/order.blocks.ts';
 import orderTemplate from '../views/step3/form_order/order.template.ts';
 import expiredTemplate from '../views/step3/form_expired/expired.template.ts';
 import traineeTemplate from '../views/step3/form_trainee/trainee.template.ts';
@@ -26,11 +27,17 @@ const timeFormatted = () => {
   return `${DDD}, ${MM}-${DD}-${YY} at ${T}`;
 };
 
-const handleCompose: HandleCompose = ({ user, template }) => {
+const handleCompose: HandleCompose = ({ user, template, values }) => {
   // Construct the header
   const title = `*${template.title.toUpperCase()} :${template.emojiKey}:*`;
   const subtitle = `By <@${user}> | ${timeFormatted()}`;
   const header = `${title}\n${subtitle}\n----------`;
+
+  console.log(values);
+
+  const textValById = (id: string) => values[id].action.value;
+  const dateValById = (id: string) => values[id].action.selected_date;
+  const userValById = (id: string) => values[id].action.selected_users[0];
 
   // Construct the body
   const body: string = (() => {
@@ -38,7 +45,10 @@ const handleCompose: HandleCompose = ({ user, template }) => {
       // Message: order
       case 'order':
         return orderTemplate({
-          accountManager: 'TODO',
+          orderId: textValById(orderIds.orderId),
+          orderRecap: textValById(orderIds.orderRecap),
+          deliveryDate: dateValById(orderIds.deliveryDate),
+          accountManager: userValById(orderIds.accountManager),
         });
       // Message: expired
       case 'expired':
