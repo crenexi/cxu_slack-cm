@@ -1,5 +1,6 @@
 import { Template } from '../constants/templates.ts';
 import { ids as orderIds } from '../views/step3/form_order/order.blocks.ts';
+import { ids as expiredIds } from '../views/step3/form_expired/expired.blocks.ts';
 import orderTemplate from '../views/step3/form_order/order.template.ts';
 import expiredTemplate from '../views/step3/form_expired/expired.template.ts';
 import traineeTemplate from '../views/step3/form_trainee/trainee.template.ts';
@@ -30,6 +31,8 @@ const formatDate = (date?: string) => {
 };
 
 const handleCompose: HandleCompose = ({ user, template, values }) => {
+  // console.log(values);
+
   // Construct the header
   const title = `*${template.title.toUpperCase()} :${template.emojiKey}:*`;
   const subtitle = `By <@${user}> | ${formatDate()}`;
@@ -62,10 +65,16 @@ const handleCompose: HandleCompose = ({ user, template, values }) => {
       // Message: expired
       case 'expired':
         return expiredTemplate({
-          name: 'TODO',
-          quantity: 99,
-          bbDate: 'TODO',
-          accountManager: 'TODO',
+          e1_itemName: textValById(`e1_${expiredIds.itemName}`),
+          e1_quantity: textValById(`e1_${expiredIds.quantity}`),
+          e1_bbDate: dateValById(`e1_${expiredIds.bbDate}`),
+          e2_itemName: textValById(`e2_${expiredIds.itemName}`),
+          e2_quantity: textValById(`e2_${expiredIds.quantity}`),
+          e2_bbDate: dateValById(`e2_${expiredIds.bbDate}`),
+          e3_itemName: textValById(`e3_${expiredIds.itemName}`),
+          e3_quantity: textValById(`e3_${expiredIds.quantity}`),
+          e3_bbDate: dateValById(`e3_${expiredIds.bbDate}`),
+          accountManager: userValById(expiredIds.accountManager),
         });
       // Message: trainee
       case 'trainee':
