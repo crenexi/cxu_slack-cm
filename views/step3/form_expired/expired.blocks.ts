@@ -23,7 +23,7 @@ const header = (text: string) => ({
 const itemName = ({ id, required }: FnProps) => ({
   type: 'input',
   block_id: `e${id}_${ids.itemName}`,
-  label: plain('Item/Product'),
+  label: plain('Item Name'),
   optional: !required,
   element: {
     type: 'plain_text_input',
@@ -84,11 +84,13 @@ const entry = (id: number) => {
 const expiredBlocks = [
   accountManager,
   divider,
-  header('Entry One'),
+  header('Product 1'),
   ...entry(1),
-  header('Entry Two'),
+  divider,
+  header('Product 2'),
   ...entry(2),
-  header('Entry Three'),
+  divider,
+  header('Product 3'),
   ...entry(3),
 ];
 
