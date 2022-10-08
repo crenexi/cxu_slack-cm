@@ -1,39 +1,36 @@
 export type Template = {
-  enabled: boolean;
   key: string;
+  isEnabled: boolean;
+  isSlackDeprecated: boolean;
   title: string;
   emojiKey: string;
-  footnote: string;
-  moreLink?: URL;
+  channelTip: string;
 };
 
 const templates: Template[] = [
   {
-    enabled: true,
+    key: 'dro',
+    isEnabled: true,
+    isSlackDeprecated: true,
+    title: 'DRO / Daily Report',
+    emojiKey: 'calendar',
+    channelTip: 'Select *DM to yourself* for copy-paste use.',
+  },
+  {
     key: 'order',
+    isEnabled: true,
+    isSlackDeprecated: true,
     title: 'Order Summary',
     emojiKey: 'package',
-    footnote: 'Select the relevant site channel',
-    moreLink: new URL(
-      'https://docs.google.com/document/d/1ZMLlip4x07TbQcISxLsrcNqm0mt2BfL1b5IXWh4WYWQ/edit?usp=sharing',
-    ),
+    channelTip: 'Select *DM to yourself* for copy-paste use.',
   },
   {
-    enabled: true,
-    key: 'expired',
-    title: 'Expired Product',
-    emojiKey: 'wastebasket',
-    footnote: 'Select the relevant site channel',
-    moreLink: new URL(
-      'https://docs.google.com/document/d/17C9BLztmVtg5m3dLlmP2PoqB_RoLMJby9KjrdL4INbo/edit?usp=sharing',
-    ),
-  },
-  {
-    enabled: true,
     key: 'trainee',
+    isEnabled: true,
+    isSlackDeprecated: false,
     title: 'Trainee Recap',
-    footnote: 'Select *#ba_flex_operators* as the channel',
     emojiKey: 'mortar_board',
+    channelTip: 'Select *#ba_flex_operators* as the channel',
   },
 ];
 

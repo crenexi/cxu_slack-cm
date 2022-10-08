@@ -5,24 +5,15 @@ type Props = {
 };
 
 const modalHeaderBlocks = ({ template }: Props) => {
-  const { key, moreLink } = template;
+  const isSlackDeprecated = { template };
 
   return [
     {
-      type: 'actions',
-      elements: [
-        {
-          type: 'button',
-          text: {
-            type: 'plain_text',
-            text: 'More Instructions :link:',
-            emoji: true,
-          },
-          value: key,
-          action_id: 'button_more',
-          url: moreLink,
-        },
-      ],
+      type: 'section',
+      text: {
+        type: 'plain_text',
+        text: `Header Block | ${isSlackDeprecated}`,
+      },
     },
   ];
 };

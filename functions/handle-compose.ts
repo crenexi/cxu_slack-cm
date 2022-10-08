@@ -1,8 +1,6 @@
 import { Template } from '../constants/templates.ts';
 import { ids as orderIds } from '../views/step3/form_order/order.blocks.ts';
-import { ids as expiredIds } from '../views/step3/form_expired/expired.blocks.ts';
 import orderTemplate from '../views/step3/form_order/order.template.ts';
-import expiredTemplate from '../views/step3/form_expired/expired.template.ts';
 import traineeTemplate from '../views/step3/form_trainee/trainee.template.ts';
 
 type HandleCompose = (props: {
@@ -61,20 +59,6 @@ const handleCompose: HandleCompose = ({ user, template, values }) => {
             ? ':arrow_down:'
             : 'n/a',
           accountManager: userValById(orderIds.accountManager),
-        });
-      // Message: expired
-      case 'expired':
-        return expiredTemplate({
-          e1_itemName: textValById(`e1_${expiredIds.itemName}`),
-          e1_quantity: textValById(`e1_${expiredIds.quantity}`),
-          e1_bbDate: dateValById(`e1_${expiredIds.bbDate}`),
-          e2_itemName: textValById(`e2_${expiredIds.itemName}`),
-          e2_quantity: textValById(`e2_${expiredIds.quantity}`),
-          e2_bbDate: dateValById(`e2_${expiredIds.bbDate}`),
-          e3_itemName: textValById(`e3_${expiredIds.itemName}`),
-          e3_quantity: textValById(`e3_${expiredIds.quantity}`),
-          e3_bbDate: dateValById(`e3_${expiredIds.bbDate}`),
-          accountManager: userValById(expiredIds.accountManager),
         });
       // Message: trainee
       case 'trainee':
