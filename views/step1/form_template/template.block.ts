@@ -17,7 +17,7 @@ export const selectedTemplate = ({ state }: any) => {
 };
 
 const templateOptions = templates
-  .filter(({ enabled }) => enabled)
+  .filter(({ isEnabled }) => isEnabled)
   .map(({ key, title, emojiKey }) => {
     return {
       text: {

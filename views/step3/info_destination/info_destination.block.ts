@@ -1,11 +1,8 @@
-import { Template } from '../../../constants/templates.ts';
-
 type Props = {
   channelName: string | undefined;
-  template: Template;
 };
 
-const modalFooterBlocks = ({ channelName }: Props) => {
+const infoDestinationBlock = ({ channelName }: Props) => {
   return [
     {
       type: 'section',
@@ -17,4 +14,4 @@ const modalFooterBlocks = ({ channelName }: Props) => {
   ];
 };
 
-export default modalFooterBlocks;
+export default infoDestinationBlock;

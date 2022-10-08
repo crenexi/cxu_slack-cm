@@ -1,8 +1,7 @@
 import { Template } from '../../constants/templates.ts';
 import errorView from '../error/error.view.ts';
 import errorBlock from '../error/error.block.ts';
-// import headerBlocks from './modal_header/modal-header.blocks.ts';
-import footerBlocks from './modal_footer/modal-footer.blocks.ts';
+import infoDestinationBlock from './info_destination/info_destination.block.ts';
 import orderBlocks from './form_order/order.blocks.ts';
 import traineeBlocks from './form_trainee/trainee.blocks.ts';
 
@@ -44,11 +43,9 @@ const step3View = ({ channel, channelName, template }: Props) => {
     close: plain('Cancel'),
     submit: plain('Send'),
     blocks: [
-      // ...headerBlocks({ template }),
-      // dividerBlock,
       ...templateBlocks(template),
       dividerBlock,
-      ...footerBlocks({ channelName, template }),
+      ...infoDestinationBlock({ channelName }),
     ],
   };
 };

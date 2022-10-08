@@ -10,7 +10,7 @@ const modalFooterBlocks = ({ template }: Props) => [
     elements: [
       {
         type: 'mrkdwn',
-        text: template?.footnote,
+        text: template?.channelTip,
       },
     ],
   },
