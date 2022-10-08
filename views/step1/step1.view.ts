@@ -1,7 +1,9 @@
 import templateBlocks from './form_template/template.block.ts';
+import infoDeprecationBlock from './info_deprecation/info_deprecation.block.ts';
 
 // Helpers
 const plain = (text: string) => ({ text, type: 'plain_text' });
+const divider = { type: 'divider' };
 
 const step1View = () => ({
   type: 'modal',
@@ -10,7 +12,11 @@ const step1View = () => ({
   title: plain('Compose Message'),
   close: plain('Cancel'),
   submit: plain('Next'),
-  blocks: [templateBlocks],
+  blocks: [
+    templateBlocks,
+    divider,
+    infoDeprecationBlock,
+  ],
 });
 
 export default step1View;

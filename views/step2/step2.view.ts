@@ -1,6 +1,6 @@
 import { Template } from '../../constants/templates.ts';
 import channelBlocks from './form_channel/channel.block.ts';
-import footerBlocks from './model_footer/model-footer.block.ts';
+import channelTipBlock from './info_channel-tip/info_channel-tip.block.ts';
 import infoDeprecationBlock from './info_deprecation/info_deprecation.block.ts';
 
 type Props = {
@@ -26,13 +26,20 @@ const step1View = ({ activeChannel, template }: Props) => {
     close: plain('Cancel'),
     submit: plain('Next'),
     blocks: [
-      channelBlocks({ activeChannel }),
-      ...footerBlocks({ template }),
+      {
+        type: 'section',
+        text: {
+          type: 'plain_text',
+          text: 'Test',
+        },
+      },
+      // channelBlocks({ activeChannel }),
+      // channelTipBlock({ template }),
+      // ...(!isSlackDeprecated ? [] : [
+      //   divider,
+      //   infoDeprecationBlock,
+      // ]),
     ],
-    ...(!isSlackDeprecated ? [] : [
-      divider,
-      infoDeprecationBlock,
-    ]),
   };
 };
 

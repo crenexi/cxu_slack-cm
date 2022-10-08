@@ -22,7 +22,7 @@ const constants: Constants = {
   },
   slackDeprecated: {
     firstWarning:
-      ':information_source: For copy-only, Slack-deprecated templates destined for the Crafty Activity Feed, you may still utilize this workflow. Simply *direct message yourself* in the channel selection, then copy-paste the composed message.',
+      ':information_source: For "Copy Only" templates destined for the Crafty Activity Feed, you may still use this workflow. Simply *direct message yourself*, then copy-paste the composed message.',
     secondWarning:
       ':warning: *THIS MESSAGE TEMPLATE IS DESTINED FOR THE CRAFTY ACTIVITY FEED*, not for Slack channels. You may still utilize this workflow. Simply *direct message yourself* in the channel selection, then copy-paste the composed message. _When pasting to the Crafy app activity feed, don\'t forget to tag people as needed before sending_.',
   },

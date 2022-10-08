@@ -1,5 +1,14 @@
 import templates from '../../../constants/templates.ts';
 
+type TemplateOptionBlock = {
+  value: string;
+  text: {
+    type: string;
+    text: string;
+    emoji: true;
+  };
+};
+
 export const ids = {
   input_template_block: 'input_template',
   input_template_action: 'input_template_action',
@@ -18,16 +27,30 @@ export const selectedTemplate = ({ state }: any) => {
 
 const templateOptions = templates
   .filter(({ isEnabled }) => isEnabled)
-  .map(({ key, title, emojiKey }) => {
-    return {
+  // .map(({ key, title, emojiKey }) => {
+  //   return {
+  //     text: {
+  //       type: 'plain_text',
+  //       text: `:${emojiKey}: ${title}`,
+  //       emoji: true,
+  //     },
+  //     value: key,
+  //   };
+  // });
+  .reduce<TemplateOptionBlock[]>((options, template) => {
+    const { key, title, emojiKey, isSlackDeprecated } = template;
+
+    return [...options, {
       text: {
         type: 'plain_text',
-        text: `:${emojiKey}: ${title}`,
         emoji: true,
+        text: isSlackDeprecated
+          ? `:${emojiKey}: (Copy Only) ${title}`
+          : `:${emojiKey}: ${title}`,
       },
       value: key,
-    };
-  });
+    }];
+  }, []);
 
 const templateBlock = ({
   type: 'input',
