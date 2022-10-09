@@ -3,7 +3,13 @@ import cmWorkflow from './workflows/cm_workflow.ts';
 import constants from './constants/constants.ts';
 
 // Scopes needed to read channel name in step3 of function_flow
-const readScopes = ['channels:read', 'groups:read', 'mpim:read', 'im:read'];
+const readScopes = [
+  'users:read',
+  'channels:read',
+  'groups:read',
+  'mpim:read',
+  'im:read',
+];
 
 /** https://api.slack.com/future/manifest */
 export default Manifest({

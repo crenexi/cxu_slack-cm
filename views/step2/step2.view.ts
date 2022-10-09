@@ -1,10 +1,10 @@
 import { Template } from '../../constants/templates.ts';
-import channelBlocks from './form_channel/channel.block.ts';
+import convoBlock from './form_convo/convo.block.ts';
 import channelTipBlock from './info_channel-tip/info_channel-tip.block.ts';
 import infoDeprecationBlock from './info_deprecation/info_deprecation.block.ts';
 
 type Props = {
-  activeChannel: string | undefined;
+  initialConvo: string | undefined;
   template: Template | undefined;
 };
 
@@ -12,7 +12,7 @@ type Props = {
 const plain = (text: string) => ({ text, type: 'plain_text' });
 const divider = { type: 'divider' };
 
-const step1View = ({ activeChannel, template }: Props) => {
+const step1View = ({ initialConvo, template }: Props) => {
   const private_metadata = JSON.stringify({ template });
   const title = !template ? '' : template.title;
   const isSlackDeprecated = !template ? false : template.isSlackDeprecated;
@@ -26,19 +26,12 @@ const step1View = ({ activeChannel, template }: Props) => {
     close: plain('Cancel'),
     submit: plain('Next'),
     blocks: [
-      {
-        type: 'section',
-        text: {
-          type: 'plain_text',
-          text: 'Test',
-        },
-      },
-      // channelBlocks({ activeChannel }),
-      // channelTipBlock({ template }),
-      // ...(!isSlackDeprecated ? [] : [
-      //   divider,
-      //   infoDeprecationBlock,
-      // ]),
+      convoBlock({ initialConvo }),
+      channelTipBlock({ template }),
+      ...(!isSlackDeprecated ? [] : [
+        divider,
+        infoDeprecationBlock,
+      ]),
     ],
   };
 };

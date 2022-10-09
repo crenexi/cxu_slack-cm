@@ -8,7 +8,7 @@ import step1View from '../views/step1/step1.view.ts';
 import { selectedTemplate } from '../views/step1/form_template/template.block.ts';
 
 import step2View from '../views/step2/step2.view.ts';
-import { selectedChannel } from '../views/step2/form_channel/channel.block.ts';
+import { selectedConvo } from '../views/step2/form_convo/convo.block.ts';
 
 import step3View from '../views/step3/step3.view.ts';
 import handleCompose from './handle-compose.ts';
@@ -80,33 +80,52 @@ const ViewRouter = ViewsRouter(FlowFn);
 export const { viewSubmission, viewClosed } = ViewRouter
   .addClosedHandler('step1', () => {})
   .addSubmissionHandler('step1', ({ inputs, view }) => {
-    const activeChannel = inputs.channel;
-
     // Get selected template from state
     const templateKey = selectedTemplate({ state: view.state });
     const template = templates.find(({ key }) => key === templateKey);
 
+    // Determine the initial conversation selected
+    const isSlackDeprecated = !template ? '' : template.isSlackDeprecated;
+    const initialConvo = !isSlackDeprecated ? inputs.channel : inputs.user;
+
     return {
       response_action: 'update',
-      view: step2View({ activeChannel, template }),
+      view: step2View({ initialConvo, template }),
     };
   })
   .addClosedHandler('step2', () => {})
   .addSubmissionHandler('step2', async ({ token, view }) => {
+    const client = SlackAPI(token);
+
     // Get data
     const { template } = parseMetadata(view.private_metadata);
-    const channel = selectedChannel({ state: view.state });
+    const inputConvo = selectedConvo({ state: view.state });
 
-    // Note channel name from API info
-    const client = SlackAPI(token);
-    const channelName = await client.apiCall(
-      'conversations.info',
-      { token, channel },
-    ).then((res) => res.channel.name);
+    // Get destination convo
+    const destConvo = await (() => {
+      const id = inputConvo;
+      const isChannel = id[0] === 'C';
+      const isUser = id[0] === 'U';
+
+      // Get channel name
+      if (isChannel) {
+        return client.conversations.info({ token, channel: id })
+          .then((res) => ({ id, name: res.channel.name }));
+      }
+
+      // Get user name
+      if (isUser) {
+        return client.users.info({ token, user: id })
+          .then((res) => ({ id, name: res.user.profile.display_name }));
+      }
+
+      // Neither channel nor user
+      return { id: undefined, name: undefined };
+    })();
 
     return {
       response_action: 'update',
-      view: step3View({ template, channel, channelName }),
+      view: step3View({ template, destConvo }),
     };
   })
   .addClosedHandler('step3', () => {})

@@ -6,9 +6,11 @@ import orderBlocks from './form_order/order.blocks.ts';
 import traineeBlocks from './form_trainee/trainee.blocks.ts';
 
 type Props = {
-  channel: string | undefined;
-  channelName: string | undefined;
   template: Template;
+  destConvo: {
+    id: string | undefined;
+    name: string | undefined;
+  };
 };
 
 // Helpers
@@ -17,6 +19,8 @@ const plain = (text: string) => ({ text, type: 'plain_text' });
 
 const templateBlocks = (template: Template) => {
   switch (template.key) {
+    case 'dro':
+      return [];
     case 'order':
       return orderBlocks;
     case 'trainee':
@@ -26,8 +30,9 @@ const templateBlocks = (template: Template) => {
   }
 };
 
-const step3View = ({ channel, channelName, template }: Props) => {
-  const private_metadata = JSON.stringify({ channel, template });
+const step3View = ({ template, destConvo }: Props) => {
+  const private_metadata = JSON.stringify({ destConvo, template });
+  const destConvoName = destConvo.name;
 
   if (!template) {
     console.error('Template key not found in constants');
@@ -45,7 +50,7 @@ const step3View = ({ channel, channelName, template }: Props) => {
     blocks: [
       ...templateBlocks(template),
       dividerBlock,
-      ...infoDestinationBlock({ channelName }),
+      ...infoDestinationBlock({ destConvoName }),
     ],
   };
 };

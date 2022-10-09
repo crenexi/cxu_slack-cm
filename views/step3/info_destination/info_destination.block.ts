@@ -1,14 +1,14 @@
 type Props = {
-  channelName: string | undefined;
+  destConvoName: string | undefined;
 };
 
-const infoDestinationBlock = ({ channelName }: Props) => {
+const infoDestinationBlock = ({ destConvoName }: Props) => {
   return [
     {
       type: 'section',
       text: {
         type: 'mrkdwn',
-        text: `Message will send to # *${channelName}*`,
+        text: `Message will send to # *${destConvoName}*`,
       },
     },
   ];
