@@ -30,7 +30,7 @@ const flowFnStep = CmWorkflow.addStep(FlowFn, {
 });
 
 CmWorkflow.addStep(Schema.slack.functions.SendMessage, {
-  channel_id: flowFnStep.outputs.channel,
+  channel_id: flowFnStep.outputs.destConvoId,
   message: flowFnStep.outputs.message,
 });
 

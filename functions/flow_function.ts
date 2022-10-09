@@ -16,8 +16,11 @@ import handleCompose from './handle-compose.ts';
 //## Types
 
 type ViewMetadata = {
-  channel: string;
   template: Template;
+  destConvo: {
+    id: string;
+    name: string;
+  };
 };
 
 //## Function Definition
@@ -29,7 +32,7 @@ const inputProps = {
 };
 
 const outputProps = {
-  channel: { type: Schema.slack.types.channel_id },
+  destConvoId: { type: Schema.slack.types.channel_id },
   message: { type: Schema.slack.types.rich_text },
 };
 
@@ -44,7 +47,7 @@ export const FlowFn = DefineFunction({
   },
   output_parameters: {
     properties: { ...outputProps },
-    required: ['channel', 'message'],
+    required: ['destConvoId', 'message'],
   },
 });
 
@@ -99,24 +102,31 @@ export const { viewSubmission, viewClosed } = ViewRouter
 
     // Get data
     const { template } = parseMetadata(view.private_metadata);
-    const inputConvo = selectedConvo({ state: view.state });
+    const selConvo = selectedConvo({ state: view.state });
 
     // Get destination convo
-    const destConvo = await (() => {
-      const id = inputConvo;
-      const isChannel = id[0] === 'C';
-      const isUser = id[0] === 'U';
+    const destConvo = await (async () => {
+      const isChannel = selConvo[0] === 'C';
+      const isUser = selConvo[0] === 'U';
 
       // Get channel name
       if (isChannel) {
-        return client.conversations.info({ token, channel: id })
-          .then((res) => ({ id, name: res.channel.name }));
+        return client.conversations.info({ token, channel: selConvo })
+          .then((res) => ({
+            id: selConvo,
+            name: res.channel.name,
+          }));
       }
 
-      // Get user name
+      // Get user name then im id
       if (isUser) {
-        return client.users.info({ token, user: id })
-          .then((res) => ({ id, name: res.user.profile.display_name }));
+        const id = await client.conversations.open({ users: selConvo })
+          .then((res) => res.channel.id);
+
+        const name = await client.users.info({ token, user: selConvo })
+          .then((res) => res.user.profile.display_name);
+
+        return { id, name };
       }
 
       // Neither channel nor user
@@ -131,18 +141,21 @@ export const { viewSubmission, viewClosed } = ViewRouter
   .addClosedHandler('step3', () => {})
   .addSubmissionHandler('step3', async ({ token, inputs, body, view }) => {
     // Get data
-    const { channel, template } = parseMetadata(view.private_metadata);
+    const { destConvo, template } = parseMetadata(view.private_metadata);
     const { values } = view.state;
     const { user } = inputs;
 
-    // Compose message payload
+    // Note destination id and compose message payload
+    const destConvoId = destConvo.id;
     const message = handleCompose({ user, template, values });
+
+    console.log(destConvoId);
 
     // Complete flow
     const client = SlackAPI(token);
     await client.functions.completeSuccess({
       function_execution_id: body.function_data.execution_id,
-      outputs: { channel, message },
+      outputs: { destConvoId, message },
     });
 
     return {
