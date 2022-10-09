@@ -82,7 +82,7 @@ export const Flow: SlackFunctionHandler<
 const ViewRouter = ViewsRouter(FlowFn);
 export const { viewSubmission, viewClosed } = ViewRouter
   .addClosedHandler('step1', () => {})
-  .addSubmissionHandler('step1', ({ inputs, view }) => {
+  .addSubmissionHandler('step1', async ({ token, inputs, view }) => {
     // Get selected template from state
     const templateKey = selectedTemplate({ state: view.state });
     const template = templates.find(({ key }) => key === templateKey);
@@ -91,6 +91,23 @@ export const { viewSubmission, viewClosed } = ViewRouter
     const isSlackDeprecated = !template ? '' : template.isSlackDeprecated;
     const initialConvo = !isSlackDeprecated ? inputs.channel : inputs.user;
 
+    // If using direct message, skip channel selection
+    if (isSlackDeprecated) {
+      const destConvo = await (async () => {
+        const client = SlackAPI(token);
+        const id = await client.conversations.open({ users: inputs.user })
+          .then((res) => res.channel.id);
+
+        return { id, name: 'DM to you' };
+      })();
+
+      return {
+        response_action: 'update',
+        view: step3View({ destConvo, template }),
+      };
+    }
+
+    // Move to channel selection
     return {
       response_action: 'update',
       view: step2View({ initialConvo, template }),
@@ -105,33 +122,14 @@ export const { viewSubmission, viewClosed } = ViewRouter
     const selConvo = selectedConvo({ state: view.state });
 
     // Get destination convo
-    const destConvo = await (async () => {
-      const isChannel = selConvo[0] === 'C';
-      const isUser = selConvo[0] === 'U';
-
-      // Get channel name
-      if (isChannel) {
-        return client.conversations.info({ token, channel: selConvo })
-          .then((res) => ({
-            id: selConvo,
-            name: res.channel.name,
-          }));
-      }
-
-      // Get user name then im id
-      if (isUser) {
-        const id = await client.conversations.open({ users: selConvo })
-          .then((res) => res.channel.id);
-
-        const name = await client.users.info({ token, user: selConvo })
-          .then((res) => res.user.profile.display_name);
-
-        return { id, name };
-      }
-
-      // Neither channel nor user
-      return { id: undefined, name: undefined };
-    })();
+    const destConvo = await client.conversations.info({
+      token,
+      channel: selConvo,
+    })
+      .then((res) => ({
+        id: selConvo,
+        name: res.channel.name,
+      }));
 
     return {
       response_action: 'update',
@@ -148,8 +146,6 @@ export const { viewSubmission, viewClosed } = ViewRouter
     // Note destination id and compose message payload
     const destConvoId = destConvo.id;
     const message = handleCompose({ user, template, values });
-
-    console.log(destConvoId);
 
     // Complete flow
     const client = SlackAPI(token);

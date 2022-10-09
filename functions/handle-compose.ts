@@ -38,7 +38,7 @@ const handleCompose: HandleCompose = ({ user, template, values }) => {
 
   const textValById = (id: string) => values[id].action.value;
   const dateValById = (id: string) => values[id].action.selected_date;
-  const userValById = (id: string) => values[id].action.selected_users[0];
+  // const userValById = (id: string) => values[id].action.selected_users[0];
   const cbValById = (id: string) => values[id].action.selected_options.length;
 
   // Construct the body
@@ -50,15 +50,13 @@ const handleCompose: HandleCompose = ({ user, template, values }) => {
           orderId: textValById(orderIds.orderId),
           orderRecap: textValById(orderIds.orderRecap),
           deliveryDate: formatDate(dateValById(orderIds.deliveryDate)),
+          // accountManager: userValById(orderIds.accountManager),
+          listUnavailable: trimText(textValById(orderIds.listUnavailable)),
           listChained: trimText(textValById(orderIds.listChained)),
           listICNeeds: trimText(textValById(orderIds.listICNeeds)),
           listEdits: trimText(textValById(orderIds.listEdits)),
-          auditCheck: cbValById(orderIds.auditCheck) ? 'Yes' : 'No',
           itemsPickup: trimText(textValById(orderIds.itemsPickup)),
-          itemsUnavailable: cbValById(orderIds.itemsUnavailable)
-            ? ':arrow_down:'
-            : 'n/a',
-          accountManager: userValById(orderIds.accountManager),
+          auditCheck: cbValById(orderIds.auditCheck) ? 'Yes' : 'No',
         });
       // Message: trainee
       case 'trainee':
@@ -67,7 +65,7 @@ const handleCompose: HandleCompose = ({ user, template, values }) => {
         });
       // Fallback
       default: {
-        return 'Something went wrong.';
+        return 'No case found for this template key.';
       }
     }
   })();

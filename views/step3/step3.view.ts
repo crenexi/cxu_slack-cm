@@ -6,7 +6,7 @@ import orderBlocks from './form_order/order.blocks.ts';
 import traineeBlocks from './form_trainee/trainee.blocks.ts';
 
 type Props = {
-  template: Template;
+  template: Template | undefined;
   destConvo: {
     id: string | undefined;
     name: string | undefined;

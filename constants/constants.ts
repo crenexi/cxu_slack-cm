@@ -8,8 +8,7 @@ export type Constants = {
     actionLabel: string;
   };
   slackDeprecated: {
-    firstWarning: string;
-    secondWarning: string;
+    view1Notice: string;
   };
 };
 
@@ -21,10 +20,8 @@ const constants: Constants = {
     actionLabel: 'Compose Message',
   },
   slackDeprecated: {
-    firstWarning:
-      ':information_source: For "Copy Only" templates destined for the Crafty Activity Feed, you may still use this workflow. Simply *direct message yourself*, then copy-paste the composed message.',
-    secondWarning:
-      ':warning: *This message template is destined for the Crafty Activity Feed*, not for Slack channels. You may still utilize this workflow.\n\nSimply *select yourself* in the selection above, then copy-paste the composed message. When pasting to the Crafy app activity feed, don\'t forget to tag people as needed before sending.',
+    view1Notice:
+      '*** _These messages are for the Crafty Activity Feed only. You may still use this composer. Channel selection will be skipped, and *you\'ll get a DM* of the composed message to copy-paste to the shift feed_.',
   },
 };
 

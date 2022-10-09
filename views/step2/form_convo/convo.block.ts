@@ -32,7 +32,7 @@ const convoBlock = ({ initialConvo }: Props) => ({
       text: 'Select channel or yourself',
     },
     filter: {
-      include: ['im', 'public', 'private'],
+      include: ['public', 'private'],
     },
     initial_conversation: initialConvo,
     action_id: ids.input_convo_action,

@@ -27,16 +27,6 @@ export const selectedTemplate = ({ state }: any) => {
 
 const templateOptions = templates
   .filter(({ isEnabled }) => isEnabled)
-  // .map(({ key, title, emojiKey }) => {
-  //   return {
-  //     text: {
-  //       type: 'plain_text',
-  //       text: `:${emojiKey}: ${title}`,
-  //       emoji: true,
-  //     },
-  //     value: key,
-  //   };
-  // });
   .reduce<TemplateOptionBlock[]>((options, template) => {
     const { key, title, emojiKey, isSlackDeprecated } = template;
 
@@ -45,7 +35,7 @@ const templateOptions = templates
         type: 'plain_text',
         emoji: true,
         text: isSlackDeprecated
-          ? `:${emojiKey}: (Copy Only) ${title}`
+          ? `:${emojiKey}: *** ${title}`
           : `:${emojiKey}: ${title}`,
       },
       value: key,

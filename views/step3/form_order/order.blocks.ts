@@ -2,13 +2,13 @@ export const ids = {
   orderId: 'order-id',
   orderRecap: 'order-recap',
   deliveryDate: 'delivery-date',
+  accountManager: 'account-manager',
+  listUnavailable: 'items-unavailable',
   listChained: 'list-chained',
   listICNeeds: 'list-adjustment-needs',
   listEdits: 'list-edits-made',
-  auditCheck: 'audit-check',
   itemsPickup: 'items-pickup',
-  itemsUnavailable: 'items-unavailable',
-  accountManager: 'account-manager',
+  auditCheck: 'audit-check',
 };
 
 // Helper for text object
@@ -55,6 +55,32 @@ const deliveryDate = {
   },
 };
 
+/*const accountManager = {
+  type: 'input',
+  block_id: ids.accountManager,
+  label: plain('Account Manager'),
+  element: {
+    type: 'multi_users_select',
+    action_id: 'action',
+    max_selected_items: 1,
+    placeholder: plain('Select'),
+  },
+};*/
+
+const listUnavailable = {
+  type: 'input',
+  block_id: ids.listUnavailable,
+  optional: true,
+  label: plain('Items Unavailable'),
+  hint: plain('What could not make it on the order?'),
+  element: {
+    type: 'plain_text_input',
+    action_id: 'action',
+    multiline: true,
+    placeholder: plain('- Item\n- Item'),
+  },
+};
+
 const listChained = {
   type: 'input',
   block_id: ids.listChained,
@@ -97,6 +123,20 @@ const listEdits = {
   },
 };
 
+const itemsPickup = {
+  type: 'input',
+  block_id: ids.itemsPickup,
+  optional: true,
+  label: plain('Items for Pickup'),
+  hint: plain('Any items for pick-up + reason for pick-up'),
+  element: {
+    type: 'plain_text_input',
+    action_id: 'action',
+    multiline: true,
+    placeholder: plain('- Item\n- Item'),
+  },
+};
+
 const auditCheck = {
   type: 'input',
   block_id: ids.auditCheck,
@@ -114,65 +154,20 @@ const auditCheck = {
   },
 };
 
-const itemsPickup = {
-  type: 'input',
-  block_id: ids.itemsPickup,
-  optional: true,
-  label: plain('Items for Pickup'),
-  hint: plain('Any items for pick-up + reason for pick-up'),
-  element: {
-    type: 'plain_text_input',
-    action_id: 'action',
-    multiline: true,
-    placeholder: plain('- Item\n- Item'),
-  },
-};
-
-const itemsUnavailable = {
-  type: 'input',
-  block_id: ids.itemsUnavailable,
-  optional: true,
-  label: plain('Items Unavailable?'),
-  element: {
-    type: 'checkboxes',
-    action_id: 'action',
-    options: [
-      {
-        text: plain(
-          'Are there "Items Not Placed on Order"? If yes, send this message then post a screenshot of them below',
-        ),
-        value: 'v1',
-      },
-    ],
-  },
-};
-
-const accountManager = {
-  type: 'input',
-  block_id: ids.accountManager,
-  label: plain('Account Manager'),
-  element: {
-    type: 'multi_users_select',
-    action_id: 'action',
-    max_selected_items: 1,
-    placeholder: plain('Select'),
-  },
-};
-
 const orderBlocks = [
   header('Basics'),
   orderId,
   orderRecap,
   deliveryDate,
-  accountManager,
+  // accountManager,
   header('Audit'),
+  listUnavailable,
   listChained,
   listICNeeds,
   listEdits,
-  itemsPickup,
   header('Checks'),
+  itemsPickup,
   auditCheck,
-  itemsUnavailable,
 ];
 
 export default orderBlocks;
