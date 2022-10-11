@@ -6,6 +6,9 @@
     }
   },
   "fmt": {
+    "files": {
+      "exclude": [".slack", ".github", ".vscode"]
+    },
     "options": {
       "useTabs": false,
       "lineWidth": 80,
