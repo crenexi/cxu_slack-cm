@@ -13,6 +13,8 @@ _Equipment_: ${p.equipDesc}
 _Area/zone_: ${p.equipZone}
 _Issue_: ${p.equipIssue}
 ----------
+:link: _Relevant pics below if provided_
+
 @ba-fieldops <@${p.accountManager}> ${tagsToText(p.technicians)}
 `);
 

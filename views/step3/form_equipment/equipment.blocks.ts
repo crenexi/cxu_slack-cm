@@ -4,6 +4,7 @@ export const ids = {
   equipIssue: 'equipment-issue',
   accountManager: 'account-manager',
   tehnicians: 'technicians',
+  nextSteps: 'next-steps',
 };
 
 // Helper for text object
@@ -67,10 +68,21 @@ const technicians = {
   type: 'input',
   block_id: ids.tehnicians,
   label: plain('Technicians'),
+  optional: true,
   element: {
     type: 'multi_users_select',
     action_id: 'action',
     placeholder: plain('Select'),
+  },
+};
+
+const picsReminder = {
+  type: 'section',
+  block_id: ids.nextSteps,
+  text: {
+    type: 'plain_text',
+    text: ':iphone::link: After sending, attach any relevant pictures!',
+    emoji: true,
   },
 };
 
@@ -79,6 +91,8 @@ const equipmentBlocks = [
   equipDesc,
   equipZone,
   equipIssue,
+  header('Pics'),
+  picsReminder,
   header('Tags'),
   accountManager,
   technicians,
