@@ -38,7 +38,6 @@ const handleCompose: HandleCompose = async (props) => {
           orderId: textValById(orderIds.orderId),
           orderRecap: textValById(orderIds.orderRecap),
           deliveryDate: formatDate(dateValById(orderIds.deliveryDate)),
-          // accountManager: userValById(orderIds.accountManager),
           listUnavailable: trimText(textValById(orderIds.listUnavailable)),
           listChained: trimText(textValById(orderIds.listChained)),
           listICNeeds: trimText(textValById(orderIds.listICNeeds)),

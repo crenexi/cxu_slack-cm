@@ -2,7 +2,6 @@ export const ids = {
   orderId: 'order-id',
   orderRecap: 'order-recap',
   deliveryDate: 'delivery-date',
-  accountManager: 'account-manager',
   listUnavailable: 'items-unavailable',
   listChained: 'list-chained',
   listICNeeds: 'list-adjustment-needs',
@@ -54,18 +53,6 @@ const deliveryDate = {
     placeholder: plain('Select'),
   },
 };
-
-/*const accountManager = {
-  type: 'input',
-  block_id: ids.accountManager,
-  label: plain('Account Manager'),
-  element: {
-    type: 'multi_users_select',
-    action_id: 'action',
-    max_selected_items: 1,
-    placeholder: plain('Select'),
-  },
-};*/
 
 const listUnavailable = {
   type: 'input',
@@ -159,7 +146,6 @@ const orderBlocks = [
   orderId,
   orderRecap,
   deliveryDate,
-  // accountManager,
   header('Audit'),
   listUnavailable,
   listChained,
