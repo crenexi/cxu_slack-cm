@@ -1,6 +1,6 @@
 export const trimText = (str: string | undefined) => {
   if (!str) return 'n/a';
-  return str.length < 10 ? str.trim() : `\n${str.trim()}`;
+  return str.length < 15 ? str.trim() : `\n${str.trim()}`;
 };
 
 export const formatDate = (date?: string) => {

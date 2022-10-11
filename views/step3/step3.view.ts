@@ -3,6 +3,7 @@ import errorView from '../error/error.view.ts';
 import errorBlock from '../error/error.block.ts';
 import infoDestinationBlock from './info_destination/info_destination.block.ts';
 import orderBlocks from './form_order/order.blocks.ts';
+import signageBlocks from './form_signage/signage.blocks.ts';
 import traineeBlocks from './form_trainee/trainee.blocks.ts';
 
 type Props = {
@@ -23,6 +24,8 @@ const templateBlocks = (template: Template) => {
       return [];
     case 'order':
       return orderBlocks;
+    case 'signage':
+      return signageBlocks;
     case 'trainee':
       return traineeBlocks;
     default:

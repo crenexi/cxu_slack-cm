@@ -25,6 +25,14 @@ const templates: Template[] = [
     channelTip: 'Select *DM to yourself* for copy-paste use.',
   },
   {
+    key: 'signage',
+    isEnabled: true,
+    isSlackDeprecated: false,
+    title: 'Signage Request',
+    emojiKey: 'label',
+    channelTip: 'Select *#ba_signage_labels* as the channel',
+  },
+  {
     key: 'trainee',
     isEnabled: true,
     isSlackDeprecated: false,
