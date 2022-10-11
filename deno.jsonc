@@ -1,5 +1,10 @@
 {
   "importMap": "import_map.json",
+  "lint": {
+    "files": {
+      "exclude": [".slack", ".github", ".vscode"]
+    }
+  },
   "fmt": {
     "options": {
       "useTabs": false,
