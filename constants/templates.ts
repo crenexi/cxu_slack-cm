@@ -25,6 +25,14 @@ const templates: Template[] = [
     channelTip: 'Select *DM to yourself* for copy-paste use.',
   },
   {
+    key: 'equipment',
+    isEnabled: true,
+    isSlackDeprecated: false,
+    title: 'Equipment Issue',
+    emojiKey: 'wrench',
+    channelTip: 'Select *site channel* of concern.',
+  },
+  {
     key: 'signage',
     isEnabled: true,
     isSlackDeprecated: false,

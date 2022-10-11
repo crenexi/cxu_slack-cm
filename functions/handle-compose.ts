@@ -1,9 +1,11 @@
 import { Template } from '../constants/templates.ts';
 import { formatDate, trimText } from '../helpers/helpers.ts';
 import { ids as orderIds } from '../views/step3/form_order/order.blocks.ts';
+import { ids as equipIds } from '../views/step3/form_equipment/equipment.blocks.ts';
 import { ids as signageIds } from '../views/step3/form_signage/signage.blocks.ts';
 import { ids as traineeIds } from '../views/step3/form_trainee/trainee.blocks.ts';
 import orderTemplate from '../views/step3/form_order/order.template.ts';
+import equipTemplate from '../views/step3/form_equipment/equipment.template.ts';
 import signageTemplate from '../views/step3/form_signage/signage.template.ts';
 import traineeTemplate from '../views/step3/form_trainee/trainee.template.ts';
 
@@ -51,6 +53,15 @@ const handleCompose: HandleCompose = async (props) => {
           listEdits: trimText(textValById(orderIds.listEdits)),
           itemsPickup: trimText(textValById(orderIds.itemsPickup)),
           auditCheck: cbValById(orderIds.auditCheck) ? 'Yes' : 'No',
+        });
+      // Message: equipment
+      case 'equipment':
+        return equipTemplate({
+          equipDesc: textValById(equipIds.equipDesc),
+          equipZone: textValById(equipIds.equipZone),
+          equipIssue: textValById(equipIds.equipIssue),
+          accountManager: userValById(equipIds.accountManager),
+          technicians: usersValById(equipIds.tehnicians),
         });
       // Message: signage
       case 'signage':
