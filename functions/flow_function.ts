@@ -138,17 +138,31 @@ export const { viewSubmission, viewClosed } = ViewRouter
   })
   .addClosedHandler('step3', () => {})
   .addSubmissionHandler('step3', async ({ token, inputs, body, view }) => {
+    const client = SlackAPI(token);
+
     // Get data
     const { destConvo, template } = parseMetadata(view.private_metadata);
     const { values } = view.state;
     const { user } = inputs;
 
+    // Helper to get real user name
+    const getRealName = async (userId: string) => {
+      const name = await client.users.info({ user: userId })
+        .then((res) => res.user.profile.real_name);
+
+      return name;
+    };
+
     // Note destination id and compose message payload
     const destConvoId = destConvo.id;
-    const message = handleCompose({ user, template, values });
+    const message = await handleCompose({
+      user,
+      template,
+      values,
+      getRealName,
+    });
 
     // Complete flow
-    const client = SlackAPI(token);
     await client.functions.completeSuccess({
       function_execution_id: body.function_data.execution_id,
       outputs: { destConvoId, message },
