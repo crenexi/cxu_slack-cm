@@ -21,7 +21,7 @@ const constants: Constants = {
   },
   slackDeprecated: {
     view1Notice:
-      '*** _These messages are for the Crafty Activity Feed only. You may still use this composer. Channel selection will be skipped, and *you\'ll get a DM* of the composed message to copy-paste to the shift feed_.',
+      '_Templates with *** are for the Crafty Activity Feed only. You may still use this composer. Channel selection will be skipped, and *you\'ll get a DM* of the composed message to copy-paste to the shift feed_.',
   },
 };
 

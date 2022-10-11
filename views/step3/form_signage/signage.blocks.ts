@@ -22,9 +22,8 @@ const priority = (() => {
   });
 
   const options = [
-    option('high', ':red_circle: High — Need ASAP'),
-    option('medium', ':large_yellow_circle: Medium — Need Timely'),
-    option('low', ':white_circle: Low — No Rush'),
+    option('high', ':stopwatch: need ASAP'),
+    option('low', 'no rush'),
   ];
 
   return {
@@ -34,7 +33,7 @@ const priority = (() => {
     element: {
       type: 'static_select',
       action_id: 'action',
-      initial_option: options[2],
+      initial_option: options[1],
       options: [...options],
     },
   };
@@ -106,8 +105,8 @@ const signageBlocks = [
   divider,
   quantity,
   request,
-  priority,
   divider,
+  priority,
   tags,
 ];
 

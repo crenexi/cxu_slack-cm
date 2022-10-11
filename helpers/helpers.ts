@@ -1,3 +1,9 @@
+export const tagsToText = (tags: string[]) => {
+  return tags.reduce((str, tag, i) => {
+    return i === 0 ? `<@${tag}>` : `${str} <@${tag}>`;
+  }, '');
+};
+
 export const trimText = (str: string | undefined) => {
   if (!str) return 'n/a';
   return str.length < 15 ? str.trim() : `\n${str.trim()}`;
