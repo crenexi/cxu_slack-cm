@@ -9,20 +9,12 @@ export type Template = {
 
 const templates: Template[] = [
   {
-    key: 'dro',
+    key: 'signage',
     isEnabled: true,
-    isSlackDeprecated: true,
-    title: 'DRO / Daily Report',
-    emojiKey: 'calendar',
-    channelTip: 'Select *DM to yourself* for copy-paste use.',
-  },
-  {
-    key: 'order',
-    isEnabled: true,
-    isSlackDeprecated: true,
-    title: 'Order Summary',
-    emojiKey: 'package',
-    channelTip: 'Select *DM to yourself* for copy-paste use.',
+    isSlackDeprecated: false,
+    title: 'Signage Request',
+    emojiKey: 'label',
+    channelTip: 'Select *#ba_signage_labels* as the channel',
   },
   {
     key: 'equipment',
@@ -33,20 +25,28 @@ const templates: Template[] = [
     channelTip: 'Select *site channel* of concern.',
   },
   {
-    key: 'signage',
-    isEnabled: true,
-    isSlackDeprecated: false,
-    title: 'Signage Request',
-    emojiKey: 'label',
-    channelTip: 'Select *#ba_signage_labels* as the channel',
-  },
-  {
     key: 'trainee',
     isEnabled: true,
     isSlackDeprecated: false,
     title: 'Trainee Recap',
     emojiKey: 'mortar_board',
     channelTip: 'Select *#ba_flex_operators* as the channel',
+  },
+  {
+    key: 'order',
+    isEnabled: true,
+    isSlackDeprecated: true,
+    title: 'Order Report',
+    emojiKey: 'package',
+    channelTip: 'Select *DM to yourself* for copy-paste use.',
+  },
+  {
+    key: 'dro',
+    isEnabled: true,
+    isSlackDeprecated: true,
+    title: 'DRO Report',
+    emojiKey: 'calendar',
+    channelTip: 'Select *DM to yourself* for copy-paste use.',
   },
 ];
 

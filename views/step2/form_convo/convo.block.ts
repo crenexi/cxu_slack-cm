@@ -23,13 +23,13 @@ const convoBlock = ({ initialConvo }: Props) => ({
   block_id: ids.input_convo_block,
   label: {
     type: 'plain_text',
-    text: 'Channel/Self',
+    text: 'Channel',
   },
   element: {
     type: 'conversations_select',
     placeholder: {
       type: 'plain_text',
-      text: 'Select channel or yourself',
+      text: 'Select channel',
     },
     filter: {
       include: ['public', 'private'],

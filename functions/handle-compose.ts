@@ -34,10 +34,6 @@ const handleCompose: HandleCompose = async (props) => {
   const userValById = (id: string) => values[id].action.selected_users[0];
   const cbValById = (id: string) => values[id].action.selected_options.length;
 
-  const selValById = (id: string) => {
-    return values[id].action.selected_option.text.text;
-  };
-
   // Construct the body
   const body: string = await (async () => {
     switch (template.key) {
@@ -68,7 +64,6 @@ const handleCompose: HandleCompose = async (props) => {
         return signageTemplate({
           site: trimText(textValById(signageIds.site)),
           zone: trimText(textValById(signageIds.zone)),
-          priority: selValById(signageIds.priority),
           request: trimText(textValById(signageIds.request)),
           quantity: trimText(textValById(signageIds.quantity)),
           tags: usersValById(signageIds.tags),

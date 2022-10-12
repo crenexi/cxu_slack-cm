@@ -1,9 +1,13 @@
+import constants from '../../constants/constants.ts';
 import templateBlocks from './form_template/template.block.ts';
-import infoDeprecationBlock from './info_deprecation/info_deprecation.block.ts';
 
 // Helpers
 const plain = (text: string) => ({ text, type: 'plain_text' });
-const divider = { type: 'divider' };
+
+const footnote = {
+  type: 'context',
+  elements: [plain(constants.slackDeprecated.view1Notice)],
+};
 
 const step1View = () => ({
   type: 'modal',
@@ -14,8 +18,7 @@ const step1View = () => ({
   submit: plain('Next'),
   blocks: [
     templateBlocks,
-    divider,
-    infoDeprecationBlock,
+    footnote,
   ],
 });
 

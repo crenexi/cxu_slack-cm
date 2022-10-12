@@ -1,3 +1,16 @@
+export const divider = { type: 'divider' };
+
+export const plain = (text: string) => ({ text, type: 'plain_text' });
+
+export const header = (text: string) => ({
+  type: 'header',
+  text: {
+    text,
+    type: 'plain_text',
+    emoji: true,
+  },
+});
+
 export const tagsToText = (tags: string[]) => {
   return tags.reduce((str, tag, i) => {
     return i === 0 ? `<@${tag}>` : `${str} <@${tag}>`;

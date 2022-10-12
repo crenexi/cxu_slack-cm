@@ -35,7 +35,7 @@ const templateOptions = templates
         type: 'plain_text',
         emoji: true,
         text: isSlackDeprecated
-          ? `:${emojiKey}: *** ${title}`
+          ? `:${emojiKey}: CAF | ${title}`
           : `:${emojiKey}: ${title}`,
       },
       value: key,

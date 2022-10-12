@@ -4,7 +4,7 @@ const infoDeprecationBlock = {
   type: 'section',
   text: {
     type: 'mrkdwn',
-    text: constants.slackDeprecated.view1Notice,
+    text: constants.slackDeprecated.view3Notice,
   },
 };
 

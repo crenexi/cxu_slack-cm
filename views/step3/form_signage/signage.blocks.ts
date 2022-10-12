@@ -1,5 +1,6 @@
+import { divider, header, plain } from '../../../helpers/helpers.ts';
+
 export const ids = {
-  priority: 'priority',
   site: 'site',
   zone: 'zone',
   quantity: 'quantity',
@@ -7,37 +8,7 @@ export const ids = {
   tags: 'tags',
 };
 
-// Helper for text object
-const plain = (text: string) => ({ text, type: 'plain_text' });
-const divider = { type: 'divider' };
-
-const priority = (() => {
-  const option = (value: string, text: string) => ({
-    value,
-    text: {
-      text,
-      type: 'plain_text',
-      emoji: true,
-    },
-  });
-
-  const options = [
-    option('high', ':stopwatch: need ASAP'),
-    option('low', 'no rush'),
-  ];
-
-  return {
-    type: 'input',
-    block_id: ids.priority,
-    label: plain('Priority'),
-    element: {
-      type: 'static_select',
-      action_id: 'action',
-      initial_option: options[1],
-      options: [...options],
-    },
-  };
-})();
+// Block helpers
 
 const site = {
   type: 'input',
@@ -63,6 +34,18 @@ const zone = {
   },
 };
 
+const quantity = {
+  type: 'input',
+  block_id: ids.quantity,
+  label: plain('Total Quantity'),
+  element: {
+    type: 'plain_text_input',
+    action_id: 'action',
+    max_length: 2,
+    placeholder: plain('0'),
+  },
+};
+
 const request = {
   type: 'input',
   block_id: ids.request,
@@ -71,19 +54,7 @@ const request = {
     type: 'plain_text_input',
     action_id: 'action',
     multiline: true,
-    placeholder: plain('- Need\n- Need'),
-  },
-};
-
-const quantity = {
-  type: 'input',
-  block_id: ids.quantity,
-  label: plain('Quantity'),
-  element: {
-    type: 'plain_text_input',
-    action_id: 'action',
-    max_length: 2,
-    placeholder: plain('0'),
+    placeholder: plain('- Describe'),
   },
 };
 
@@ -100,13 +71,13 @@ const tags = {
 };
 
 const signageBlocks = [
+  header(':office: Place'),
   site,
   zone,
-  divider,
+  header(':label: Need'),
   quantity,
   request,
   divider,
-  priority,
   tags,
 ];
 

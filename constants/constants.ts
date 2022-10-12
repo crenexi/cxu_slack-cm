@@ -9,6 +9,7 @@ export type Constants = {
   };
   slackDeprecated: {
     view1Notice: string;
+    view3Notice: string;
   };
 };
 
@@ -20,8 +21,9 @@ const constants: Constants = {
     actionLabel: 'Compose Message',
   },
   slackDeprecated: {
-    view1Notice:
-      '_Templates with *** are for the Crafty Activity Feed only. You may still use this composer. Channel selection will be skipped, and *you\'ll get a DM* of the composed message to copy-paste to the shift feed_.',
+    view1Notice: 'CAF: Crafty Activity Feed usage only',
+    view3Notice:
+      'Note: for the Crafty Activity Feed only. *You\'ll get the message as a DM*, Then, copy-paste to the shift feed.',
   },
 };
 

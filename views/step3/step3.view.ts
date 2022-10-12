@@ -1,6 +1,7 @@
 import { Template } from '../../constants/templates.ts';
 import errorView from '../error/error.view.ts';
 import errorBlock from '../error/error.block.ts';
+import infoDeprecationBlock from './info_deprecation/info_deprecation.block.ts';
 import infoDestinationBlock from './info_destination/info_destination.block.ts';
 import orderBlocks from './form_order/order.blocks.ts';
 import equipmentBlocks from './form_equipment/equipment.blocks.ts';
@@ -16,7 +17,7 @@ type Props = {
 };
 
 // Helpers
-const dividerBlock = { type: 'divider' };
+const divider = { type: 'divider' };
 const plain = (text: string) => ({ text, type: 'plain_text' });
 
 const templateBlocks = (template: Template) => {
@@ -45,6 +46,12 @@ const step3View = ({ template, destConvo }: Props) => {
     return errorView;
   }
 
+  // For Slack-deprecated templates, show disclaimer
+  const slackDeprecated = !template.isSlackDeprecated ? [] : [
+    infoDeprecationBlock,
+    divider,
+  ];
+
   return {
     private_metadata,
     type: 'modal',
@@ -54,8 +61,9 @@ const step3View = ({ template, destConvo }: Props) => {
     close: plain('Cancel'),
     submit: plain('Send'),
     blocks: [
+      ...slackDeprecated,
       ...templateBlocks(template),
-      dividerBlock,
+      divider,
       ...infoDestinationBlock({ destConvoName }),
     ],
   };
