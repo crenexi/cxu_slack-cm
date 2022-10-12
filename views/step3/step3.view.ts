@@ -4,10 +4,12 @@ import errorView from '../error/error.view.ts';
 import errorBlock from '../error/error.block.ts';
 import infoDeprecationBlock from './info_deprecation/info_deprecation.block.ts';
 import infoDestinationBlock from './info_destination/info_destination.block.ts';
-import orderBlocks from './form_order/order.blocks.ts';
-import equipmentBlocks from './form_equipment/equipment.blocks.ts';
+
 import signageBlocks from './form_signage/signage.blocks.ts';
+import equipmentBlocks from './form_equipment/equipment.blocks.ts';
 import traineeBlocks from './form_trainee/trainee.blocks.ts';
+import orderBlocks from './form_order/order.blocks.ts';
+import droBlocks from './form_dro/dro.blocks.ts';
 
 type Props = {
   template: Template | undefined;
@@ -20,7 +22,7 @@ type Props = {
 const templateBlocks = (template: Template) => {
   switch (template.key) {
     case 'dro':
-      return [];
+      return droBlocks;
     case 'order':
       return orderBlocks;
     case 'equipment':
