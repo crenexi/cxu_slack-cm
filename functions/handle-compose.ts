@@ -23,10 +23,11 @@ const handleCompose: HandleCompose = async (props) => {
   // console.log(values);
 
   const { user, template, values, getRealName } = props;
-  const { title, emojiKey } = template;
+  const { title, emojiKey, isSlackDeprecated } = template;
+  const emojiPrefix = isSlackDeprecated ? '' : `:${emojiKey}: | `;
 
   // Construct the header
-  const subtitle = `:${emojiKey}: | By <@${user}> | ${formatDate()}`;
+  const subtitle = `${emojiPrefix}By <@${user}> | ${formatDate()}`;
   const header = `*${title.toUpperCase()}*\n${subtitle}\n\n`;
 
   // Helpers to extract relevant data from values

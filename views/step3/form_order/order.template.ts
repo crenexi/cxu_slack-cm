@@ -11,19 +11,20 @@ interface Props {
 }
 
 const orderTemplate = (p: Props) => (`
-_Order ID_: ${p.orderId}
-_Order Recap_: ${p.orderRecap}
-_Delivery date_: ${p.deliveryDate}
-----------
-_Have you audited this order?_: ${p.auditCheck}
-_Are there any "chained" products for the next order?_: ${p.listChained}
-_Any adjustments needed to quantities for products listed?_: ${p.listICNeeds}
-_Were any edits made to this order?_: ${p.listEdits}
-----------
-_Any items for pick-up + reason for pick-up_: ${p.itemsPickup}
-_Items that couldn't make it on the order_: ${p.listUnavailable}
-----------
-{TAGS}
+Order ID: ${p.orderId}
+Order recap: ${p.orderRecap}
+Delivery date: ${p.deliveryDate}
+
+Have you audited this order?: ${p.auditCheck}
+Are there any "chained" products for the next order?: ${p.listChained}
+Any adjustments needed to quantities for products listed?: ${p.listICNeeds}
+Were any edits made to this order?: ${p.listEdits}
+
+Any items for pick-up + reason for pick-up: ${p.itemsPickup}
+Items that couldn't make it on the order: ${p.listUnavailable}
+
+Account Manager: {TAG}
+Field Coordinator: {TAG}
 `);
 
 export default orderTemplate;

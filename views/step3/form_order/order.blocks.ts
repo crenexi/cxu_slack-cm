@@ -57,7 +57,7 @@ const listUnavailable = {
     type: 'plain_text_input',
     action_id: 'action',
     multiline: true,
-    placeholder: plain('- Item\n- Item'),
+    placeholder: plain('- Item'),
   },
 };
 
@@ -71,7 +71,7 @@ const listChained = {
     type: 'plain_text_input',
     action_id: 'action',
     multiline: true,
-    placeholder: plain('- Item\n- Item'),
+    placeholder: plain('- Item'),
   },
 };
 
@@ -85,7 +85,7 @@ const listICNeeds = {
     type: 'plain_text_input',
     action_id: 'action',
     multiline: true,
-    placeholder: plain('- Item\n- Item'),
+    placeholder: plain('- Item'),
   },
 };
 
@@ -99,7 +99,7 @@ const listEdits = {
     type: 'plain_text_input',
     action_id: 'action',
     multiline: true,
-    placeholder: plain('- Item\n- Item'),
+    placeholder: plain('- Item'),
   },
 };
 
@@ -113,7 +113,7 @@ const itemsPickup = {
     type: 'plain_text_input',
     action_id: 'action',
     multiline: true,
-    placeholder: plain('- Item\n- Item'),
+    placeholder: plain('- Item'),
   },
 };
 
@@ -135,18 +135,18 @@ const auditCheck = {
 };
 
 const orderBlocks = [
-  header('Basics'),
+  header(':package: Recap'),
   orderId,
   orderRecap,
   deliveryDate,
-  header('Audit'),
+  header(':mag: Audit'),
+  auditCheck,
   listUnavailable,
   listChained,
-  listICNeeds,
   listEdits,
-  header('Checks'),
+  header(':pushpin: Needs'),
+  listICNeeds,
   itemsPickup,
-  auditCheck,
 ];
 
 export default orderBlocks;
