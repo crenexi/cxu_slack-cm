@@ -20,14 +20,16 @@ type HandleCompose = (props: {
 }) => Promise<string>;
 
 const handleCompose: HandleCompose = async (props) => {
+  // console.log(values);
+
   const { user, template, values, getRealName } = props;
-  console.log(values);
+  const { title, emojiKey } = template;
 
   // Construct the header
-  const title = `*${template.title.toUpperCase()} :${template.emojiKey}:*`;
-  const subtitle = `By <@${user}> | ${formatDate()}`;
-  const header = `${title}\n${subtitle}\n----------`;
+  const subtitle = `:${emojiKey}: | By <@${user}> | ${formatDate()}`;
+  const header = `*${title.toUpperCase()}*\n${subtitle}\n\n`;
 
+  // Helpers to extract relevant data from values
   const textValById = (id: string) => values[id].action.value;
   const dateValById = (id: string) => values[id].action.selected_date;
   const usersValById = (id: string) => values[id].action.selected_users;
@@ -37,7 +39,6 @@ const handleCompose: HandleCompose = async (props) => {
   // Construct the body
   const body: string = await (async () => {
     switch (template.key) {
-      // Message: order
       case 'order':
         return orderTemplate({
           orderId: textValById(orderIds.orderId),
@@ -50,7 +51,6 @@ const handleCompose: HandleCompose = async (props) => {
           itemsPickup: trimText(textValById(orderIds.itemsPickup)),
           auditCheck: cbValById(orderIds.auditCheck) ? 'Yes' : 'No',
         });
-      // Message: equipment
       case 'equipment':
         return equipTemplate({
           equipDesc: textValById(equipIds.equipDesc),
@@ -59,7 +59,6 @@ const handleCompose: HandleCompose = async (props) => {
           accountManager: userValById(equipIds.accountManager),
           technicians: usersValById(equipIds.tehnicians),
         });
-      // Message: signage
       case 'signage':
         return signageTemplate({
           site: trimText(textValById(signageIds.site)),
@@ -68,7 +67,6 @@ const handleCompose: HandleCompose = async (props) => {
           quantity: trimText(textValById(signageIds.quantity)),
           tags: usersValById(signageIds.tags),
         });
-      // Message: trainee
       case 'trainee':
         return traineeTemplate({
           trainee: await getRealName(userValById(traineeIds.trainee)),
@@ -77,7 +75,6 @@ const handleCompose: HandleCompose = async (props) => {
           listTrainNext: trimText(textValById(traineeIds.listTrainNext)),
           listWentWell: trimText(textValById(traineeIds.listWentWell)),
         });
-      // Fallback
       default: {
         return 'No case found for this template key.';
       }

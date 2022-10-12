@@ -1,8 +1,6 @@
 import constants from '../../constants/constants.ts';
+import { plain } from '../../helpers/helpers.ts';
 import templateBlocks from './form_template/template.block.ts';
-
-// Helpers
-const plain = (text: string) => ({ text, type: 'plain_text' });
 
 const footnote = {
   type: 'context',

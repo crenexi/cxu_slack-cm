@@ -1,4 +1,4 @@
-import { today } from '../../../helpers/helpers.ts';
+import { plain, today } from '../../../helpers/helpers.ts';
 
 export const ids = {
   trainee: 'trainee',
@@ -7,9 +7,6 @@ export const ids = {
   listTrainNext: 'list-train-next',
   listWentWell: 'list-went-well',
 };
-
-// Helper for text object
-const plain = (text: string) => ({ text, type: 'plain_text' });
 
 const trainee = {
   type: 'input',

@@ -1,4 +1,5 @@
 import { Template } from '../../constants/templates.ts';
+import { plain } from '../../helpers/helpers.ts';
 import convoBlock from './form_convo/convo.block.ts';
 import channelTipBlock from './info_channel-tip/info_channel-tip.block.ts';
 
@@ -6,9 +7,6 @@ type Props = {
   initialConvo: string | undefined;
   template: Template | undefined;
 };
-
-// Helpers
-const plain = (text: string) => ({ text, type: 'plain_text' });
 
 const step1View = ({ initialConvo, template }: Props) => {
   const private_metadata = JSON.stringify({ template });

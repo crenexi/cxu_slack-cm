@@ -1,3 +1,5 @@
+import { header, plain } from '../../../helpers/helpers.ts';
+
 export const ids = {
   equipDesc: 'equipment-desc',
   equipZone: 'equipment-zone',
@@ -6,15 +8,6 @@ export const ids = {
   tehnicians: 'technicians',
   nextSteps: 'next-steps',
 };
-
-// Helper for text object
-const plain = (text: string) => ({ text, type: 'plain_text' });
-
-// Helper for header block
-const header = (text: string) => ({
-  text: plain(text.toUpperCase()),
-  type: 'header',
-});
 
 const equipDesc = {
   type: 'input',

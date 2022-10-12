@@ -1,3 +1,5 @@
+import { header, plain } from '../../../helpers/helpers.ts';
+
 export const ids = {
   orderId: 'order-id',
   orderRecap: 'order-recap',
@@ -9,15 +11,6 @@ export const ids = {
   itemsPickup: 'items-pickup',
   auditCheck: 'audit-check',
 };
-
-// Helper for text object
-const plain = (text: string) => ({ text, type: 'plain_text' });
-
-// Helper for header block
-const header = (text: string) => ({
-  text: plain(text.toUpperCase()),
-  type: 'header',
-});
 
 const orderId = {
   type: 'input',

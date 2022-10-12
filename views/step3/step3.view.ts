@@ -1,4 +1,5 @@
 import { Template } from '../../constants/templates.ts';
+import { divider, plain } from '../../helpers/helpers.ts';
 import errorView from '../error/error.view.ts';
 import errorBlock from '../error/error.block.ts';
 import infoDeprecationBlock from './info_deprecation/info_deprecation.block.ts';
@@ -15,10 +16,6 @@ type Props = {
     name: string | undefined;
   };
 };
-
-// Helpers
-const divider = { type: 'divider' };
-const plain = (text: string) => ({ text, type: 'plain_text' });
 
 const templateBlocks = (template: Template) => {
   switch (template.key) {
