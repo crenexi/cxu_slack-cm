@@ -7,12 +7,13 @@ interface Props {
 }
 
 const traineeTemplate = (p: Props) => (`
-_Operator_: *${p.trainee}*
-_Training date_: ${p.trainDate}
-_Training covered_: ${p.listTrainScope}
-_Areas of opportunity_: ${p.listTrainNext}
-_What went well_: ${p.listWentWell}
-----------
+Trainee/operator: *${p.trainee}*
+Training date: ${p.trainDate}
+
+Training covered: ${p.listTrainScope}
+Areas of opportunity: ${p.listTrainNext}
+What went well: ${p.listWentWell}
+
 @ba-fieldops
 `);
 

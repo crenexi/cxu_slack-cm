@@ -1,4 +1,4 @@
-import { plain, today } from '../../../helpers/helpers.ts';
+import { header, plain, today } from '../../../helpers/helpers.ts';
 
 export const ids = {
   trainee: 'trainee',
@@ -40,7 +40,7 @@ const listTrainScope = {
     type: 'plain_text_input',
     action_id: 'action',
     multiline: true,
-    placeholder: plain('- Item\n- Item'),
+    placeholder: plain('- Item'),
   },
 };
 
@@ -52,7 +52,7 @@ const listTrainNext = {
     type: 'plain_text_input',
     action_id: 'action',
     multiline: true,
-    placeholder: plain('- Item\n- Item'),
+    placeholder: plain('- Item'),
   },
 };
 
@@ -64,13 +64,14 @@ const listWentWell = {
     type: 'plain_text_input',
     action_id: 'action',
     multiline: true,
-    placeholder: plain('- Item\n- Item'),
+    placeholder: plain('- Item'),
   },
 };
 
 const traineeBlocks = [
-  trainee,
   trainDate,
+  trainee,
+  header(':book: Review'),
   listTrainScope,
   listTrainNext,
   listWentWell,
