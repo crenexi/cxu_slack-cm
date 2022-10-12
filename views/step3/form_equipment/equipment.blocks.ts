@@ -6,7 +6,7 @@ export const ids = {
   equipIssue: 'equipment-issue',
   accountManager: 'account-manager',
   tehnicians: 'technicians',
-  nextSteps: 'next-steps',
+  picsReminder: 'next-steps',
 };
 
 const equipDesc = {
@@ -71,22 +71,18 @@ const technicians = {
 
 const picsReminder = {
   type: 'section',
-  block_id: ids.nextSteps,
-  text: {
-    type: 'plain_text',
-    text: ':iphone::link: After sending, attach any relevant pictures!',
-    emoji: true,
-  },
+  block_id: ids.picsReminder,
+  text: plain('After sending, attach any relevant pictures!'),
 };
 
 const equipmentBlocks = [
-  header('Issue'),
+  header(':flashlight: Issue'),
   equipDesc,
   equipZone,
   equipIssue,
-  header('Pics'),
+  header(':iphone: Pics'),
   picsReminder,
-  header('Tags'),
+  header(':bust_in_silhouette: Tags'),
   accountManager,
   technicians,
 ];

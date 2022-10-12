@@ -9,10 +9,10 @@ interface Props {
 }
 
 const equipmentTemplate = (p: Props) => (`
-_Equipment_: ${p.equipDesc}
-_Area/zone_: ${p.equipZone}
-_Issue_: ${p.equipIssue}
-----------
+Equipment: ${p.equipDesc}
+Area/zone: ${p.equipZone}
+Issue: ${p.equipIssue}
+
 :link: _Relevant pics below if provided_
 
 @ba-fieldops <@${p.accountManager}> ${tagsToText(p.technicians)}
