@@ -1,4 +1,4 @@
-import { divider, header, plain } from '../../../helpers/helpers.ts';
+import { header, plain } from '../../../helpers/helpers.ts';
 
 type Plain = {
   type: string;
@@ -102,7 +102,7 @@ const deliveryReturned = droInput({
 const prodAdjustments = droInput({
   optional: true,
   id: ids.prodAdjustments,
-  label: 'Inventory Aduustments',
+  label: 'Inventory Adustments',
   placeholder: 'All good!',
   hint: 'Edits needed for auto-order settings',
 });
