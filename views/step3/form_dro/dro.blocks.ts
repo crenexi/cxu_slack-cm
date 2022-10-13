@@ -11,6 +11,7 @@ type DroInput = (props: {
   placeholder: string;
   hint: string;
   optional?: boolean;
+  multiline?: boolean;
 }) => {
   type: 'input';
   block_id: string;
@@ -19,6 +20,7 @@ type DroInput = (props: {
   element: {
     type: 'plain_text_input';
     action_id: 'action';
+    multiline: boolean;
     placeholder: Plain;
   };
 };
@@ -36,7 +38,7 @@ export const ids = {
 };
 
 const droInput: DroInput = (props) => {
-  const { id, label, placeholder, hint, optional } = props;
+  const { id, label, placeholder, hint, optional, multiline } = props;
 
   return {
     type: 'input',
@@ -48,6 +50,7 @@ const droInput: DroInput = (props) => {
       type: 'plain_text_input',
       action_id: 'action',
       placeholder: plain(placeholder),
+      multiline: !!multiline,
     },
   };
 };
@@ -65,6 +68,7 @@ const opsClientMemo = droInput({
   placeholder: 'None',
   hint: 'Client trends/adjustments/issues',
   optional: true,
+  multiline: true,
 });
 
 const opsDoneMemo = droInput({
@@ -73,6 +77,7 @@ const opsDoneMemo = droInput({
   placeholder: 'None',
   hint: 'Tasks you were unable to complete',
   optional: true,
+  multiline: true,
 });
 
 const deliveryMissing = droInput({
@@ -89,6 +94,7 @@ const deliveryDiscarded = droInput({
   label: 'Delivery Expired/Damaged',
   placeholder: 'None',
   hint: 'Issues with delivered product?',
+  multiline: true,
 });
 
 const deliveryReturned = droInput({
@@ -97,6 +103,7 @@ const deliveryReturned = droInput({
   label: 'Delivery Returned',
   placeholder: 'None',
   hint: 'Any delivery returns or pickups?',
+  multiline: true,
 });
 
 const prodAdjustments = droInput({
@@ -105,6 +112,7 @@ const prodAdjustments = droInput({
   label: 'Inventory Adustments',
   placeholder: 'All good!',
   hint: 'Edits needed for auto-order settings',
+  multiline: true,
 });
 
 const prodExpired = droInput({
@@ -113,6 +121,7 @@ const prodExpired = droInput({
   label: 'Product Expired',
   placeholder: 'None',
   hint: 'Any product expired/damaged on-site?',
+  multiline: true,
 });
 
 const prodPickup = droInput({
