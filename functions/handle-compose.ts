@@ -4,12 +4,14 @@ import { formatDate, trimText } from '../helpers/helpers.ts';
 import { ids as signageIds } from '../views/step3/form_signage/signage.blocks.ts';
 import { ids as equipIds } from '../views/step3/form_equipment/equipment.blocks.ts';
 import { ids as traineeIds } from '../views/step3/form_trainee/trainee.blocks.ts';
+import { ids as qcStartingIds } from '../views/step3/form_qc-starting/qc-starting.blocks.ts';
 import { ids as orderIds } from '../views/step3/form_order/order.blocks.ts';
 import { ids as droIds } from '../views/step3/form_dro/dro.blocks.ts';
 
 import signageTemplate from '../views/step3/form_signage/signage.template.ts';
 import equipTemplate from '../views/step3/form_equipment/equipment.template.ts';
 import traineeTemplate from '../views/step3/form_trainee/trainee.template.ts';
+import qcStartingTemplate from '../views/step3/form_qc-starting/qc-starting.template.ts';
 import orderTemplate from '../views/step3/form_order/order.template.ts';
 import droTemplate from '../views/step3/form_dro/dro.template.ts';
 
@@ -67,6 +69,11 @@ const handleCompose: HandleCompose = async (props) => {
           listTrainScope: trimText(textValById(traineeIds.listTrainScope)),
           listTrainNext: trimText(textValById(traineeIds.listTrainNext)),
           listWentWell: trimText(textValById(traineeIds.listWentWell)),
+        });
+      case 'qcStarting':
+        return qcStartingTemplate({
+          greeting: trimText(textValById(qcStartingIds.greeting)),
+          memo: textValById(qcStartingIds.memo)?.trim(),
         });
       case 'order':
         return orderTemplate({

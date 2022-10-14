@@ -1,52 +1,76 @@
 export type Template = {
   key: string;
-  isEnabled: boolean;
-  isSlackDeprecated: boolean;
-  title: string;
   emojiKey: string;
+  titleGroup: string;
+  title: string;
   channelTip: string;
+  isSlackDeprecated: boolean;
+  isEnabled: boolean;
 };
 
 const templates: Template[] = [
   {
     key: 'signage',
-    isEnabled: true,
-    isSlackDeprecated: false,
-    title: 'Signage Request',
     emojiKey: 'label',
+    titleGroup: 'Ops',
+    title: 'Signage Request',
     channelTip: 'Select *#ba_signage_labels* as the channel',
+    isSlackDeprecated: false,
+    isEnabled: true,
   },
   {
     key: 'equipment',
-    isEnabled: true,
-    isSlackDeprecated: false,
-    title: 'Equipment Issue',
     emojiKey: 'wrench',
-    channelTip: 'Select *site channel* of concern.',
+    titleGroup: 'Ops',
+    title: 'Equipment Issue',
+    channelTip: 'Select *site channel* of concern',
+    isSlackDeprecated: false,
+    isEnabled: true,
+  },
+  {
+    key: 'qcStarting',
+    emojiKey: 'straight_ruler',
+    titleGroup: 'Flex',
+    title: 'QC Starting',
+    channelTip: 'Select * site channel* of QC Check',
+    isSlackDeprecated: false,
+    isEnabled: true,
+  },
+  {
+    key: 'qcFootnotes',
+    emojiKey: 'black_nib',
+    titleGroup: 'Flex',
+    title: 'QC Footnotes',
+    channelTip: 'Select * site channel* of QC Check',
+    isSlackDeprecated: false,
+    isEnabled: true,
   },
   {
     key: 'trainee',
-    isEnabled: true,
-    isSlackDeprecated: false,
-    title: 'Trainee Recap',
     emojiKey: 'mortar_board',
+    titleGroup: 'Flex',
+    title: 'Trainee Recap',
     channelTip: 'Select *#ba_flex_operators* as the channel',
+    isSlackDeprecated: false,
+    isEnabled: true,
   },
   {
     key: 'order',
-    isEnabled: true,
-    isSlackDeprecated: true,
-    title: 'Order Report',
     emojiKey: 'package',
-    channelTip: 'Select *DM to yourself* for copy-paste use.',
+    titleGroup: 'CAF',
+    title: 'Order Report',
+    channelTip: 'Select *DM to yourself* for copy-paste use',
+    isSlackDeprecated: true,
+    isEnabled: true,
   },
   {
     key: 'dro',
-    isEnabled: true,
-    isSlackDeprecated: true,
-    title: 'DRO Report',
     emojiKey: 'calendar',
-    channelTip: 'Select *DM to yourself* for copy-paste use.',
+    titleGroup: 'CAF',
+    title: 'DRO Report',
+    channelTip: 'Select *DM to yourself* for copy-paste use',
+    isSlackDeprecated: true,
+    isEnabled: true,
   },
 ];
 

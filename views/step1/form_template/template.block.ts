@@ -28,15 +28,13 @@ export const selectedTemplate = ({ state }: any) => {
 const templateOptions = templates
   .filter(({ isEnabled }) => isEnabled)
   .reduce<TemplateOptionBlock[]>((options, template) => {
-    const { key, title, emojiKey, isSlackDeprecated } = template;
+    const { key, emojiKey, title, titleGroup } = template;
 
     return [...options, {
       text: {
         type: 'plain_text',
         emoji: true,
-        text: isSlackDeprecated
-          ? `:${emojiKey}: CAF | ${title}`
-          : `:${emojiKey}: ${title}`,
+        text: `:${emojiKey}:  ${titleGroup} — ${title}`,
       },
       value: key,
     }];

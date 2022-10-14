@@ -8,6 +8,7 @@ import infoDestinationBlock from './info_destination/info_destination.block.ts';
 import signageBlocks from './form_signage/signage.blocks.ts';
 import equipmentBlocks from './form_equipment/equipment.blocks.ts';
 import traineeBlocks from './form_trainee/trainee.blocks.ts';
+import qcStartingBlocks from './form_qc-starting/qc-starting.blocks.ts';
 import orderBlocks from './form_order/order.blocks.ts';
 import droBlocks from './form_dro/dro.blocks.ts';
 
@@ -21,16 +22,18 @@ type Props = {
 
 const templateBlocks = (template: Template) => {
   switch (template.key) {
-    case 'dro':
-      return droBlocks;
-    case 'order':
-      return orderBlocks;
     case 'equipment':
       return equipmentBlocks;
     case 'signage':
       return signageBlocks;
     case 'trainee':
       return traineeBlocks;
+    case 'qcStarting':
+      return qcStartingBlocks;
+    case 'order':
+      return orderBlocks;
+    case 'dro':
+      return droBlocks;
     default:
       return [errorBlock('No case defined for this template')];
   }
