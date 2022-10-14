@@ -28,7 +28,7 @@ const memo = {
     action_id: 'action',
     max_length: 50,
     multiline: true,
-    placeholder: plain('Memo'),
+    placeholder: plain('None'),
   },
 };
 
