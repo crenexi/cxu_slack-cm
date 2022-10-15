@@ -23,12 +23,12 @@ export const trimText = (str: string | undefined) => {
 };
 
 export const formatDate = (date?: string) => {
-  const n = !date ? new Date() : new Date(`${date}T00:00:00Z`);
+  const n = !date ? new Date() : new Date(`${date}T00:00:00`);
 
   const YY = String(n.getFullYear()).split('').slice(-2).join('');
-  const MM = n.toLocaleString('en-US', { month: '2-digit', timeZone: 'UTC' });
-  const DD = n.toLocaleString('en-US', { day: '2-digit', timeZone: 'UTC' });
-  const DDD = n.toLocaleString('en-US', { weekday: 'short', timeZone: 'UTC' });
+  const MM = n.toLocaleString('en-US', { month: '2-digit' });
+  const DD = n.toLocaleString('en-US', { day: '2-digit' });
+  const DDD = n.toLocaleString('en-US', { weekday: 'short' });
 
   return `${DDD}, ${MM}-${DD}-${YY}`;
 };

@@ -34,7 +34,7 @@ const handleCompose: HandleCompose = async (props) => {
 
   // Construct the header
   const subtitle = `${emojiPrefix}By <@${user}> | ${formatDate()}`;
-  const header = `*${title.toUpperCase()}*\n${subtitle}\n---------`;
+  const header = `*${title.toUpperCase()}*\n${subtitle}\n----------`;
 
   // Helpers to extract relevant data from values
   const textValById = (id: string) => values[id].action.value;

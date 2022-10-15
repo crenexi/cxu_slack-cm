@@ -24,6 +24,7 @@ Any items for pick-up + reason for pick-up: ${p.itemsPickup}
 Items that couldn't make it on the order: ${p.listUnavailable}
 ----------
 Account Manager: {TAG}
+Field Coordinator: {TAG}
 `);
 
 export default orderTemplate;
