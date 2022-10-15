@@ -1,3 +1,5 @@
+// deno-lint-ignore-file no-explicit-any
+
 //## DATA TYPES
 
 export type Constants = {
@@ -34,17 +36,28 @@ export type ViewMetadata = {
   };
 };
 
+export type InputValues = {
+  [key: string]: InputValue;
+};
+
+export type InputValue = {
+  action: any;
+};
+
 //## FUNCTION TYPES
 
 export type HandleCompose = (props: {
   user: string | undefined;
   template: Template;
-  values: {
-    // deno-lint-ignore no-explicit-any
-    [key: string]: any;
-  };
+  values: InputValues;
   getRealName: (userId: string) => Promise<string>;
 }) => Promise<string>;
+
+export type Compose = (props: {
+  values: InputValues;
+}) => string;
+
+export type ValById = (v: InputValue) => any;
 
 //## BLOCK TYPES
 

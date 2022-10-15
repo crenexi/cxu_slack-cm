@@ -1,7 +1,7 @@
 import { qcRemarksTemplate } from './qc-remarks.template.ts';
 
-export const qcRemarksCompose = () =>
-  qcRemarksTemplate({
+export const qcRemarksCompose = () => {
+  return qcRemarksTemplate({
     infoRemarks: 'Test',
     landscapeRemarks: 'Test',
     shiftRemarks: 'Test',
@@ -21,3 +21,4 @@ export const qcRemarksCompose = () =>
     utdICLayout: false,
     utdICUtils: false,
   });
+};
