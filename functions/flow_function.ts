@@ -112,11 +112,10 @@ export const { viewSubmission, viewClosed } = ViewRouter
     const destConvo = await client.conversations.info({
       token,
       channel: selConvo,
-    })
-      .then((res) => ({
-        id: selConvo,
-        name: res.channel.name,
-      }));
+    }).then((res) => ({
+      id: selConvo,
+      name: res.channel.name,
+    }));
 
     return {
       response_action: 'update',
@@ -132,27 +131,16 @@ export const { viewSubmission, viewClosed } = ViewRouter
     const { values } = view.state;
     const { user } = inputs;
 
-    // Helper to get real user name
-    const getRealName = async (userId: string) => {
-      const name = await client.users.info({ user: userId })
-        .then((res) => res.user.profile.real_name);
-
-      return name;
-    };
-
     // Note destination id and compose message payload
-    const destConvoId = destConvo.id;
-    const message = await handleCompose({
-      user,
-      template,
-      values,
-      getRealName,
-    });
+    const message = handleCompose({ user, template, values });
 
     // Complete flow
     await client.functions.completeSuccess({
       function_execution_id: body.function_data.execution_id,
-      outputs: { destConvoId, message },
+      outputs: {
+        destConvoId: destConvo.id,
+        message,
+      },
     });
 
     return {

@@ -40,7 +40,7 @@ const blockIds = {
     utdICUtils: 'ic-utils',
   },
   trainee: {
-    trainee: 'trainee',
+    operator: 'operator',
     trainDate: 'train-date',
     listTrainScope: 'list-train-scope',
     listTrainNext: 'list-train-next',

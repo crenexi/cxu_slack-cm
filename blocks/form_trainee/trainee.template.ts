@@ -1,5 +1,5 @@
 type Props = {
-  trainee: string;
+  operator: string;
   trainDate: string;
   listTrainScope: string;
   listTrainNext: string;
@@ -7,7 +7,7 @@ type Props = {
 };
 
 export const traineeTemplate = (p: Props) => (`
-Trainee/operator: *${p.trainee}*
+Trainee/operator: *${p.operator}*
 Training date: ${p.trainDate}
 ----------
 Training covered: ${p.listTrainScope}

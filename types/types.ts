@@ -50,8 +50,7 @@ export type HandleCompose = (props: {
   user: string | undefined;
   template: Template;
   values: InputValues;
-  getRealName: (userId: string) => Promise<string>;
-}) => Promise<string>;
+}) => string;
 
 export type Compose = (props: {
   values: InputValues;

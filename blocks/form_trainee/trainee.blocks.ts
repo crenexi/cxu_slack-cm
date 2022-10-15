@@ -1,14 +1,13 @@
 import ids from '../../constants/block-ids.ts';
 import { header, plain, today } from '../../helpers/helpers.ts';
 
-const trainee = {
+const operator = {
   type: 'input',
-  block_id: ids.trainee.trainee,
+  block_id: ids.trainee.operator,
   label: plain('Operator'),
   element: {
-    type: 'multi_users_select',
+    type: 'plain_text_input',
     action_id: 'action',
-    max_selected_items: 1,
     placeholder: plain('Select'),
   },
 };
@@ -63,7 +62,7 @@ const listWentWell = {
 
 export const traineeBlocks = [
   trainDate,
-  trainee,
+  operator,
   header(':book: Review'),
   listTrainScope,
   listTrainNext,
