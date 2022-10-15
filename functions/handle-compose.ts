@@ -1,31 +1,17 @@
-import { Template } from '../constants/templates.ts';
+import { HandleCompose } from '../types/types.ts';
+import ids from '../constants/block-ids.ts';
 import { formatDate, trimText } from '../helpers/helpers.ts';
 
-import { ids as signageIds } from '../views/step3/form_signage/signage.blocks.ts';
-import { ids as equipIds } from '../views/step3/form_equipment/equipment.blocks.ts';
-import { ids as traineeIds } from '../views/step3/form_trainee/trainee.blocks.ts';
-import { ids as qcStartingIds } from '../views/step3/form_qc-starting/qc-starting.blocks.ts';
-import { ids as orderIds } from '../views/step3/form_order/order.blocks.ts';
-import { ids as droIds } from '../views/step3/form_dro/dro.blocks.ts';
+import { signageTemplate } from '../blocks/form_signage/signage.template.ts';
+import { equipmentTemplate } from '../blocks/form_equipment/equipment.template.ts';
+import { traineeTemplate } from '../blocks/form_trainee/trainee.template.ts';
+import { qcStartingTemplate } from '../blocks/form_qc-starting/qc-starting.template.ts';
+import { orderTemplate } from '../blocks/form_order/order.template.ts';
+import { droTemplate } from '../blocks/form_dro/dro.template.ts';
 
-import signageTemplate from '../views/step3/form_signage/signage.template.ts';
-import equipTemplate from '../views/step3/form_equipment/equipment.template.ts';
-import traineeTemplate from '../views/step3/form_trainee/trainee.template.ts';
-import qcStartingTemplate from '../views/step3/form_qc-starting/qc-starting.template.ts';
-import orderTemplate from '../views/step3/form_order/order.template.ts';
-import droTemplate from '../views/step3/form_dro/dro.template.ts';
+import { qcRemarksCompose } from '../blocks/form_qc-remarks/qc-remarks.compose.ts';
 
-type HandleCompose = (props: {
-  user: string | undefined;
-  template: Template;
-  values: {
-    // deno-lint-ignore no-explicit-any
-    [key: string]: any;
-  };
-  getRealName: (userId: string) => Promise<string>;
-}) => Promise<string>;
-
-const handleCompose: HandleCompose = async (props) => {
+export const handleCompose: HandleCompose = async (props) => {
   // console.log(values);
 
   const { user, template, values, getRealName } = props;
@@ -48,56 +34,58 @@ const handleCompose: HandleCompose = async (props) => {
     switch (template.key) {
       case 'signage':
         return signageTemplate({
-          site: trimText(textValById(signageIds.site)),
-          zone: trimText(textValById(signageIds.zone)),
-          request: trimText(textValById(signageIds.request)),
-          quantity: trimText(textValById(signageIds.quantity)),
-          tags: usersValById(signageIds.tags),
+          site: trimText(textValById(ids.signage.site)),
+          zone: trimText(textValById(ids.signage.zone)),
+          request: trimText(textValById(ids.signage.request)),
+          quantity: trimText(textValById(ids.signage.quantity)),
+          tags: usersValById(ids.signage.tags),
         });
       case 'equipment':
-        return equipTemplate({
-          equipDesc: textValById(equipIds.equipDesc),
-          equipZone: textValById(equipIds.equipZone),
-          equipIssue: textValById(equipIds.equipIssue),
-          accountManager: userValById(equipIds.accountManager),
-          technicians: usersValById(equipIds.tehnicians),
+        return equipmentTemplate({
+          equipDesc: textValById(ids.equipment.equipDesc),
+          equipZone: textValById(ids.equipment.equipZone),
+          equipIssue: textValById(ids.equipment.equipIssue),
+          accountManager: userValById(ids.equipment.accountManager),
+          technicians: usersValById(ids.equipment.tehnicians),
         });
       case 'trainee':
         return traineeTemplate({
-          trainee: await getRealName(userValById(traineeIds.trainee)),
-          trainDate: formatDate(dateValById(traineeIds.trainDate)),
-          listTrainScope: trimText(textValById(traineeIds.listTrainScope)),
-          listTrainNext: trimText(textValById(traineeIds.listTrainNext)),
-          listWentWell: trimText(textValById(traineeIds.listWentWell)),
+          trainee: await getRealName(userValById(ids.trainee.trainee)),
+          trainDate: formatDate(dateValById(ids.trainee.trainDate)),
+          listTrainScope: trimText(textValById(ids.trainee.listTrainScope)),
+          listTrainNext: trimText(textValById(ids.trainee.listTrainNext)),
+          listWentWell: trimText(textValById(ids.trainee.listWentWell)),
         });
       case 'qcStarting':
         return qcStartingTemplate({
-          greeting: trimText(textValById(qcStartingIds.greeting)),
-          memo: textValById(qcStartingIds.memo)?.trim(),
+          greeting: trimText(textValById(ids.qcStarting.greeting)),
+          memo: textValById(ids.qcStarting.memo)?.trim(),
         });
+      case 'qcRemarks':
+        return qcRemarksCompose();
       case 'order':
         return orderTemplate({
-          orderId: textValById(orderIds.orderId),
-          orderRecap: textValById(orderIds.orderRecap),
-          deliveryDate: formatDate(dateValById(orderIds.deliveryDate)),
-          listUnavailable: trimText(textValById(orderIds.listUnavailable)),
-          listChained: trimText(textValById(orderIds.listChained)),
-          listICNeeds: trimText(textValById(orderIds.listICNeeds)),
-          listEdits: trimText(textValById(orderIds.listEdits)),
-          itemsPickup: trimText(textValById(orderIds.itemsPickup)),
-          auditCheck: cbValById(orderIds.auditCheck) ? 'Yes' : 'No',
+          orderId: textValById(ids.order.orderId),
+          orderRecap: textValById(ids.order.orderRecap),
+          deliveryDate: formatDate(dateValById(ids.order.deliveryDate)),
+          listUnavailable: trimText(textValById(ids.order.listUnavailable)),
+          listChained: trimText(textValById(ids.order.listChained)),
+          listICNeeds: trimText(textValById(ids.order.listICNeeds)),
+          listEdits: trimText(textValById(ids.order.listEdits)),
+          itemsPickup: trimText(textValById(ids.order.itemsPickup)),
+          auditCheck: cbValById(ids.order.auditCheck) ? 'Yes' : 'No',
         });
       case 'dro':
         return droTemplate({
-          opsGeneralMemo: trimText(textValById(droIds.opsGeneralMemo)),
-          opsClientMemo: trimText(textValById(droIds.opsClientMemo)),
-          opsDoneMemo: trimText(textValById(droIds.opsDoneMemo)),
-          deliveryMissing: trimText(textValById(droIds.deliveryMissing)),
-          deliveryDiscarded: trimText(textValById(droIds.deliveryDiscarded)),
-          deliveryReturned: trimText(textValById(droIds.deliveryReturned)),
-          prodAdjustments: trimText(textValById(droIds.prodAdjustments)),
-          prodExpired: trimText(textValById(droIds.prodExpired)),
-          prodPickup: trimText(textValById(droIds.prodPickup)),
+          opsGeneralMemo: trimText(textValById(ids.dro.opsGeneralMemo)),
+          opsClientMemo: trimText(textValById(ids.dro.opsClientMemo)),
+          opsDoneMemo: trimText(textValById(ids.dro.opsDoneMemo)),
+          deliveryMissing: trimText(textValById(ids.dro.deliveryMissing)),
+          deliveryDiscarded: trimText(textValById(ids.dro.deliveryDiscarded)),
+          deliveryReturned: trimText(textValById(ids.dro.deliveryReturned)),
+          prodAdjustments: trimText(textValById(ids.dro.prodAdjustments)),
+          prodExpired: trimText(textValById(ids.dro.prodExpired)),
+          prodPickup: trimText(textValById(ids.dro.prodPickup)),
         });
       default: {
         return 'No case found for this template key.';
@@ -107,5 +95,3 @@ const handleCompose: HandleCompose = async (props) => {
 
   return `${header}\n${body.trim()}`;
 };
-
-export default handleCompose;

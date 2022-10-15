@@ -1,12 +1,4 @@
-export type Template = {
-  key: string;
-  emojiKey: string;
-  titleGroup: string;
-  title: string;
-  channelTip: string;
-  isSlackDeprecated: boolean;
-  isEnabled: boolean;
-};
+import { Template } from '../types/types.ts';
 
 const templates: Template[] = [
   {

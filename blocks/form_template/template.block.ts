@@ -1,0 +1,36 @@
+import ids from '../../constants/block-ids.ts';
+import { TemplateOptionBlock } from '../../types/types.ts';
+import templates from '../../constants/templates.ts';
+
+const templateOptions = templates
+  .filter(({ isEnabled }) => isEnabled)
+  .reduce<TemplateOptionBlock[]>((options, template) => {
+    const { key, emojiKey, title, titleGroup } = template;
+
+    return [...options, {
+      text: {
+        type: 'plain_text',
+        emoji: true,
+        text: `:${emojiKey}:  ${titleGroup} — ${title}`,
+      },
+      value: key,
+    }];
+  }, []);
+
+export const templateBlock = ({
+  type: 'input',
+  block_id: ids.template,
+  label: {
+    type: 'plain_text',
+    text: 'Template',
+  },
+  element: {
+    type: 'static_select',
+    placeholder: {
+      type: 'plain_text',
+      text: 'Select template',
+    },
+    options: templateOptions,
+    action_id: 'action',
+  },
+});

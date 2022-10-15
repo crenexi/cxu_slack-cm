@@ -1,20 +1,5 @@
-import templates, { Template } from './templates.ts';
-
-export type Constants = {
-  templates: Template[];
-  general: {
-    title: string;
-    description: string;
-    actionLabel: string;
-  };
-  slackDeprecated: {
-    view1Notice: string;
-    view3Notice: string;
-  };
-  links: {
-    qcExpectations: string;
-  };
-};
+import { Constants } from '../types/types.ts';
+import templates from './templates.ts';
 
 const constants: Constants = {
   templates,

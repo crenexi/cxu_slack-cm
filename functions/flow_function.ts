@@ -1,27 +1,14 @@
 import { DefineFunction, Schema, ViewsRouter } from 'deno-slack-sdk/mod.ts';
 import type { SlackFunctionHandler } from 'deno-slack-sdk/types.ts';
 import { SlackAPI } from 'deno-slack-api/mod.ts';
+
+import { ViewMetadata } from '../types/types.ts';
 import constants from '../constants/constants.ts';
-import templates, { Template } from '../constants/templates.ts';
-
-import step1View from '../views/step1/step1.view.ts';
-import { selectedTemplate } from '../views/step1/form_template/template.block.ts';
-
-import step2View from '../views/step2/step2.view.ts';
-import { selectedConvo } from '../views/step2/form_convo/convo.block.ts';
-
-import step3View from '../views/step3/step3.view.ts';
-import handleCompose from './handle-compose.ts';
-
-//## Types
-
-type ViewMetadata = {
-  template: Template;
-  destConvo: {
-    id: string;
-    name: string;
-  };
-};
+import templates from '../constants/templates.ts';
+import { selectedTemplate, step1View } from '../views/step1.view.ts';
+import { selectedConvo, step2View } from '../views/step2.view.ts';
+import { step3View } from '../views/step3.view.ts';
+import { handleCompose } from './handle-compose.ts';
 
 //## Function Definition
 
