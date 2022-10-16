@@ -5,6 +5,8 @@ import { errorBlock } from '../blocks/error/error.block.ts';
 import { deprecationBlock } from '../blocks/info_deprecation/deprecation.block.ts';
 import { destinationBlock } from '../blocks/info_destination/destination.block.ts';
 
+import { taskSingleBlocks } from '../blocks/form_task-single/task-single.blocks.ts';
+import { taskBulkBlocks } from '../blocks/form_task-bulk/task-bulk.blocks.ts';
 import { signageBlocks } from '../blocks/form_signage/signage.blocks.ts';
 import { equipmentBlocks } from '../blocks/form_equipment/equipment.blocks.ts';
 import { traineeBlocks } from '../blocks/form_trainee/trainee.blocks.ts';
@@ -23,6 +25,10 @@ type Props = {
 
 const templateBlocks = (template: Template) => {
   switch (template.key) {
+    case 'taskSingle':
+      return taskSingleBlocks;
+    case 'taskBulk':
+      return taskBulkBlocks;
     case 'equipment':
       return equipmentBlocks;
     case 'signage':

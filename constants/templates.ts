@@ -2,8 +2,26 @@ import { Template } from '../types/types.ts';
 
 const templates: Template[] = [
   {
+    key: 'taskSingle',
+    emojiKey: 'clipboard',
+    titleGroup: 'Ops',
+    title: 'Single Task Request',
+    channelTip: 'Select related *site channel*',
+    isSlackDeprecated: false,
+    isEnabled: true,
+  },
+  {
+    key: 'taskBulk',
+    emojiKey: 'clipboard',
+    titleGroup: 'Ops',
+    title: 'Bulk Tasks Request',
+    channelTip: 'Select related *site channel*',
+    isSlackDeprecated: false,
+    isEnabled: true,
+  },
+  {
     key: 'signage',
-    emojiKey: 'label',
+    emojiKey: 'placard',
     titleGroup: 'Ops',
     title: 'Signage Request',
     channelTip: 'Select *#ba_signage_labels* as the channel',
@@ -15,7 +33,7 @@ const templates: Template[] = [
     emojiKey: 'wrench',
     titleGroup: 'Ops',
     title: 'Equipment Issue',
-    channelTip: 'Select *site channel* of concern',
+    channelTip: 'Select related *site channel*',
     isSlackDeprecated: false,
     isEnabled: true,
   },

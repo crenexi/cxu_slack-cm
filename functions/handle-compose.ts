@@ -1,5 +1,7 @@
 import { HandleCompose } from '../types/types.ts';
 import { formatDate } from '../helpers/helpers.ts';
+import { taskSingleCompose } from '../blocks/form_task-single/task-single.compose.ts';
+import { taskBulkCompose } from '../blocks/form_task-bulk/task-bulk.compose.ts';
 import { signageCompose } from '../blocks/form_signage/signage.compose.ts';
 import { equipmentCompose } from '../blocks/form_equipment/equipment.compose.ts';
 import { qcStartingCompose } from '../blocks/form_qc-starting/qc-starting.compose.ts';
@@ -22,6 +24,10 @@ export const handleCompose: HandleCompose = (props) => {
   // Construct the body
   const body: string = (() => {
     switch (template.key) {
+      case 'taskSingle':
+        return taskSingleCompose({ values });
+      case 'taskBulk':
+        return taskBulkCompose({ values });
       case 'signage':
         return signageCompose({ values });
       case 'equipment':
