@@ -29,10 +29,10 @@ const templates: Template[] = [
     isEnabled: true,
   },
   {
-    key: 'qcFootnotes',
+    key: 'qcRemarks',
     emojiKey: 'black_nib',
     titleGroup: 'Flex',
-    title: 'QC Footnotes',
+    title: 'QC Remarks',
     channelTip: 'Select * site channel* of QC Check',
     isSlackDeprecated: false,
     isEnabled: true,

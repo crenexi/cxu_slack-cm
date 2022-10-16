@@ -1,53 +1,71 @@
+import { tagsToText } from '../../helpers/helpers.ts';
+
 type Props = {
+  infoOpts: {
+    utdInfoSync: boolean;
+    utdClientSync: boolean;
+    utdAccess: boolean;
+  };
+  placeOpts: {
+    utdSignage: boolean;
+    utdEquipment: boolean;
+    utdShelving: boolean;
+    utdICUtils: boolean;
+  };
+  systemOpts: {
+    utdTaskList: boolean;
+    utdICLevels: boolean;
+    utdTiming: boolean;
+  };
   infoRemarks: string;
-  landscapeRemarks: string;
-  shiftRemarks: string;
-  inventoryRemarks: string;
-  utdDescription: boolean;
-  utdLandscape: boolean;
-  utdClientSync: boolean;
-  utdAccess: boolean;
-  utdSignage: boolean;
-  utdEquipment: boolean;
-  utdShelving: boolean;
-  utdDiscard: boolean;
-  utdTaskList: boolean;
-  utdTaskOrder: boolean;
-  utdTiming: boolean;
-  utdICLevels: boolean;
-  utdICLayout: boolean;
-  utdICUtils: boolean;
+  placeRemarks: string;
+  systemRemarks: string;
+  accountManager: string;
+  tagOthers: string[];
 };
 
 const cb = (checked: boolean): string => {
-  return checked ? ':heavy_check_mark: |' : 'heavy_minus_sign: |';
+  return checked ? ':ballot_box_with_check:' : ':white_square:';
+};
+
+export const qcRemarksText = {
+  infoSync: 'Channel Description and Site Landscape slides are up-to-date',
+  clientSync: 'Client feedback/vibe/needs synced with team',
+  access: 'Site access is situated (protocols, badges, etc)',
+  signage: 'Signage and labels are situated as needed',
+  equipment: 'Equipment care and knowledge are provided',
+  shelving: 'Storage shelving and areas are arranged',
+  taskList: 'The shift task lists have up-to-date and ordered tasks',
+  timing: 'Site timing, pacing, and efficiency are stable',
+  icLevels: 'Inventory Center layout, levels, and thresholds are stable',
+  icUtils: 'Utilities and supplies are provided if needed*',
 };
 
 export const qcRemarksTemplate = (p: Props) => (`
-:pencil: *INFO CHECK*
-${cb(p.utdDescription)} Site Description is up-to-date (Slack)
-${cb(p.utdLandscape)} Site Landscape is up-to-date (slide)
-${cb(p.utdClientSync)} Client feedback/vibe/needs synced with team
+*INFO CHECKS*
+
+${cb(p.infoOpts.utdInfoSync)} | ${qcRemarksText.infoSync}
+${cb(p.infoOpts.utdClientSync)} | ${qcRemarksText.clientSync}
+${cb(p.infoOpts.utdAccess)} | ${qcRemarksText.access}
+
 Remarks on information: ${p.infoRemarks}
 ----------
-:office: *SITE LANDSCAPE*
-${cb(p.utdAccess)} Site access is situated (protocols, badges, etc)
-${cb(p.utdSignage)} Signage and labels are situated as needed
-${cb(p.utdEquipment)} Equipment care and knowledge are provided
-${cb(p.utdShelving)} Storage shelving and areas are arranged
-${cb(p.utdDiscard)} Trash discard methods are understood
-Remarks on landscape: ${p.landscapeRemarks}
+*PLACE CHECKS*
+
+${cb(p.placeOpts.utdSignage)} | ${qcRemarksText.signage}
+${cb(p.placeOpts.utdEquipment)} | ${qcRemarksText.equipment}
+${cb(p.placeOpts.utdShelving)} | ${qcRemarksText.shelving}
+${cb(p.placeOpts.utdICUtils)} | ${qcRemarksText.icUtils}
+
+Remarks on place: ${p.placeRemarks}
 ----------
-:clock10: *SHIFT FLOW*
-${cb(p.utdTaskList)} The shift task lists have up-to-date tasks
-${cb(p.utdTaskOrder)} The shift task lists are ordered appropriately
-${cb(p.utdTiming)} Site timing, pacing, and efficiency are stable
-Remarks on shift: ${p.shiftRemarks}
+*SYSTEM CHECKS*
+
+${cb(p.systemOpts.utdTaskList)} | ${qcRemarksText.taskList}
+${cb(p.systemOpts.utdICLevels)} | ${qcRemarksText.icLevels}
+${cb(p.systemOpts.utdTiming)} | ${qcRemarksText.timing}
+
+Remarks on system: ${p.systemRemarks}
 ----------
-:scales: *INVENTORY STATE*
-${cb(p.utdICLevels)} Inventory levels and auto-order settings are stable
-${cb(p.utdICLayout)} Inventory Center layout is situated as needed
-${cb(p.utdICUtils)} Utilities and supplies are provided if needed*
-Remarks on inventory: ${p.inventoryRemarks}
-*_Based on site needs; may include cart, stool, paper towels, wipes, wrench, line cleaning kit, other_
+@ba-fieldops <@${p.accountManager}> ${tagsToText(p.tagOthers)}
 `);

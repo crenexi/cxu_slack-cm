@@ -1,37 +1,46 @@
-import { ValById } from '../types/types.ts';
+import { Plain, ValById, ValByOption } from '../types/types.ts';
 
 // Block helpers for divider and plain text
 export const divider = { type: 'divider' };
-export const plain = (text: string) => ({ text, type: 'plain_text' });
+export const plain = (text: string): Plain => ({ text, type: 'plain_text' });
 
 // Block helper for header
 export const header = (text: string) => ({
   type: 'header',
   text: {
-    text,
+    text: text.toUpperCase(),
     type: 'plain_text',
     emoji: true,
   },
 });
 
 // Helpers to extract relevant data from values
-export const textValById: ValById = (v) => trimText(v.action.value);
 export const dateValById: ValById = (v) => v.action.selected_date;
 export const usersValById: ValById = (v) => v.action.selected_users;
 export const userValById: ValById = (v) => v.action.selected_users[0];
 export const cbValById: ValById = (v) => v.action.selected_options.length;
+
+// Helpers to extract relevant data from text input
+export const textValById: ValById = (v, opts = { default: 'n/a' }) => {
+  const str = v.action.value;
+
+  // Return default if input is empty
+  if (!str) return opts.default;
+
+  // Trim and add newline to long text
+  return str.length < 15 ? str.trim() : `\n${str.trim()}`;
+};
+
+// Helpers to extract relevant data from checkbox options
+export const cbValByOption: ValByOption = ({ val, opt }) => {
+  return val.action.selected_options.some((o) => o.value === opt);
+};
 
 // Helper to turn tags into marked string
 export const tagsToText = (tags: string[]) => {
   return tags.reduce((str, tag, i) => {
     return i === 0 ? `<@${tag}>` : `${str} <@${tag}>`;
   }, '');
-};
-
-// Helper to trim text and add n/a if null
-export const trimText = (str: string | undefined) => {
-  if (!str) return 'n/a';
-  return str.length < 15 ? str.trim() : `\n${str.trim()}`;
 };
 
 // Helper to format date generally

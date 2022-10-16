@@ -56,12 +56,25 @@ export type Compose = (props: {
   values: InputValues;
 }) => string;
 
-export type ValById = (v: InputValue) => any;
+export type ValById = (v: InputValue, options?: {
+  default?: string;
+}) => any;
+
+export type ValByOption = (props: {
+  val: {
+    action: {
+      selected_options: {
+        value: string;
+      }[];
+    };
+  };
+  opt: string;
+}) => any;
 
 //## BLOCK TYPES
 
 export type Plain = {
-  type: string;
+  type: 'plain_text';
   text: string;
 };
 
@@ -76,6 +89,27 @@ export type RemarksBlock = (props: {
     type: 'plain_text_input';
     action_id: 'action';
     placeholder: Plain;
+  };
+};
+
+export type RemarksChecklistBlock = (props: {
+  id: string;
+  label: string;
+  options: {
+    value: string;
+    text: Plain;
+  }[];
+}) => {
+  type: 'input';
+  block_id: string;
+  label: Plain;
+  element: {
+    type: 'checkboxes';
+    action_id: 'action';
+    options: {
+      value: string;
+      text: Plain;
+    }[];
   };
 };
 

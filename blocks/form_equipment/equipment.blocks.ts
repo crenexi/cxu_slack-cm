@@ -74,7 +74,7 @@ export const equipmentBlocks = [
   equipIssue,
   header(':iphone: Pics'),
   picsReminder,
-  header(':bust_in_silhouette: Tags'),
+  header(':busts_in_silhouette: Tags'),
   accountManager,
   technicians,
 ];

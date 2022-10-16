@@ -4,8 +4,10 @@ import { textValById } from '../../helpers/helpers.ts';
 import { qcStartingTemplate } from './qc-starting.template.ts';
 
 export const qcStartingCompose: Compose = ({ values }) => {
+  const memo = values[ids.qcStarting.memo];
+
   return qcStartingTemplate({
     greeting: textValById(values[ids.qcStarting.greeting]),
-    memo: textValById(values[ids.qcStarting.memo]),
+    memo: textValById(memo, { default: '' }),
   });
 };

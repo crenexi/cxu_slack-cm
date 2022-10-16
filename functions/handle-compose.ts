@@ -9,9 +9,9 @@ import { orderCompose } from '../blocks/form_order/order.compose.ts';
 import { droCompose } from '../blocks/form_dro/dro.compose.ts';
 
 export const handleCompose: HandleCompose = (props) => {
+  const { user, template, values } = props;
   // console.log(values);
 
-  const { user, template, values } = props;
   const { title, emojiKey, isSlackDeprecated } = template;
   const emojiPrefix = isSlackDeprecated ? '' : `:${emojiKey}: | `;
 
@@ -31,7 +31,7 @@ export const handleCompose: HandleCompose = (props) => {
       case 'qcStarting':
         return qcStartingCompose({ values });
       case 'qcRemarks':
-        return qcRemarksCompose();
+        return qcRemarksCompose({ values });
       case 'order':
         return orderCompose({ values });
       case 'dro':
