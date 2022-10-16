@@ -1,10 +1,10 @@
 import ids from '../../constants/block-ids.ts';
-import { TemplateOptionBlock } from '../../types/types.ts';
+import { SelectOptionBlock } from '../../types/types.ts';
 import templates from '../../constants/templates.ts';
 
 const templateOptions = templates
   .filter(({ isEnabled }) => isEnabled)
-  .reduce<TemplateOptionBlock[]>((options, template) => {
+  .reduce<SelectOptionBlock[]>((options, template) => {
     const { key, emojiKey, title, titleGroup } = template;
 
     return [...options, {

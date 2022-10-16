@@ -12,7 +12,7 @@ import { droCompose } from '../blocks/form_dro/dro.compose.ts';
 
 export const handleCompose: HandleCompose = (props) => {
   const { user, template, values } = props;
-  // console.log(values);
+  console.log(values);
 
   const { title, emojiKey, isSlackDeprecated } = template;
   const emojiPrefix = isSlackDeprecated ? '' : `:${emojiKey}: | `;

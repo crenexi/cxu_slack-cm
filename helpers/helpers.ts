@@ -18,6 +18,7 @@ export const header = (text: string) => ({
 export const dateValById: ValById = (v) => v.action.selected_date;
 export const usersValById: ValById = (v) => v.action.selected_users;
 export const userValById: ValById = (v) => v.action.selected_users[0];
+export const selValById: ValById = (v) => v.action.selected_option.value;
 export const cbValById: ValById = (v) => v.action.selected_options.length;
 
 // Helpers to extract relevant data from text input
@@ -28,7 +29,7 @@ export const textValById: ValById = (v, opts = { default: 'n/a' }) => {
   if (!str) return opts.default;
 
   // Trim and add newline to long text
-  return str.length < 15 ? str.trim() : `\n${str.trim()}`;
+  return str.length < 30 ? str.trim() : `\n${str.trim()}`;
 };
 
 // Helpers to extract relevant data from checkbox options

@@ -1,7 +1,13 @@
 const blockIds = {
   template: 'input_template',
   conversation: 'input_convo',
-  taskSingle: {},
+  taskSingle: {
+    actionType: 'action-type',
+    taskRequest: 'task-request',
+    taskZone: 'task-zone',
+    taskNote: 'task-note',
+    timing: 'timing',
+  },
   taskBulk: {
     pretext: 'pretext',
     toAdd: 'tasks-add',

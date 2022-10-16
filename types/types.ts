@@ -113,7 +113,7 @@ export type RemarksChecklistBlock = (props: {
   };
 };
 
-export type TemplateOptionBlock = {
+export type SelectOptionBlock = {
   value: string;
   text: {
     type: string;

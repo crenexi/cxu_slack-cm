@@ -5,7 +5,7 @@ const templates: Template[] = [
     key: 'taskSingle',
     emojiKey: 'clipboard',
     titleGroup: 'Ops',
-    title: 'Single Task Request',
+    title: 'Task Request',
     channelTip: 'Select related *site channel*',
     isSlackDeprecated: false,
     isEnabled: true,
