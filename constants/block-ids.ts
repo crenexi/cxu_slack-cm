@@ -13,7 +13,9 @@ const blockIds = {
     toAdd: 'tasks-add',
     toRemove: 'tasks-remove',
     toUpdate: 'tasks-update',
-    toOrder: 'tasks-order',
+    toReorder: 'tasks-order',
+    refPicsLink: 'ref-pics-link',
+    refPicsText: 'ref-pics-text',
   },
   signage: {
     site: 'site',

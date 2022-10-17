@@ -67,5 +67,5 @@ ${cb(p.systemOpts.utdTiming)} | ${qcRemarksText.timing}
 
 Remarks on system: ${p.systemRemarks}
 ----------
-@ba-fieldops <@${p.accountManager}> ${tagsToText(p.tagOthers)}
+<@ba-fieldops> <@${p.accountManager}> ${tagsToText(p.tagOthers)}
 `);

@@ -141,3 +141,23 @@ export type DroInput = (props: {
     placeholder: Plain;
   };
 };
+
+export type TaskBulkInput = (props: {
+  id: string;
+  label: string;
+}) => {
+  type: 'input';
+  block_id: string;
+  label: {
+    type: 'plain_text';
+    text: string;
+    emoji: true;
+  };
+  optional: boolean;
+  element: {
+    type: 'plain_text_input';
+    action_id: 'action';
+    placeholder: Plain;
+    multiline: true;
+  };
+};

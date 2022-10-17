@@ -13,5 +13,5 @@ Location/client: ${p.site}
 Signage/labels needed: ${p.request}
 Quantity: ${p.quantity}
 ----------
-@ba-fieldops ${tagsToText(p.tags)}
+<@ba-fieldops> ${tagsToText(p.tags)}
 `);
