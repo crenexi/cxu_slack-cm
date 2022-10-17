@@ -23,6 +23,25 @@ const option: Option = ({ value, text }) => ({
   },
 });
 
+const actionTypeOptions = [
+  option({
+    value: 'add',
+    text: ':new: Add a task',
+  }),
+  option({
+    value: 'remove',
+    text: ':end: Remove a task',
+  }),
+  option({
+    value: 'update',
+    text: ':arrows_counterclockwise: Update a task',
+  }),
+  option({
+    value: 'reorder',
+    text: ':arrow_up_down: Reorder a task',
+  }),
+];
+
 const actionType = {
   type: 'input',
   block_id: ids.taskSingle.actionType,
@@ -31,26 +50,28 @@ const actionType = {
     type: 'static_select',
     action_id: 'action',
     placeholder: plain('Select'),
-    options: [
-      option({
-        value: 'add',
-        text: ':new: Add a task',
-      }),
-      option({
-        value: 'remove',
-        text: ':end: Remove a task',
-      }),
-      option({
-        value: 'update',
-        text: ':arrows_counterclockwise: Update a task',
-      }),
-      option({
-        value: 'reorder',
-        text: ':arrow_up_down: Reorder a task',
-      }),
-    ],
+    options: actionTypeOptions,
   },
 };
+
+const timingOptions = [
+  option({
+    value: 'earlier',
+    text: timingText.earlier,
+  }),
+  option({
+    value: 'standard',
+    text: timingText.standard,
+  }),
+  option({
+    value: 'later',
+    text: timingText.later,
+  }),
+  option({
+    value: 'unsure',
+    text: timingText.unsure,
+  }),
+];
 
 const timing = {
   type: 'input',
@@ -59,25 +80,8 @@ const timing = {
   element: {
     type: 'static_select',
     action_id: 'action',
-    placeholder: plain('Select'),
-    options: [
-      option({
-        value: 'earlier',
-        text: timingText.earlier,
-      }),
-      option({
-        value: 'standard',
-        text: timingText.standard,
-      }),
-      option({
-        value: 'later',
-        text: timingText.later,
-      }),
-      option({
-        value: 'unsure',
-        text: timingText.unsure,
-      }),
-    ],
+    initial_option: timingOptions.find((o) => o.value === 'standard'),
+    options: timingOptions,
   },
 };
 
