@@ -76,7 +76,12 @@ export const { viewSubmission, viewClosed } = ViewRouter
 
     // Determine the initial conversation selected
     const isSlackDeprecated = !template ? '' : template.isSlackDeprecated;
-    const initialConvo = !isSlackDeprecated ? inputs.channel : inputs.user;
+
+    const isDM = inputs.channel && inputs.channel[0] === 'D';
+    const initialConvo = (isSlackDeprecated || isDM)
+      ? undefined
+      : inputs.channel;
+    console.log(`Initial convo: ${initialConvo}`);
 
     // If using direct message, skip channel selection
     if (isSlackDeprecated) {
