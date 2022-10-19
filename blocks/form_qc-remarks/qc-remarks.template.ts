@@ -28,6 +28,7 @@ const cb = (checked: boolean): string => {
   return checked ? ':ballot_box_with_check:' : ':white_square:';
 };
 
+// deno-fmt-ignore
 export const qcRemarksText = {
   infoSync: 'Channel Description and Site Landscape slides are up-to-date',
   clientSync: 'Client feedback/vibe/needs synced with team',
@@ -38,7 +39,7 @@ export const qcRemarksText = {
   taskList: 'The shift task lists have up-to-date and ordered tasks',
   timing: 'Site timing, pacing, and efficiency are stable',
   icLevels: 'Inventory Center layout, levels, and thresholds are stable',
-  icUtils: 'Utilities and supplies are provided if needed*',
+  icUtils: 'Utilities and supplies are provided if needed. Example: cart, stool, paper towels, wipes, wrench, line cleaning, et cetera',
 };
 
 export const qcRemarksTemplate = (p: Props) => (`

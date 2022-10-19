@@ -110,15 +110,6 @@ const systemChecks = checklistBlock({
 
 //## OTHER
 
-const placeFootnote = {
-  type: 'section',
-  text: {
-    type: 'mrkdwn',
-    text:
-      '_*Site-specific needs. Ex. cart, stool, paper towels, wipes, wrench, line cleaning kit, specific requests, et cetera_',
-  },
-};
-
 const accountManager = {
   type: 'input',
   block_id: ids.qcRemarks.accountManager,
@@ -151,7 +142,6 @@ export const qcRemarksBlocks = [
   header(':office: Place'),
   placeChecks,
   placeRemarks,
-  placeFootnote,
   header(':scales: System'),
   systemChecks,
   systemRemarks,

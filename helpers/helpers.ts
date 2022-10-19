@@ -29,7 +29,11 @@ export const dateValById: ValById = (v) => v.action.selected_date;
 export const usersValById: ValById = (v) => v.action.selected_users;
 export const userValById: ValById = (v) => v.action.selected_users[0];
 export const selValById: ValById = (v) => v.action.selected_option.value;
-export const cbValById: ValById = (v) => v.action.selected_options.length;
+
+export const cbValById: ValById = (v) => {
+  const isChecked = v.action.selected_options.length > 0;
+  return isChecked ? 'Yes' : 'No';
+};
 
 // Helpers to extract relevant data from text input
 export const textValById: ValById = (v, opts = { default: 'n/a' }) => {
