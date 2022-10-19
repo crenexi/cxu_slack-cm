@@ -1,27 +1,5 @@
 import ids from '../../constants/block-ids.ts';
-import { SelectOptionBlock } from '../../types/types.ts';
-import { divider, plain } from '../../helpers/helpers.ts';
-
-type Option = (props: {
-  value: string;
-  text: string;
-}) => SelectOptionBlock;
-
-const timingText = {
-  earlier: 'Earlier — near the start of the shift',
-  standard: 'Standard — alongside related tasks',
-  later: 'Later — near the end of the shift',
-  unsure: 'Unsure — determine in context',
-};
-
-const option: Option = ({ value, text }) => ({
-  value,
-  text: {
-    text,
-    type: 'plain_text',
-    emoji: true,
-  },
-});
+import { divider, option, plain } from '../../helpers/helpers.ts';
 
 const actionTypeOptions = [
   option({
@@ -57,19 +35,19 @@ const actionType = {
 const timingOptions = [
   option({
     value: 'earlier',
-    text: timingText.earlier,
+    text: 'Earlier — near the start of the shift',
   }),
   option({
     value: 'standard',
-    text: timingText.standard,
+    text: 'Standard — alongside related tasks',
   }),
   option({
     value: 'later',
-    text: timingText.later,
+    text: 'Later — near the end of the shift',
   }),
   option({
     value: 'unsure',
-    text: timingText.unsure,
+    text: 'Unsure — determine in context',
   }),
 ];
 

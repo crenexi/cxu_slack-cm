@@ -1,4 +1,4 @@
-import { Plain, ValById, ValByOption } from '../types/types.ts';
+import { OptionBlock, Plain, ValById, ValByOption } from '../types/types.ts';
 
 // Block helpers for divider and plain text
 export const divider = { type: 'divider' };
@@ -9,6 +9,16 @@ export const header = (text: string) => ({
   type: 'header',
   text: {
     text: text.toUpperCase(),
+    type: 'plain_text',
+    emoji: true,
+  },
+});
+
+// Block header for option
+export const option: OptionBlock = ({ value, text }) => ({
+  value,
+  text: {
+    text,
     type: 'plain_text',
     emoji: true,
   },

@@ -17,6 +17,14 @@ const blockIds = {
     refPicsLink: 'ref-pics-link',
     refPicsText: 'ref-pics-text',
   },
+  taskRefPic: {
+    site: 'site',
+    zone: 'zone',
+    task: 'task',
+    currPic: 'curr-pic',
+    picsPrompt: 'pics-prompt',
+    picsLink: 'pics-link',
+  },
   signage: {
     site: 'site',
     zone: 'zone',

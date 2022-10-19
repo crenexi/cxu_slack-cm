@@ -78,6 +78,11 @@ export type Plain = {
   text: string;
 };
 
+export type OptionBlock = (props: {
+  value: string;
+  text: string;
+}) => SelectOptionBlock;
+
 export type RemarksBlock = (props: {
   id: string;
   label: string;

@@ -134,8 +134,9 @@ const accountManager = {
 const otherTags = {
   type: 'input',
   block_id: ids.qcRemarks.otherTags,
-  label: plain('Other Tags'),
   optional: true,
+  label: plain('Other Tags'),
+  hint: plain('@ba-field-ops included by default'),
   element: {
     type: 'multi_users_select',
     action_id: 'action',

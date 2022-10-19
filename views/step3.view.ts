@@ -7,6 +7,7 @@ import { destinationBlock } from '../blocks/info_destination/destination.block.t
 
 import { taskSingleBlocks } from '../blocks/form_task-single/task-single.blocks.ts';
 import { taskBulkBlocks } from '../blocks/form_task-bulk/task-bulk.blocks.ts';
+import { taskRefPicBlocks } from '../blocks/form_task-ref-pic/task-ref-pic.blocks.ts';
 import { signageBlocks } from '../blocks/form_signage/signage.blocks.ts';
 import { equipmentBlocks } from '../blocks/form_equipment/equipment.blocks.ts';
 import { traineeBlocks } from '../blocks/form_trainee/trainee.blocks.ts';
@@ -29,6 +30,8 @@ const templateBlocks = (template: Template) => {
       return taskSingleBlocks;
     case 'taskBulk':
       return taskBulkBlocks;
+    case 'taskRefPic':
+      return taskRefPicBlocks;
     case 'equipment':
       return equipmentBlocks;
     case 'signage':

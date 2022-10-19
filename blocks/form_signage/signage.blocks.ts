@@ -1,8 +1,6 @@
 import ids from '../../constants/block-ids.ts';
 import { divider, header, plain } from '../../helpers/helpers.ts';
 
-// Block helpers
-
 const site = {
   type: 'input',
   block_id: ids.signage.site,
