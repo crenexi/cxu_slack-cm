@@ -13,14 +13,15 @@ import { droCompose } from '../blocks/form_dro/dro.compose.ts';
 
 export const handleCompose: HandleCompose = (props) => {
   const { user, template, values } = props;
-  console.log(values);
+  // console.log(values);
 
   const { title, emojiKey, isSlackDeprecated } = template;
   const emojiPrefix = isSlackDeprecated ? '' : `:${emojiKey}: | `;
 
   // Construct the header
   const subtitle = `${emojiPrefix}By <@${user}> | ${formatDate()}`;
-  const header = `*${title.toUpperCase()}*\n${subtitle}\n----------`;
+  const displayTitle = title.toUpperCase().replaceAll('SEND ', '');
+  const header = `*${displayTitle}*\n${subtitle}\n----------`;
 
   // Construct the body
   const body: string = (() => {

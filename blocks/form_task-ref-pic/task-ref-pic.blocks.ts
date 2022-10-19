@@ -37,6 +37,33 @@ const task = {
   },
 };
 
+const picsPrompt = {
+  type: 'section',
+  block_id: ids.taskRefPic.picsPrompt,
+  text: {
+    type: 'mrkdwn',
+    text:
+      '*Attach the new reference photo(s) after the sent message*. Or, add them to a shared folder and add the URL:',
+  },
+};
+
+const picsLink = {
+  type: 'input',
+  block_id: ids.taskRefPic.picsLink,
+  optional: true,
+  label: {
+    type: 'plain_text',
+    text: 'Reference Pics',
+    emoji: true,
+  },
+  hint: plain('Shared folder with named ref pics'),
+  element: {
+    type: 'plain_text_input',
+    action_id: 'action',
+    placeholder: plain('URL'),
+  },
+};
+
 const currPicOptions = [
   option({
     value: 'missing',
@@ -60,43 +87,18 @@ const currPic = {
     type: 'static_select',
     action_id: 'action',
     placeholder: plain('Select'),
+    initial_option: currPicOptions[0],
     options: currPicOptions,
   },
 };
 
-const picsLink = {
-  type: 'input',
-  block_id: ids.taskRefPic.picsLink,
-  optional: true,
-  label: {
-    type: 'plain_text',
-    text: 'Reference Pics',
-    emoji: true,
-  },
-  hint: plain('Shared folder with named ref pics'),
-  element: {
-    type: 'plain_text_input',
-    action_id: 'action',
-    placeholder: plain('URL'),
-  },
-};
-
-const picsPrompt = {
-  type: 'section',
-  block_id: ids.taskRefPic.picsPrompt,
-  text: plain(
-    'Test',
-    // 'Consider adding relevant reference pics, either via a shared folder with the URL here, or attach pics after the sent message.',
-  ),
-};
-
 export const taskRefPicBlocks = [
-  header(':clipboard: Task'),
+  header(':heavy_check_mark: Task'),
   site,
   zone,
   task,
   header(':link: Photo'),
-  currPic,
-  picsLink,
   picsPrompt,
+  picsLink,
+  currPic,
 ];

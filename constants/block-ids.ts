@@ -21,9 +21,9 @@ const blockIds = {
     site: 'site',
     zone: 'zone',
     task: 'task',
-    currPic: 'curr-pic',
     picsPrompt: 'pics-prompt',
     picsLink: 'pics-link',
+    currPic: 'curr-pic',
   },
   signage: {
     site: 'site',

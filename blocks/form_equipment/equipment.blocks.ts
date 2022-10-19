@@ -9,7 +9,7 @@ const equipDesc = {
     type: 'plain_text_input',
     action_id: 'action',
     max_length: 50,
-    placeholder: plain('Describe'),
+    placeholder: plain('Duke Nio'),
   },
 };
 
@@ -21,7 +21,7 @@ const equipZone = {
     type: 'plain_text_input',
     action_id: 'action',
     max_length: 50,
-    placeholder: plain('Describe'),
+    placeholder: plain('L7 Kitchen'),
   },
 };
 
@@ -72,7 +72,7 @@ export const equipmentBlocks = [
   equipDesc,
   equipZone,
   equipIssue,
-  header(':iphone: Pics'),
+  header(':link: Pics'),
   picsReminder,
   header(':busts_in_silhouette: Tags'),
   accountManager,
