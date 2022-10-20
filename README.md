@@ -6,11 +6,12 @@ This app utilizes the [Slack API](https://api.slack.com/), and is built as a **R
 
 ## TypeScript
 
-This app is built with TypeScript, as setup and guided by the Slack API docs. In simple terms: it defines a workflow that runs a function; that function opens a modal that routes through a couple views. Use of types and constants assisted in making more robust code with.
+This app is built with TypeScript, as setup and guided by the Slack API docs. In simple terms: it defines a workflow that runs a function; that function opens a modal that routes through a couple views. Use of types and constants assisted in making more robust code.
 
 ## Permissions
 
 The Slack bot scopes in `manifest.ts` include only a few basic permissions to enable reading and writing to channels and im. We use the Slack API in only two cases:
+
 1. Use of `client.conversations.info` to get the channel name for display purposes
 2. Use of `client.conversations.open` to message the user (for DRO and Order)
 
@@ -108,17 +109,22 @@ The folder structure goes as follows.
 - Handles three modal views, named **step1**, **step2**, and **step3**
 
 This is what the workflow runs. It's the router for the modal, that handles three consecutive modal views:
+
 1. Select a template
 2. Select a channel*
 3. Enter inputs for selected template.
 
-\* *Skipped for DRO and Order templates; in those cases, the message is sent as a DM from the app. These are intended for copy-paste use only for the Activity Feed. This is provided as a disclaimer in Step 1.*
+\* _Skipped for DRO and Order templates; in those cases, the message is sent as a DM from the app. These are intended for copy-paste use only for the Activity Feed. This is provided as a disclaimer in Step 1._
 
 # Misc
 
 ## Contributions
 
 App built by James Walrath | <james.walrath@craftydelivers.com>
+
+## Region
+
+For the Bay Area region only. Some of the templates tag **@ba-field-ops** by default. If there was any interest in making them usable by other regions, I can work on that (would require a region selection and tag).
 
 ## Bug Fixes
 
