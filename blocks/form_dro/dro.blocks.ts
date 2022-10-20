@@ -36,39 +36,12 @@ const opsClientMemo = droInput({
   multiline: true,
 });
 
-const opsDoneMemo = droInput({
-  id: ids.dro.opsDoneMemo,
-  label: 'Unable to Complete',
-  placeholder: 'None',
-  hint: 'Tasks you were unable to complete',
-  optional: true,
-  multiline: true,
-});
-
 const deliveryMissing = droInput({
   optional: true,
   id: ids.dro.deliveryMissing,
   label: 'Delivery Missing',
   placeholder: 'None',
   hint: 'Anything missing from delivery?',
-});
-
-const deliveryDiscarded = droInput({
-  optional: true,
-  id: ids.dro.deliveryDiscarded,
-  label: 'Delivery Expired/Damaged',
-  placeholder: 'None',
-  hint: 'Issues with delivered product?',
-  multiline: true,
-});
-
-const deliveryReturned = droInput({
-  optional: true,
-  id: ids.dro.deliveryReturned,
-  label: 'Delivery Returned',
-  placeholder: 'None',
-  hint: 'Any delivery returns or pickups?',
-  multiline: true,
 });
 
 const prodAdjustments = droInput({
@@ -101,11 +74,7 @@ export const droBlocks = [
   header(':office: Summary'),
   opsGeneralMemo,
   opsClientMemo,
-  opsDoneMemo,
-  header(':truck: Delivery'),
   deliveryMissing,
-  deliveryDiscarded,
-  deliveryReturned,
   header(':green_apple: Product'),
   prodAdjustments,
   prodExpired,
