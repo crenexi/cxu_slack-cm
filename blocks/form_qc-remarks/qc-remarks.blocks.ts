@@ -127,7 +127,7 @@ const otherTags = {
   block_id: ids.qcRemarks.otherTags,
   optional: true,
   label: plain('Other Tags'),
-  hint: plain('@ba-field-ops included by default'),
+  hint: plain('@ba-fieldops included by default'),
   element: {
     type: 'multi_users_select',
     action_id: 'action',

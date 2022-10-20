@@ -124,7 +124,7 @@ App built by James Walrath | <james.walrath@craftydelivers.com>
 
 ## Region
 
-For the Bay Area region only. Some of the templates tag **@ba-field-ops** by default. If there was any interest in making them usable by other regions, I can work on that (would require a region selection and tag).
+For the Bay Area region only. Some of the templates tag **@ba-fieldops** by default. If there was any interest in making them usable by other regions, I can work on that (would require a region selection and tag).
 
 ## Bug Fixes
 
