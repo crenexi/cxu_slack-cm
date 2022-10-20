@@ -22,7 +22,6 @@ const memo = {
   element: {
     type: 'plain_text_input',
     action_id: 'action',
-    max_length: 50,
     multiline: true,
     placeholder: plain('None'),
   },

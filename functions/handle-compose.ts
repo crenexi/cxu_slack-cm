@@ -16,12 +16,13 @@ export const handleCompose: HandleCompose = (props) => {
   // console.log(values);
 
   const { title, emojiKey, isSlackDeprecated } = template;
-  const emojiPrefix = isSlackDeprecated ? '' : `:${emojiKey}: | `;
 
   // Construct the header
-  const subtitle = `${emojiPrefix}By <@${user}> | ${formatDate()}`;
+  const subtext = () => `\n:${emojiKey}: | By <@${user}> | ${formatDate()}`;
+  const subtitle = isSlackDeprecated ? '' : subtext();
+
   const displayTitle = title.toUpperCase().replaceAll('SEND ', '');
-  const header = `*${displayTitle}*\n${subtitle}\n----------`;
+  const header = `*${displayTitle}*${subtitle}\n----------`;
 
   // Construct the body
   const body: string = (() => {
