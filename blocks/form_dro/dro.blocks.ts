@@ -71,11 +71,11 @@ const prodPickup = droInput({
 });
 
 export const droBlocks = [
-  header(':office: Summary'),
+  header('Summary :office:'),
   opsGeneralMemo,
   opsClientMemo,
   deliveryMissing,
-  header(':green_apple: Product'),
+  header('Product :green_apple:'),
   prodAdjustments,
   prodExpired,
   prodPickup,

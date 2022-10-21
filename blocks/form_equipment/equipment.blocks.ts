@@ -68,13 +68,13 @@ const picsReminder = {
 };
 
 export const equipmentBlocks = [
-  header(':flashlight: Issue'),
+  header('Issue :flashlight:'),
   equipDesc,
   equipZone,
   equipIssue,
-  header(':link: Pics'),
+  header('Pics :link:'),
   picsReminder,
-  header(':busts_in_silhouette: Tags'),
+  header('Tags :busts_in_silhouette:'),
   accountManager,
   technicians,
 ];

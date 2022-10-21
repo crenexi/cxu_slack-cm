@@ -63,7 +63,7 @@ const listWentWell = {
 export const traineeBlocks = [
   trainDate,
   operator,
-  header(':book: Review'),
+  header('Review :book:'),
   listTrainScope,
   listTrainNext,
   listWentWell,

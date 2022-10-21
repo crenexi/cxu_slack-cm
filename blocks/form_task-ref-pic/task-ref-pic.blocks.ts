@@ -93,11 +93,11 @@ const currPic = {
 };
 
 export const taskRefPicBlocks = [
-  header(':heavy_check_mark: Task'),
+  header('Task :heavy_check_mark:'),
   site,
   zone,
   task,
-  header(':link: Photo'),
+  header('Photo :link:'),
   picsPrompt,
   picsLink,
   currPic,

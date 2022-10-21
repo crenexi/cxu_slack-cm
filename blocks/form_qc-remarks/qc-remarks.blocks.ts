@@ -136,16 +136,16 @@ const otherTags = {
 };
 
 export const qcRemarksBlocks = [
-  header(':pencil: Info'),
+  header('Info :pencil:'),
   infoChecks,
   infoRemarks,
-  header(':office: Place'),
+  header('Place :office:'),
   placeChecks,
   placeRemarks,
-  header(':scales: System'),
+  header('System :scales:'),
   systemChecks,
   systemRemarks,
-  header(':busts_in_silhouette: Tags'),
+  header('Tags :busts_in_silhouette:'),
   accountManager,
   otherTags,
 ];

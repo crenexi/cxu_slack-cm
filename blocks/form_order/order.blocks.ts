@@ -124,16 +124,16 @@ const auditCheck = {
 };
 
 export const orderBlocks = [
-  header(':package: Recap'),
+  header('Recap :package:'),
   orderId,
   orderRecap,
   deliveryDate,
-  header(':mag: Audit'),
+  header('Audit :mag:'),
   auditCheck,
   listUnavailable,
   listChained,
   listEdits,
-  header(':pushpin: Needs'),
+  header('Needs :pushpin:'),
   listICNeeds,
   itemsPickup,
 ];

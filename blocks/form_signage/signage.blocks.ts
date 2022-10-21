@@ -62,10 +62,10 @@ const tags = {
 };
 
 export const signageBlocks = [
-  header(':office: Place'),
+  header('Place :office:'),
   site,
   zone,
-  header(':label: Need'),
+  header('Need :label:'),
   quantity,
   request,
   divider,
