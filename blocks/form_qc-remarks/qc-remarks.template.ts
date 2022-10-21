@@ -25,12 +25,12 @@ type Props = {
 };
 
 const cb = (checked: boolean): string => {
-  return checked ? ':ballot_box_with_check:' : ':white_square:';
+  return checked ? ':ballot_box_with_check:' : ':building_construction:';
 };
 
 // deno-fmt-ignore
 export const qcRemarksText = {
-  infoSync: 'Channel Description and Site Landscape slides are up-to-date',
+  infoSync: 'Channel Description and general info is up-to-date',
   clientSync: 'Client feedback/vibe/needs synced with team',
   access: 'Site access is situated (protocols, badges, etc)',
   signage: 'Signage and labels are situated as needed',
@@ -39,34 +39,28 @@ export const qcRemarksText = {
   taskList: 'The shift task lists have up-to-date and ordered tasks',
   timing: 'Site timing, pacing, and efficiency are stable',
   icLevels: 'Inventory Center layout, levels, and thresholds are stable',
-  icUtils: 'Utilities and supplies are provided if needed. Example: cart, stool, paper towels, wipes, wrench, line cleaning, et cetera',
+  icUtils: 'Utilities and supplies are provided if needed.',
 };
 
 export const qcRemarksTemplate = (p: Props) => (`
 *INFO CHECKS*
-
-${cb(p.infoOpts.utdInfoSync)} | ${qcRemarksText.infoSync}
-${cb(p.infoOpts.utdClientSync)} | ${qcRemarksText.clientSync}
-${cb(p.infoOpts.utdAccess)} | ${qcRemarksText.access}
-
-Remarks on information: ${p.infoRemarks}
+> ${cb(p.infoOpts.utdInfoSync)} | ${qcRemarksText.infoSync}
+> ${cb(p.infoOpts.utdClientSync)} | ${qcRemarksText.clientSync}
+> ${cb(p.infoOpts.utdAccess)} | ${qcRemarksText.access}
+_Remarks on information_: ${p.infoRemarks}
 ----------
 *PLACE CHECKS*
-
-${cb(p.placeOpts.utdSignage)} | ${qcRemarksText.signage}
-${cb(p.placeOpts.utdEquipment)} | ${qcRemarksText.equipment}
-${cb(p.placeOpts.utdShelving)} | ${qcRemarksText.shelving}
-${cb(p.placeOpts.utdICUtils)} | ${qcRemarksText.icUtils}
-
-Remarks on place: ${p.placeRemarks}
+> ${cb(p.placeOpts.utdSignage)} | ${qcRemarksText.signage}
+> ${cb(p.placeOpts.utdEquipment)} | ${qcRemarksText.equipment}
+> ${cb(p.placeOpts.utdShelving)} | ${qcRemarksText.shelving}
+> ${cb(p.placeOpts.utdICUtils)} | ${qcRemarksText.icUtils}
+_Remarks on place_: ${p.placeRemarks}
 ----------
 *SYSTEM CHECKS*
-
-${cb(p.systemOpts.utdTaskList)} | ${qcRemarksText.taskList}
-${cb(p.systemOpts.utdICLevels)} | ${qcRemarksText.icLevels}
-${cb(p.systemOpts.utdTiming)} | ${qcRemarksText.timing}
-
-Remarks on system: ${p.systemRemarks}
+> ${cb(p.systemOpts.utdTaskList)} | ${qcRemarksText.taskList}
+> ${cb(p.systemOpts.utdICLevels)} | ${qcRemarksText.icLevels}
+> ${cb(p.systemOpts.utdTiming)} | ${qcRemarksText.timing}
+_Remarks on system_: ${p.systemRemarks}
 ----------
 <@ba-fieldops> <@${p.accountManager}> ${tagsToText(p.tagOthers)}
 `);
