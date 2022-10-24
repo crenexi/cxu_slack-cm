@@ -6,7 +6,7 @@ type Props = {
 };
 
 const memo = (str?: string) => {
-  return !str ? '' : `\n----------\n${str}`;
+  return !str ? '' : `----------\n${str}`;
 };
 
 export const qcStartingTemplate = (p: Props) => (`
