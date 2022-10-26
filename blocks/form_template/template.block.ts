@@ -5,11 +5,7 @@ import templates from '../../constants/templates.ts';
 const templateOptions = templates
   .filter(({ isEnabled }) => isEnabled)
   .reduce<SelectOptionBlock[]>((options, template) => {
-    const { key, emojiKey, titleGroup, isSlackDeprecated } = template;
-
-    const title = !isSlackDeprecated
-      ? template.title
-      : `${template.title} Assistant`;
+    const { key, emojiKey, titleGroup, title } = template;
 
     return [...options, {
       text: {

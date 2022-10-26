@@ -77,25 +77,6 @@ const blockIds = {
     listTrainNext: 'list-train-next',
     listWentWell: 'list-went-well',
   },
-  order: {
-    orderId: 'order-id',
-    orderRecap: 'order-recap',
-    deliveryDate: 'delivery-date',
-    listUnavailable: 'items-unavailable',
-    listChained: 'list-chained',
-    listICNeeds: 'list-adjustment-needs',
-    listEdits: 'list-edits-made',
-    itemsPickup: 'items-pickup',
-    auditCheck: 'audit-check',
-  },
-  dro: {
-    opsGeneralMemo: 'ops-general-memo',
-    opsClientMemo: 'ops-client-memo',
-    deliveryMissing: 'delivery-missing',
-    prodAdjustments: 'prod-adjustments',
-    prodExpired: 'prod-expired',
-    prodPickup: 'prod-pickup',
-  },
 };
 
 export default blockIds;

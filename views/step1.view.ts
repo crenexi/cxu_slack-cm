@@ -1,12 +1,6 @@
 import ids from '../constants/block-ids.ts';
-import constants from '../constants/constants.ts';
 import { plain } from '../helpers/helpers.ts';
 import { templateBlock } from '../blocks/form_template/template.block.ts';
-
-const footnote = {
-  type: 'context',
-  elements: [plain(constants.slackDeprecated.view1Notice)],
-};
 
 // deno-lint-ignore no-explicit-any
 export const selectedTemplate = ({ state }: any) => {
@@ -25,5 +19,5 @@ export const step1View = () => ({
   title: plain('Compose Message'),
   close: plain('Cancel'),
   submit: plain('Next'),
-  blocks: [templateBlock, footnote],
+  blocks: [templateBlock],
 });

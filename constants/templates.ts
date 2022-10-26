@@ -7,7 +7,6 @@ const templates: Template[] = [
     titleGroup: 'Ops',
     title: 'Request Task Update',
     channelTip: 'Select related *site channel*',
-    isSlackDeprecated: false,
     isEnabled: true,
   },
   {
@@ -16,7 +15,6 @@ const templates: Template[] = [
     titleGroup: 'Ops',
     title: 'Add Task Reference Photo',
     channelTip: 'Selected related *site channel*',
-    isSlackDeprecated: false,
     isEnabled: true,
   },
   {
@@ -25,7 +23,6 @@ const templates: Template[] = [
     titleGroup: 'Ops',
     title: 'Request Signage/Labels',
     channelTip: 'Select *#ba_signage_labels* as the channel',
-    isSlackDeprecated: false,
     isEnabled: true,
   },
   {
@@ -34,7 +31,6 @@ const templates: Template[] = [
     titleGroup: 'Ops',
     title: 'Flag Equipment Issue',
     channelTip: 'Select related *site channel*',
-    isSlackDeprecated: false,
     isEnabled: true,
   },
   {
@@ -43,7 +39,6 @@ const templates: Template[] = [
     titleGroup: 'Flex',
     title: 'Request Task Bulk Update',
     channelTip: 'Select related *site channel*',
-    isSlackDeprecated: false,
     isEnabled: true,
   },
   {
@@ -52,7 +47,6 @@ const templates: Template[] = [
     titleGroup: 'Flex',
     title: 'Send QC Starting',
     channelTip: 'Select * site channel* of QC Check',
-    isSlackDeprecated: false,
     isEnabled: true,
   },
   {
@@ -61,7 +55,6 @@ const templates: Template[] = [
     titleGroup: 'Flex',
     title: 'Send QC Remarks',
     channelTip: 'Select * site channel* of QC Check',
-    isSlackDeprecated: false,
     isEnabled: true,
   },
   {
@@ -70,25 +63,6 @@ const templates: Template[] = [
     titleGroup: 'Flex',
     title: 'Send Trainee Recap',
     channelTip: 'Select *#ba_flex_operators* as the channel',
-    isSlackDeprecated: false,
-    isEnabled: true,
-  },
-  {
-    key: 'dro',
-    emojiKey: 'calendar',
-    titleGroup: 'CAF',
-    title: 'Shift Report',
-    channelTip: 'Select *DM to yourself* for copy-paste use',
-    isSlackDeprecated: true,
-    isEnabled: true,
-  },
-  {
-    key: 'order',
-    emojiKey: 'package',
-    titleGroup: 'CAF',
-    title: 'Order Report',
-    channelTip: 'Select *DM to yourself* for copy-paste use',
-    isSlackDeprecated: true,
     isEnabled: true,
   },
 ];

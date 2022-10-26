@@ -9,10 +9,6 @@ export type Constants = {
     description: string;
     actionLabel: string;
   };
-  slackDeprecated: {
-    view1Notice: string;
-    view3Notice: string;
-  };
   links: {
     qcExpectations: string;
   };
@@ -24,7 +20,6 @@ export type Template = {
   titleGroup: string;
   title: string;
   channelTip: string;
-  isSlackDeprecated: boolean;
   isEnabled: boolean;
 };
 
@@ -124,26 +119,6 @@ export type SelectOptionBlock = {
     type: string;
     text: string;
     emoji: true;
-  };
-};
-
-export type DroInput = (props: {
-  id: string;
-  label: string;
-  placeholder: string;
-  hint: string;
-  optional?: boolean;
-  multiline?: boolean;
-}) => {
-  type: 'input';
-  block_id: string;
-  label: Plain;
-  hint: Plain;
-  element: {
-    type: 'plain_text_input';
-    action_id: 'action';
-    multiline: boolean;
-    placeholder: Plain;
   };
 };
 

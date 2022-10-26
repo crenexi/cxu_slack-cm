@@ -9,7 +9,6 @@ const botScopes = [
   'chat:write.public',
   'channels:read',
   'groups:read',
-  'im:write',
 ];
 
 /** https://api.slack.com/future/manifest */

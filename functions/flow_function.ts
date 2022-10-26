@@ -69,34 +69,13 @@ export const Flow: SlackFunctionHandler<
 const ViewRouter = ViewsRouter(FlowFn);
 export const { viewSubmission, viewClosed } = ViewRouter
   .addClosedHandler('step1', () => {})
-  .addSubmissionHandler('step1', async ({ token, inputs, view }) => {
+  .addSubmissionHandler('step1', ({ inputs, view }) => {
     // Get selected template from state
     const templateKey = selectedTemplate({ state: view.state });
     const template = templates.find(({ key }) => key === templateKey);
 
-    // Determine the initial conversation selected
-    const isSlackDeprecated = !template ? '' : template.isSlackDeprecated;
-
     const isDM = inputs.channel && inputs.channel[0] === 'D';
-    const initialConvo = (isSlackDeprecated || isDM)
-      ? undefined
-      : inputs.channel;
-
-    // If using direct message, skip channel selection
-    if (isSlackDeprecated) {
-      const destConvo = await (async () => {
-        const client = SlackAPI(token);
-        const id = await client.conversations.open({ users: inputs.user })
-          .then((res) => res.channel.id);
-
-        return { id, name: 'DM to you' };
-      })();
-
-      return {
-        response_action: 'update',
-        view: step3View({ destConvo, template }),
-      };
-    }
+    const initialConvo = isDM ? undefined : inputs.channel;
 
     // Move to channel selection
     return {

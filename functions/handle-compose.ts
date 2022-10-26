@@ -8,19 +8,15 @@ import { equipmentCompose } from '../blocks/form_equipment/equipment.compose.ts'
 import { qcStartingCompose } from '../blocks/form_qc-starting/qc-starting.compose.ts';
 import { qcRemarksCompose } from '../blocks/form_qc-remarks/qc-remarks.compose.ts';
 import { traineeCompose } from '../blocks/form_trainee/trainee.compose.ts';
-import { orderCompose } from '../blocks/form_order/order.compose.ts';
-import { droCompose } from '../blocks/form_dro/dro.compose.ts';
 
 export const handleCompose: HandleCompose = (props) => {
   const { user, template, values } = props;
   // console.log(values);
 
-  const { title, emojiKey, isSlackDeprecated } = template;
+  const { title, emojiKey } = template;
 
   // Construct the header
-  const subtext = () => `\n:${emojiKey}: | By <@${user}> | ${formatDate()}`;
-  const subtitle = isSlackDeprecated ? '' : subtext();
-
+  const subtitle = `\n:${emojiKey}: | By <@${user}> | ${formatDate()}`;
   const displayTitle = title.toUpperCase().replaceAll('SEND ', '');
   const header = `*${displayTitle}*${subtitle}\n----------`;
 
@@ -43,10 +39,6 @@ export const handleCompose: HandleCompose = (props) => {
         return qcStartingCompose({ values });
       case 'qcRemarks':
         return qcRemarksCompose({ values });
-      case 'order':
-        return orderCompose({ values });
-      case 'dro':
-        return droCompose({ values });
       default: {
         return 'No case found for this template key.';
       }

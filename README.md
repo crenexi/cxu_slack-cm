@@ -10,10 +10,9 @@ This app is built with TypeScript, as setup and guided by the Slack API docs. In
 
 ## Permissions
 
-The Slack bot scopes in `manifest.ts` include only a few basic permissions to enable reading and writing to channels and im. We use the Slack API in only two cases:
+The Slack bot scopes in `manifest.ts` include only a few basic permissions to enable reading and writing to channels. We use the Slack API in only one case:
 
 1. Use of `client.conversations.info` to get the channel name for display purposes
-2. Use of `client.conversations.open` to message the user (for DRO and Order)
 
 ## Templates
 
@@ -27,10 +26,6 @@ These message templates are provided for:
 - Flex — Send QC Starting
 - Flex — Send QC Remarks
 - Flex — Send Trainee Recap
-- CAF — DRO Assistant*
-- CAF — Order Assistant*
-
-\* _Crafty Activity Feed use only._
 
 An `isEnabled` field exists on the templates to easily disable one if needed.
 
@@ -111,10 +106,8 @@ The folder structure goes as follows.
 This is what the workflow runs. It's the router for the modal, that handles three consecutive modal views:
 
 1. Select a template
-2. Select a channel*
+2. Select a channel
 3. Enter inputs for selected template.
-
-\* _Skipped for DRO and Order templates; in those cases, the message is sent as a DM from the app. These are intended for copy-paste use only for the Activity Feed. This is provided as a disclaimer in Step 1._
 
 # Misc
 

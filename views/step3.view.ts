@@ -2,7 +2,6 @@ import { Template } from '../types/types.ts';
 import { divider, plain } from '../helpers/helpers.ts';
 import { errorView } from '../blocks/error/error.view.ts';
 import { errorBlock } from '../blocks/error/error.block.ts';
-import { deprecationBlock } from '../blocks/info_deprecation/deprecation.block.ts';
 import { destinationBlock } from '../blocks/info_destination/destination.block.ts';
 
 import { taskSingleBlocks } from '../blocks/form_task-single/task-single.blocks.ts';
@@ -13,8 +12,6 @@ import { equipmentBlocks } from '../blocks/form_equipment/equipment.blocks.ts';
 import { traineeBlocks } from '../blocks/form_trainee/trainee.blocks.ts';
 import { qcStartingBlocks } from '../blocks/form_qc-starting/qc-starting.blocks.ts';
 import { qcRemarksBlocks } from '../blocks/form_qc-remarks/qc-remarks.blocks.ts';
-import { orderBlocks } from '../blocks/form_order/order.blocks.ts';
-import { droBlocks } from '../blocks/form_dro/dro.blocks.ts';
 
 type Props = {
   template: Template | undefined;
@@ -42,10 +39,6 @@ const templateBlocks = (template: Template) => {
       return qcStartingBlocks;
     case 'qcRemarks':
       return qcRemarksBlocks;
-    case 'order':
-      return orderBlocks;
-    case 'dro':
-      return droBlocks;
     default:
       return [errorBlock('No case defined for this template')];
   }
@@ -60,12 +53,6 @@ export const step3View = ({ template, destConvo }: Props) => {
     return errorView;
   }
 
-  // For Slack-deprecated templates, show disclaimer
-  const slackDeprecated = !template.isSlackDeprecated ? [] : [
-    deprecationBlock,
-    divider,
-  ];
-
   return {
     private_metadata,
     type: 'modal',
@@ -75,7 +62,6 @@ export const step3View = ({ template, destConvo }: Props) => {
     close: plain('Cancel'),
     submit: plain('Send'),
     blocks: [
-      ...slackDeprecated,
       ...templateBlocks(template),
       divider,
       ...destinationBlock({ destConvoName }),
