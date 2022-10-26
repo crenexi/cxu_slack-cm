@@ -1,6 +1,14 @@
 import ids from '../constants/block-ids.ts';
-import { plain } from '../helpers/helpers.ts';
+import { divider, plain } from '../helpers/helpers.ts';
 import { templateBlock } from '../blocks/form_template/template.block.ts';
+
+const regionDisclaimer = {
+  type: 'section',
+  text: {
+    type: 'mrkdwn',
+    text: ':foggy: Current use only for the *Bay Area* region',
+  },
+};
 
 // deno-lint-ignore no-explicit-any
 export const selectedTemplate = ({ state }: any) => {
@@ -19,5 +27,5 @@ export const step1View = () => ({
   title: plain('Compose Message'),
   close: plain('Cancel'),
   submit: plain('Next'),
-  blocks: [templateBlock],
+  blocks: [templateBlock, divider, regionDisclaimer],
 });
