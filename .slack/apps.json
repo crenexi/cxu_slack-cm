@@ -1,5 +1,10 @@
 {
   "apps": {
+    "craftydelivers": {
+      "name": "craftydelivers",
+      "app_id": "A048VF0R1QB",
+      "team_id": "T0490KBLW"
+    },
     "crenexi": {
       "name": "crenexi",
       "app_id": "A043DQ47LTV",
