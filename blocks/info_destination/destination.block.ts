@@ -8,7 +8,7 @@ export const destinationBlock = ({ destConvoName }: Props) => {
       type: 'section',
       text: {
         type: 'mrkdwn',
-        text: `Message will send to # *${destConvoName}*`,
+        text: `Message will send to #*${destConvoName}*`,
       },
     },
   ];
