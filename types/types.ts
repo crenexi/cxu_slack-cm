@@ -12,6 +12,9 @@ export type Constants = {
   links: {
     qcExpectations: string;
   };
+  errors: {
+    notMember: string;
+  };
 };
 
 export type Template = {

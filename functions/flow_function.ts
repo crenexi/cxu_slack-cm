@@ -5,6 +5,7 @@ import { SlackAPI } from 'deno-slack-api/mod.ts';
 import { ViewMetadata } from '../types/types.ts';
 import constants from '../constants/constants.ts';
 import templates from '../constants/templates.ts';
+import { errorView } from '../views/error.view.ts';
 import { selectedTemplate, step1View } from '../views/step1.view.ts';
 import { selectedConvo, step2View } from '../views/step2.view.ts';
 import { step3View } from '../views/step3.view.ts';
@@ -68,6 +69,7 @@ export const Flow: SlackFunctionHandler<
 
 const ViewRouter = ViewsRouter(FlowFn);
 export const { viewSubmission, viewClosed } = ViewRouter
+  .addClosedHandler('error', () => {})
   .addClosedHandler('step1', () => {})
   .addSubmissionHandler('step1', ({ inputs, view }) => {
     // Get selected template from state
@@ -92,18 +94,43 @@ export const { viewSubmission, viewClosed } = ViewRouter
     const selConvo = selectedConvo({ state: view.state });
 
     // Get destination convo
-    const destConvo = await client.conversations.info({
+    const nextView = await client.conversations.info({
       token,
       channel: selConvo,
-    }).then((res) => ({
-      id: selConvo,
-      name: res.channel.name,
-    }));
+    }).then((res) => {
+      if (!res.ok) {
+        // The channel is private and the app isn't a member
+        const channelDNE = res.error === 'channel_not_found';
+        if (channelDNE) {
+          return {
+            response_action: 'update',
+            view: errorView({
+              text: constants.errors.notMember,
+            }),
+          };
+        }
 
-    return {
-      response_action: 'update',
-      view: step3View({ template, destConvo }),
-    };
+        // Some other error
+        return {
+          response_action: 'update',
+          view: errorView(),
+        };
+      }
+
+      // All good; update view to step 3
+      return {
+        response_action: 'update',
+        view: step3View({
+          template,
+          destConvo: {
+            id: selConvo,
+            name: res.channel?.name || 'name_undefined',
+          },
+        }),
+      };
+    });
+
+    return nextView;
   })
   .addClosedHandler('step3', () => {})
   .addSubmissionHandler('step3', async ({ token, inputs, body, view }) => {
