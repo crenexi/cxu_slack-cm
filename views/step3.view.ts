@@ -1,7 +1,7 @@
 import { Template } from '../types/types.ts';
 import { divider, plain } from '../helpers/helpers.ts';
 import { errorView } from '../blocks/error/error.view.ts';
-import { errorBlock } from '../blocks/error/error.block.ts';
+import { errorBlocks } from '../blocks/error/error.block.ts';
 import { destinationBlock } from '../blocks/info_destination/destination.block.ts';
 
 import { taskSingleBlocks } from '../blocks/form_task-single/task-single.blocks.ts';
@@ -40,7 +40,7 @@ const templateBlocks = (template: Template) => {
     case 'qcRemarks':
       return qcRemarksBlocks;
     default:
-      return [errorBlock('No case defined for this template')];
+      return [...errorBlocks('No case defined for this template')];
   }
 };
 

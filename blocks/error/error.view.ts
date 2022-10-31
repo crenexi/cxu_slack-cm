@@ -1,4 +1,4 @@
-import { errorBlock } from './error.block.ts';
+import { errorBlocks } from './error.block.ts';
 
 export const errorView = ({
   type: 'modal',
@@ -8,5 +8,5 @@ export const errorView = ({
     type: 'plain_text',
     text: 'Compose Message',
   },
-  blocks: [errorBlock()],
+  blocks: [...errorBlocks()],
 });
