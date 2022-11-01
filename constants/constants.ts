@@ -1,8 +1,15 @@
-import { Constants } from '../types/types.ts';
+import { Constants, FieldOpsGroup } from '../types/types.ts';
 import templates from './templates.ts';
+
+const fieldOpsGroups: FieldOpsGroup[] = [
+  { id: 'SPLHHRX6D', name: 'Bay Area Field Ops' },
+  { id: 'SE5KQGB71', name: 'Chicago Field Ops' },
+];
 
 const constants: Constants = {
   templates,
+  fieldOpsGroups,
+  fieldOpsDefault: fieldOpsGroups[0].id,
   general: {
     title: 'Ops Composer',
     description: 'Builder to send common operator messages',

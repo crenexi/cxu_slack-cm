@@ -1,3 +1,5 @@
+import constants from '../../constants/constants.ts';
+
 type Props = {
   site: string;
   zone: string;
@@ -22,5 +24,5 @@ Task: ${p.task}
 Existing ref pics: ${p.currPic}
 *${refPics(p.picsLink)?.trim()}*
 ----------
-<@ba-fieldops>
+<!subteam^${constants.fieldOpsDefault}>
 `);

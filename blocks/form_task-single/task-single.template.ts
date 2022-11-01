@@ -1,3 +1,5 @@
+import constants from '../../constants/constants.ts';
+
 type Props = {
   actionType: string;
   taskRequest: string;
@@ -17,5 +19,5 @@ Request to *${p.actionType}* task:
 Task zone: ${p.taskZone}${taskNote(p.taskNote)}
 Timing: ${p.timing}
 ----------
-<@ba-fieldops>
+<!subteam^${constants.fieldOpsDefault}>
 `);

@@ -1,3 +1,4 @@
+import constants from '../../constants/constants.ts';
 import { tagsToText } from '../../helpers/helpers.ts';
 
 type Props = {
@@ -62,5 +63,7 @@ _Remarks on place_: ${p.placeRemarks}
 > ${cb(p.systemOpts.utdTiming)} | ${qcRemarksText.timing}
 _Remarks on system_: ${p.systemRemarks}
 ----------
-<@ba-fieldops> <@${p.accountManager}> ${tagsToText(p.tagOthers)}
+<!subteam^${constants.fieldOpsDefault}> <@${p.accountManager}> ${
+  tagsToText(p.tagOthers)
+}
 `);
