@@ -19,5 +19,5 @@ Request to *${p.actionType}* task:
 Task zone: ${p.taskZone}${taskNote(p.taskNote)}
 Timing: ${p.timing}
 ----------
-<!subteam^${constants.fieldOpsDefault}>
+<!subteam^${constants.fieldOpsDefault.trim()}>
 `);

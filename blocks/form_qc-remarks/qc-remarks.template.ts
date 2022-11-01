@@ -63,7 +63,7 @@ _Remarks on place_: ${p.placeRemarks}
 > ${cb(p.systemOpts.utdTiming)} | ${qcRemarksText.timing}
 _Remarks on system_: ${p.systemRemarks}
 ----------
-<!subteam^${constants.fieldOpsDefault}> <@${p.accountManager}> ${
+<!subteam^${constants.fieldOpsDefault.trim()}> <@${p.accountManager.trim()}> ${
   tagsToText(p.tagOthers)
 }
 `);

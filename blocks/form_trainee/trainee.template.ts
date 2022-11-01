@@ -16,5 +16,5 @@ Training covered: ${p.listTrainScope}
 Areas of opportunity: ${p.listTrainNext}
 What went well: ${p.listWentWell}
 ----------
-<!subteam^${constants.fieldOpsDefault}>
+<!subteam^${constants.fieldOpsDefault.trim()}>
 `);

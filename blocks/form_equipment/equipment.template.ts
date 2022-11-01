@@ -16,7 +16,7 @@ Issue: ${p.equipIssue}
 ----------
 :link: _Relevant pics below if provided_
 ----------
-<!subteam^${constants.fieldOpsDefault}> <@${p.accountManager}> ${
+<!subteam^${constants.fieldOpsDefault.trim()}> <@${p.accountManager.trim()}> ${
   tagsToText(p.technicians)
 }
 `);
