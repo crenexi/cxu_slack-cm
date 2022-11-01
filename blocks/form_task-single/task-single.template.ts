@@ -12,7 +12,7 @@ const taskNote = (str: string) => {
 
 export const taskSingleTemplate = (p: Props) => (`
 Request to *${p.actionType}* task:
-*${p.taskRequest}*
+*${p.taskRequest?.trim()}*
 
 Task zone: ${p.taskZone}${taskNote(p.taskNote)}
 Timing: ${p.timing}

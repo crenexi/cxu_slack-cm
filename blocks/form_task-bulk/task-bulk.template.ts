@@ -49,7 +49,8 @@ export const taskBulkTemplate = (p: Props) => {
     .reduce((str, section, i) => {
       const isFirst = (i === 0);
       const { title, emoji, input } = section;
-      const sectionStr = `:${emoji}: *${title.toUpperCase()}*\n${input}`;
+      const sectionStr =
+        `:${emoji}: *${title.toUpperCase()?.trim()}*\n${input}`;
 
       // First section
       if (isFirst) return sectionStr;
