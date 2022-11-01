@@ -20,7 +20,7 @@ Area/zone: ${p.zone}
 Task: ${p.task}
 ----------
 Existing ref pics: ${p.currPic}
-*${refPics(p.picsLink)}*
+*${refPics(p.picsLink)?.trim()}*
 ----------
 <@ba-fieldops>
 `);
