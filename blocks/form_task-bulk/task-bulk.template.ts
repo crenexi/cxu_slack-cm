@@ -1,3 +1,5 @@
+import constants from '../../constants/constants.ts';
+
 type Props = {
   toAdd: string;
   toRemove: string;
@@ -60,7 +62,7 @@ export const taskBulkTemplate = (p: Props) => {
     }, '');
 
   // Bottom tags
-  const tags = '<@ba-fieldops>';
+  const tags = '<!subteam^${constants.fieldOpsDefault}>';
 
   // URL for reference pictures, if provided
   if (p.refPicsLink) {
@@ -69,5 +71,5 @@ export const taskBulkTemplate = (p: Props) => {
   }
 
   // Otherwise just return body and tags
-  return `${body}\n${divider}\n<@ba-fieldops>`;
+  return `${body}\n${divider}\n<!subteam^${constants.fieldOpsDefault}>`;
 };

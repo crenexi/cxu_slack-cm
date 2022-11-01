@@ -2,8 +2,15 @@
 
 //## DATA TYPES
 
+export type FieldOpsGroup = {
+  id: string;
+  name: string;
+};
+
 export type Constants = {
   templates: Template[];
+  fieldOpsGroups: FieldOpsGroup[];
+  fieldOpsDefault: string;
   general: {
     title: string;
     description: string;

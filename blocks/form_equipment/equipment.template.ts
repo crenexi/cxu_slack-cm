@@ -1,3 +1,4 @@
+import constants from '../../constants/constants.ts';
 import { tagsToText } from '../../helpers/helpers.ts';
 
 type Props = {
@@ -15,5 +16,7 @@ Issue: ${p.equipIssue}
 ----------
 :link: _Relevant pics below if provided_
 ----------
-<@ba-fieldops> <@${p.accountManager}> ${tagsToText(p.technicians)}
+<!subteam^${constants.fieldOpsDefault}> <@${p.accountManager}> ${
+  tagsToText(p.technicians)
+}
 `);
