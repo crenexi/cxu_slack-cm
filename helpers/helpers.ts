@@ -54,7 +54,7 @@ export const cbValByOption: ValByOption = ({ val, opt }) => {
 // Helper to turn tags into marked string
 export const tagsToText = (tags: string[]) => {
   return tags.reduce((str, tag, i) => {
-    return i === 0 ? `<@${tag}>` : `${str} <@${tag}>`;
+    return i === 0 ? `<@${tag.trim()}>` : `${str} <@${tag.trim()}>`;
   }, '');
 };
 

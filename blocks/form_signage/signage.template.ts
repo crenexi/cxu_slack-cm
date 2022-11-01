@@ -14,5 +14,5 @@ Location/client: ${p.site}
 Signage/labels needed: ${p.request}
 Quantity: ${p.quantity}
 ----------
-<!subteam^${constants.fieldOpsDefault}> ${tagsToText(p.tags)}
+<!subteam^${constants.fieldOpsDefault.trim()}> ${tagsToText(p.tags)}
 `);

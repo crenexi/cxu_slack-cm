@@ -46,7 +46,7 @@ const templates: Template[] = [
     emojiKey: 'straight_ruler',
     titleGroup: 'Flex',
     title: 'Send QC Starting',
-    channelTip: 'Select * site channel* of QC Check',
+    channelTip: 'Select *site channel* of QC Check',
     isEnabled: true,
   },
   {
@@ -54,7 +54,7 @@ const templates: Template[] = [
     emojiKey: 'black_nib',
     titleGroup: 'Flex',
     title: 'Send QC Remarks',
-    channelTip: 'Select * site channel* of QC Check',
+    channelTip: 'Select *site channel* of QC Check',
     isEnabled: true,
   },
   {

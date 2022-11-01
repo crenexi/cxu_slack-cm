@@ -16,7 +16,7 @@ export const handleCompose: HandleCompose = (props) => {
   const { title, emojiKey } = template;
 
   // Construct the header
-  const subtitle = `\n:${emojiKey}: | By <@${user}> | ${formatDate()}`;
+  const subtitle = `\n:${emojiKey}: | By <@${user?.trim()}> | ${formatDate()}`;
   const displayTitle = title.toUpperCase().replaceAll('SEND ', '');
   const header = `*${displayTitle}*${subtitle}\n----------`;
 

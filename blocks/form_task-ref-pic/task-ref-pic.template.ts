@@ -10,7 +10,7 @@ type Props = {
 
 const refPics = (link: string) => {
   if (link) {
-    return `:open_file_folder: <${link}|Reference Photos Here>`;
+    return `:open_file_folder: <${link.trim()}|Reference Photos Here>`;
   }
 
   return ':arrow_down: Reference photos attached below';
