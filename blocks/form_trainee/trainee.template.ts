@@ -7,7 +7,7 @@ type Props = {
 };
 
 export const traineeTemplate = (p: Props) => (`
-Trainee/operator: *${p.operator}*
+Trainee/operator: *${p.operator?.trim()}*
 Training date: ${p.trainDate}
 ----------
 Training covered: ${p.listTrainScope}
