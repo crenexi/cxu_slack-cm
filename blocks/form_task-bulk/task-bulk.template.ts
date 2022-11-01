@@ -66,7 +66,7 @@ export const taskBulkTemplate = (p: Props) => {
 
   // URL for reference pictures, if provided
   if (p.refPicsLink) {
-    const link = `<${p.refPicsLink}|Reference Pictures Available>`;
+    const link = `<${p.refPicsLink.trim()}|Reference Pictures Available>`;
     return `\n${body}\n${divider}\n${link}\n${tags}`;
   }
 
