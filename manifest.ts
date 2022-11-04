@@ -16,6 +16,7 @@ export default Manifest({
   botScopes,
   name: constants.general.title,
   description: constants.general.description,
+  longDescription: constants.general.longDescription,
   icon: 'assets/icon.png',
   functions: [],
   workflows: [cmWorkflow],
