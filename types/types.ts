@@ -14,6 +14,7 @@ export type Constants = {
   general: {
     title: string;
     description: string;
+    longDescription: string;
     actionLabel: string;
   };
   links: {
