@@ -6,6 +6,25 @@ const fieldOpsGroups: FieldOpsGroup[] = [
   { id: 'SE5KQGB71', name: 'Chicago Field Ops' },
 ];
 
+// deno-fmt-ignore
+const prodLinkTrigger = 'https://slack.com/shortcuts/Ft048SKQDU0M/00f27eb88f9650229c9e46addb9130f4';
+
+// deno-fmt-ignore
+const longDescription = `
+USING THE LINK
+This link is to copy/paste into a public channel (clicking it does nothing). Doing so converts the link to a button, and adds a channel bookmark to trigger this workflow.
+${prodLinkTrigger}
+
+PURPOSE
+To accelerate inputs to some types of messages.
+
+Example - Request Signage:
+Select Request Signage → select signage channel → input location/needs → send
+
+BUGS
+Encounter bugs or unexpected behavior? LMK - James Walrath.
+`;
+
 const constants: Constants = {
   templates,
   fieldOpsGroups,
@@ -13,6 +32,7 @@ const constants: Constants = {
   general: {
     title: 'Ops Composer',
     description: 'Builder to send common operator messages',
+    longDescription: longDescription.trim(),
     actionLabel: 'Compose Message',
   },
   links: {
