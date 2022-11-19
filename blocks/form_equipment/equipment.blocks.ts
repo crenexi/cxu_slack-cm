@@ -8,7 +8,7 @@ const equipDesc = {
   element: {
     type: 'plain_text_input',
     action_id: 'action',
-    max_length: 50,
+    max_length: 300,
     placeholder: plain('Duke Nio'),
   },
 };
@@ -20,7 +20,7 @@ const equipZone = {
   element: {
     type: 'plain_text_input',
     action_id: 'action',
-    max_length: 50,
+    max_length: 300,
     placeholder: plain('L7 Kitchen'),
   },
 };
