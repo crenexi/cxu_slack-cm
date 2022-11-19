@@ -8,7 +8,7 @@ const site = {
   element: {
     type: 'plain_text_input',
     action_id: 'action',
-    max_length: 50,
+    max_length: 300,
     placeholder: plain('Block Market'),
   },
 };
@@ -20,7 +20,7 @@ const zone = {
   element: {
     type: 'plain_text_input',
     action_id: 'action',
-    max_length: 50,
+    max_length: 300,
     placeholder: plain('L7 Kitchen'),
   },
 };
@@ -32,7 +32,7 @@ const task = {
   element: {
     type: 'plain_text_input',
     action_id: 'action',
-    max_length: 50,
+    max_length: 300,
     placeholder: plain('Stock beverages'),
   },
 };
