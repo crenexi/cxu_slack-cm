@@ -1,6 +1,6 @@
 # Slack — Compose Message
 
-Slack app named **Ops Composer** to generate useful messages in Crafty (Bay Area).
+Slack app named **Ops Composer** to generate useful messages for a particular job.
 
 This app utilizes the [Slack API](https://api.slack.com/), and is built as a **Run-on-Slack** app for quick deployment. This Slack platform is beta, and emphasizes simple URL shortcuts to trigger the app. [Learn More](https://api.slack.com/future/intro).
 
@@ -18,14 +18,12 @@ The Slack bot scopes in `manifest.ts` include only a few basic permissions to en
 
 These message templates are provided for:
 
-- Ops — Request Task Update
-- Ops — Add Task Reference Photo
-- Ops — Request Signage/Labels
-- Ops — Flag Equipment Issue
-- Flex — Request Task Bulk Update
-- Flex — Send QC Starting
-- Flex — Send QC Remarks
-- Flex — Send Trainee Recap
+- Request Task Update
+- Add Task Reference Photo
+- Request Signage/Labels
+- Flag Equipment Issue
+- Send QC Starting
+- Send Trainee Recap
 
 An `isEnabled` field exists on the templates to easily disable one if needed.
 
@@ -113,12 +111,8 @@ This is what the workflow runs. It's the router for the modal, that handles thre
 
 ## Contributions
 
-App built by James Walrath | <james.walrath@craftydelivers.com>
-
-## Region
-
-For the Bay Area region only. Some of the templates tag **@ba-fieldops** by default. If there was any interest in making them usable by other regions, I can work on that (would require a region selection and tag).
+App built by James Walrath | <james@crenexi.com>
 
 ## Bug Fixes
 
-If bugs arise, I'd be happy to collect any issues, do a bulk fix, and redeploy.
+Discontinued. Project is EOL.
